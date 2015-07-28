@@ -1,14 +1,10 @@
-package org.kkb.server.api.restAssured.cmsTenants.tenantsAdminUsers;
+package org.kkb.server.api.restassured.cmsTenants.tenantsAdminUsers;
 
 import com.jayway.restassured.response.Response;
 import net.sf.json.JSONObject;
 import org.hamcrest.Matchers;
 import org.kkb.server.api.TestConfig;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import static com.jayway.restassured.path.json.JsonPath.with;
 

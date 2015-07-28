@@ -1,9 +1,8 @@
-package org.kkb.server.api.restAssured;
+package org.kkb.server.api.restassured;
 
 import com.jayway.restassured.response.Response;
 import com.jayway.restassured.specification.RequestSpecification;
 import org.hamcrest.Matchers;
-import org.testng.annotations.Test;
 
 import static com.jayway.restassured.RestAssured.given;
 

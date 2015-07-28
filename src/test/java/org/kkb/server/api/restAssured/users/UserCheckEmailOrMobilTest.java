@@ -1,4 +1,4 @@
-package org.kkb.server.api.restAssured.users;
+package org.kkb.server.api.restassured.users;
 
 import com.jayway.restassured.response.Response;
 import net.sf.json.JSONObject;

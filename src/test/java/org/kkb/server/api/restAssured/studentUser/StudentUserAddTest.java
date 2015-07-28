@@ -1,4 +1,4 @@
-package org.kkb.server.api.restAssured.studentUser;
+package org.kkb.server.api.restassured.studentUser;
 
 import com.jayway.restassured.http.ContentType;
 import com.jayway.restassured.response.Response;

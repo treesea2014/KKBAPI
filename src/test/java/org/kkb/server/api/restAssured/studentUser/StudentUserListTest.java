@@ -1,8 +1,7 @@
-package org.kkb.server.api.restAssured.studentUser;
+package org.kkb.server.api.restassured.studentUser;
 
 import com.jayway.restassured.response.Response;
 import org.kkb.server.api.TestConfig;
-import org.testng.annotations.Test;
 
 /**
  * 获取用户列表

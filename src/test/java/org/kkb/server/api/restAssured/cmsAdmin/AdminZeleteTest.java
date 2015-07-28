@@ -1,4 +1,4 @@
-package org.kkb.server.api.restAssured.cmsAdmin;
+package org.kkb.server.api.restassured.cmsAdmin;
 
 import com.jayway.restassured.response.Response;
 import org.hamcrest.Matchers;
@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
  */
 @Test
 public class AdminZeleteTest {
-    private static final String token = TestConfig.getToken("/kauth/authorize?uid=239&cid=www&tenant_id=0");//9d1dc7e9d558677630fa610652708de3
+    private static final String token = TestConfig.getToken("/kauth/authorize?uid=239&cid=www&tenant_id=1");//9d1dc7e9d558677630fa610652708de3
 
     //没有token
     public  void testWithNoToken(){

@@ -1,4 +1,4 @@
-package org.kkb.server.api.restAssured.microMajots;
+package org.kkb.server.api.restassured.microMajots;
 
 import com.jayway.restassured.http.ContentType;
 import com.jayway.restassured.response.Response;
@@ -57,7 +57,7 @@ public class MicroMajorsValidationTest {
     }
     //已经激活过的用户
     public void testAlery(){
-        String token=TestConfig.getToken("kauth/authorize?uid=812277&cid=www&tenant_id=0");
+        String token=TestConfig.getToken("kauth/authorize?uid=812277&cid=www&tenant_id=1");
         JSONObject jsonObject=new JSONObject();
         jsonObject.put("school_id","227");
         jsonObject.put("period_id","52");

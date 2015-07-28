@@ -1,4 +1,4 @@
-package org.kkb.server.api.restAssured.announcement;
+package org.kkb.server.api.restassured.announcement;
 
 import com.jayway.restassured.response.Response;
 import org.hamcrest.Matchers;

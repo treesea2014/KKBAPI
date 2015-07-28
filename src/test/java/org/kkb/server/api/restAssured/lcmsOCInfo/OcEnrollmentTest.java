@@ -1,4 +1,4 @@
-package org.kkb.server.api.restAssured.lcmsOCInfo;
+package org.kkb.server.api.restassured.lcmsOCInfo;
 
 import com.jayway.restassured.http.ContentType;
 import com.jayway.restassured.response.Response;
@@ -55,7 +55,7 @@ public class OcEnrollmentTest {
     //测试已经加入过得课程
     public void testAleryCourse(){
         JSONObject jsonObject=new JSONObject();
-        jsonObject.put("access_token",TestConfig.getToken("kauth/authorize?uid=239&cid=www&tenant_id=0"));
+        jsonObject.put("access_token",TestConfig.getToken("kauth/authorize?uid=239&cid=www&tenant_id=1"));
         jsonObject.put("course_id","2");
         jsonObject.put("lms_course_id","2");
 

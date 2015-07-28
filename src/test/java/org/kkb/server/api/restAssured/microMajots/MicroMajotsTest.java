@@ -1,4 +1,4 @@
-package org.kkb.server.api.restAssured.microMajots;
+package org.kkb.server.api.restassured.microMajots;
 
 import com.jayway.restassured.response.Response;
 import org.hamcrest.Matchers;

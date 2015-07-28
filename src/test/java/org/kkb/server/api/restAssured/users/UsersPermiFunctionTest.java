@@ -1,11 +1,9 @@
-package org.kkb.server.api.restAssured.users;
+package org.kkb.server.api.restassured.users;
 
 import com.jayway.restassured.response.Response;
 import org.hamcrest.Matchers;
 import org.kkb.server.api.TestConfig;
 import org.testng.annotations.Test;
-
-import static org.hamcrest.Matchers.equalTo;
 
 /**
  * ws.wang

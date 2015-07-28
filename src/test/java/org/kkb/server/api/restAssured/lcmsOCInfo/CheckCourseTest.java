@@ -1,4 +1,4 @@
-package org.kkb.server.api.restAssured.lcmsOCInfo;
+package org.kkb.server.api.restassured.lcmsOCInfo;
 
 import com.jayway.restassured.response.Response;
 import org.hamcrest.Matchers;

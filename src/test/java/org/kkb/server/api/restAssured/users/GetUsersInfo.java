@@ -1,4 +1,4 @@
-package org.kkb.server.api.restAssured.users;
+package org.kkb.server.api.restassured.users;
 
 import com.jayway.restassured.specification.RequestSpecification;
 import org.hamcrest.Matchers;
@@ -14,7 +14,7 @@ public class GetUsersInfo {
         RequestSpecification requestSpecification= TestConfig.requestSpecification();
 
         requestSpecification.when()
-                .get("/users?access_token="+TestConfig.getToken("kauth/authorize?uid=239&cid=www&tenant_id=0")).
+                .get("/users?access_token="+TestConfig.getToken("kauth/authorize?uid=239&cid=www&tenant_id=1")).
                 then()
                         //.log().all()
                 .assertThat().statusCode(200).body("data.name", Matchers.equalTo("开课吧"));

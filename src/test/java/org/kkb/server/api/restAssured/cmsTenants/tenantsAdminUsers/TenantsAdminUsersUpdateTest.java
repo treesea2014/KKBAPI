@@ -1,4 +1,4 @@
-package org.kkb.server.api.restAssured.cmsTenants.tenantsAdminUsers;
+package org.kkb.server.api.restassured.cmsTenants.tenantsAdminUsers;
 
 import com.jayway.restassured.response.Response;
 import net.sf.json.JSONObject;

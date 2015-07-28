@@ -1,4 +1,4 @@
-package org.kkb.server.api.restAssured.learnLog;
+package org.kkb.server.api.restassured.learnLog;
 
 import com.jayway.restassured.response.Response;
 import org.hamcrest.Matchers;

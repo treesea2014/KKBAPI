@@ -1,4 +1,4 @@
-package org.kkb.server.api.restAssured.courseVersion;
+package org.kkb.server.api.restassured.courseVersion;
 
 import com.jayway.restassured.response.Response;
 import net.sf.json.JSONObject;

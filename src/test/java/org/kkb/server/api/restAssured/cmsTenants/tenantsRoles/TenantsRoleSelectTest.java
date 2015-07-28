@@ -1,4 +1,4 @@
-package org.kkb.server.api.restAssured.cmsTenants.tenantsRoles;
+package org.kkb.server.api.restassured.cmsTenants.tenantsRoles;
 
 import com.jayway.restassured.response.Response;
 import org.kkb.server.api.TestConfig;

@@ -1,10 +1,4 @@
-package org.kkb.server.api.restAssured.course;
-
-import com.jayway.restassured.response.Response;
-import net.sf.json.JSONObject;
-import org.hamcrest.Matchers;
-import org.kkb.server.api.TestConfig;
-import org.testng.annotations.Test;
+package org.kkb.server.api.restassured.course;
 
 
 /**
