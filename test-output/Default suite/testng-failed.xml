@@ -3,13 +3,12 @@
 <suite name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="org.kkb.server.api.restassured.cmsTenants.TenantsCourseTest">
+      <class name="org.kkb.server.api.restassured.quizzes.QuizzesPutTest">
         <methods>
-          <include name="testSuc"/>
-          <include name="testWithNoParam"/>
-          <include name="testWithErrorToken"/>
+          <include name="initData"/>
+          <include name="testBody01"/>
         </methods>
-      </class> <!-- org.kkb.server.api.restassured.cmsTenants.TenantsCourseTest -->
+      </class> <!-- org.kkb.server.api.restassured.quizzes.QuizzesPutTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
