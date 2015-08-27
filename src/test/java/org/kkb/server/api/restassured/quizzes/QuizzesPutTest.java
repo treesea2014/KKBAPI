@@ -105,7 +105,7 @@ public class QuizzesPutTest {
 		quizzesID = "1682";
 		Response response = TestConfig.postOrPutExecu("put", "/quizzes/" + quizzesID + "/?access_token=" + accesstoken,
 				jsonObject);
-		response.then().assertThat().statusCode(200).body("id", equalTo(quizzesID));
+		response.then().assertThat().statusCode(200).body("id", equalTo("1682"));
 	
 	}
 
