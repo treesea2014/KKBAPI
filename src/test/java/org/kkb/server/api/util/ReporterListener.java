@@ -143,7 +143,7 @@ public class ReporterListener extends AbstractReporter
 		String url = "http://" + bundle.getString("server") + ":8080"
 				+ bundle.getString("htmlPath") 
 				+ new SimpleDateFormat("yyyyMMddHHmmss").format(reportTime)
-				+ "/html/" + INDEX_FILE;
+				 + INDEX_FILE;
 
 		int passed = 0;
 		int fail = 0;
