@@ -1,0 +1,28 @@
+[2015-09-02 11:55:17] [INFO ] [main] [org.kkb.server.api.util.ReporterListener:131] -- 测试报告完成
+[2015-09-02 11:56:03] [INFO ] [main] [org.kkb.server.api.util.ReporterListener:131] -- 测试报告完成
+[2015-09-02 15:12:28] [INFO ] [main] [org.kkb.server.api.util.HtmlMail:119] -- 邮件发送完成
+[2015-09-02 15:12:32] [INFO ] [main] [org.kkb.server.api.util.ReporterListener:142] -- 测试报告完成
+[2015-09-02 15:44:48] [INFO ] [main] [org.kkb.server.api.util.HtmlMail:119] -- 邮件发送完成
+[2015-09-02 15:44:48] [INFO ] [main] [org.kkb.server.api.util.ReporterListener:138] -- 测试报告部署完成
+[2015-09-02 16:07:10] [INFO ] [main] [org.kkb.server.api.util.HtmlMail:119] -- 邮件发送完成
+[2015-09-02 16:07:10] [INFO ] [main] [org.kkb.server.api.util.ReporterListener:138] -- 测试报告部署完成
+[2015-09-02 16:10:04] [INFO ] [main] [org.kkb.server.api.util.HtmlMail:119] -- 邮件发送完成
+[2015-09-02 16:10:04] [INFO ] [main] [org.kkb.server.api.util.ReporterListener:138] -- 测试报告部署完成
+[2015-09-02 16:28:47] [INFO ] [main] [org.kkb.server.api.util.ReporterListener:515] -- copy from {/Users/caojing/git/kaikeba-api/target/surefire-reports/html/index.html to /Users/caojing/Desktop/postman/20150902162847/index.html}
+[2015-09-02 16:28:47] [INFO ] [main] [org.kkb.server.api.util.ReporterListener:515] -- copy from {/Users/caojing/git/kaikeba-api/target/surefire-reports/html/overview.html to /Users/caojing/Desktop/postman/20150902162847/overview.html}
+[2015-09-02 16:28:47] [INFO ] [main] [org.kkb.server.api.util.ReporterListener:515] -- copy from {/Users/caojing/git/kaikeba-api/target/surefire-reports/html/reportng.css to /Users/caojing/Desktop/postman/20150902162847/reportng.css}
+[2015-09-02 16:28:47] [INFO ] [main] [org.kkb.server.api.util.ReporterListener:515] -- copy from {/Users/caojing/git/kaikeba-api/target/surefire-reports/html/reportng.js to /Users/caojing/Desktop/postman/20150902162847/reportng.js}
+[2015-09-02 16:28:47] [INFO ] [main] [org.kkb.server.api.util.ReporterListener:515] -- copy from {/Users/caojing/git/kaikeba-api/target/surefire-reports/html/suite1_test1_results.html to /Users/caojing/Desktop/postman/20150902162847/suite1_test1_results.html}
+[2015-09-02 16:28:47] [INFO ] [main] [org.kkb.server.api.util.ReporterListener:515] -- copy from {/Users/caojing/git/kaikeba-api/target/surefire-reports/html/suite1_test2_results.html to /Users/caojing/Desktop/postman/20150902162847/suite1_test2_results.html}
+[2015-09-02 16:28:47] [INFO ] [main] [org.kkb.server.api.util.ReporterListener:515] -- copy from {/Users/caojing/git/kaikeba-api/target/surefire-reports/html/suites.html to /Users/caojing/Desktop/postman/20150902162847/suites.html}
+[2015-09-02 16:28:49] [INFO ] [main] [org.kkb.server.api.util.HtmlMail:119] -- 邮件发送完成
+[2015-09-02 16:28:49] [INFO ] [main] [org.kkb.server.api.util.ReporterListener:138] -- 测试报告部署完成
+[2015-09-02 16:30:50] [INFO ] [main] [org.kkb.server.api.util.ReporterListener:515] -- copy from {/Users/caojing/git/kaikeba-api/target/surefire-reports/html/index.html to /Users/caojing/Desktop/postman/20150902163050/index.html}
+[2015-09-02 16:30:50] [INFO ] [main] [org.kkb.server.api.util.ReporterListener:515] -- copy from {/Users/caojing/git/kaikeba-api/target/surefire-reports/html/overview.html to /Users/caojing/Desktop/postman/20150902163050/overview.html}
+[2015-09-02 16:30:50] [INFO ] [main] [org.kkb.server.api.util.ReporterListener:515] -- copy from {/Users/caojing/git/kaikeba-api/target/surefire-reports/html/reportng.css to /Users/caojing/Desktop/postman/20150902163050/reportng.css}
+[2015-09-02 16:30:50] [INFO ] [main] [org.kkb.server.api.util.ReporterListener:515] -- copy from {/Users/caojing/git/kaikeba-api/target/surefire-reports/html/reportng.js to /Users/caojing/Desktop/postman/20150902163050/reportng.js}
+[2015-09-02 16:30:50] [INFO ] [main] [org.kkb.server.api.util.ReporterListener:515] -- copy from {/Users/caojing/git/kaikeba-api/target/surefire-reports/html/suite1_test1_results.html to /Users/caojing/Desktop/postman/20150902163050/suite1_test1_results.html}
+[2015-09-02 16:30:50] [INFO ] [main] [org.kkb.server.api.util.ReporterListener:515] -- copy from {/Users/caojing/git/kaikeba-api/target/surefire-reports/html/suite1_test2_results.html to /Users/caojing/Desktop/postman/20150902163050/suite1_test2_results.html}
+[2015-09-02 16:30:50] [INFO ] [main] [org.kkb.server.api.util.ReporterListener:515] -- copy from {/Users/caojing/git/kaikeba-api/target/surefire-reports/html/suites.html to /Users/caojing/Desktop/postman/20150902163050/suites.html}
+[2015-09-02 16:30:53] [INFO ] [main] [org.kkb.server.api.util.HtmlMail:119] -- 邮件发送完成
+[2015-09-02 16:30:53] [INFO ] [main] [org.kkb.server.api.util.ReporterListener:138] -- 测试报告部署完成

@@ -1,5 +1,6 @@
 package org.kkb.server.api.restassured.course;
 
+import org.testng.annotations.Test;
 import com.jayway.restassured.response.Response;
 import net.sf.json.JSONObject;
 import org.kkb.server.api.TestConfig;
@@ -14,7 +15,8 @@ import static org.hamcrest.Matchers.equalTo;
 @Test
 public class CourseCollectionsTest {
     //缺少token获取收藏状态
-    public void testGetWithoutToken(){
+    @Test
+	public void testGetWithoutToken(){
         Response response= TestConfig.getOrDeleteExecu("get", "/classes/526/collections?access_token=");
         response.then().
                 assertThat().statusCode(400).
@@ -22,7 +24,8 @@ public class CourseCollectionsTest {
     }
 
     //使用错误的token获取收藏状态
-    public void testGetWithIncorrectToken(){
+    @Test
+	public void testGetWithIncorrectToken(){
         Response response= TestConfig.getOrDeleteExecu("get", "/classes/526/collections?access_token=9fd75fc6994c9dce896379e2a0cf0c99");
         response.then().
                 assertThat().statusCode(401).
@@ -31,7 +34,8 @@ public class CourseCollectionsTest {
     }
 
     //正确获取收藏状态——未收藏
-    public void testGetUncollected(){
+    @Test
+	public void testGetUncollected(){
         Response response= TestConfig.getOrDeleteExecu("get", "/classes/526/collections?access_token=9fd75fc6994c9dce896379e2a0cf0c96");
         response.then().
                 assertThat().statusCode(200).
@@ -42,7 +46,8 @@ public class CourseCollectionsTest {
     }
 
     //缺少token--修改为已收藏状态
-    public void testPostWithoutToken(){
+    @Test
+	public void testPostWithoutToken(){
 
         JSONObject jsonObject=new JSONObject();
 
@@ -52,7 +57,8 @@ public class CourseCollectionsTest {
     }
 
     //错误的token--修改为已收藏状态
-    public void testPostWithIncorrectToken(){
+    @Test
+	public void testPostWithIncorrectToken(){
 
         JSONObject jsonObject=new JSONObject();
 
@@ -64,7 +70,8 @@ public class CourseCollectionsTest {
     }
 
     //正确修改为已收藏状态
-    public void testPostWithCorrectToken(){
+    @Test
+	public void testPostWithCorrectToken(){
 
         JSONObject jsonObject=new JSONObject();
 
@@ -84,7 +91,8 @@ public class CourseCollectionsTest {
     }
 
     //已修改为已收藏状态-再次修改
-    public void testPostWithCorrectToken2(){
+    @Test
+	public void testPostWithCorrectToken2(){
 
         JSONObject jsonObject=new JSONObject();
 
@@ -97,7 +105,8 @@ public class CourseCollectionsTest {
 
 
     //缺少token-修改为取消收藏状态
-    public void testDeleteWithoutToken(){
+    @Test
+	public void testDeleteWithoutToken(){
 
         Response response = TestConfig.getOrDeleteExecu("delete", "/classes/526/collections?access_token=");
         response.then().
@@ -105,7 +114,8 @@ public class CourseCollectionsTest {
     }
 
     //错误的token修改为取消收藏状态
-    public void testDeleteWithIncorrectToken(){
+    @Test
+	public void testDeleteWithIncorrectToken(){
 
         Response response = TestConfig.getOrDeleteExecu("delete", "/classes/526/collections?access_token=9fd75fc6994c9dce896379e2a0cf0c99");
         response.then().
@@ -115,7 +125,8 @@ public class CourseCollectionsTest {
     }
 
     //正确修改为取消收藏状态
-    public void testDeleteWithCorrectToken(){
+    @Test
+	public void testDeleteWithCorrectToken(){
 
         Response response = TestConfig.getOrDeleteExecu("delete", "/classes/526/collections?access_token=9fd75fc6994c9dce896379e2a0cf0c96");
         response.then().
@@ -125,7 +136,8 @@ public class CourseCollectionsTest {
     }
 
     //正确获取收藏状态——未收藏
-    public void testGetUncollected2(){
+    @Test
+	public void testGetUncollected2(){
         Response response= TestConfig.getOrDeleteExecu("get", "/classes/526/collections?access_token=9fd75fc6994c9dce896379e2a0cf0c96");
         response.then().
                 assertThat().statusCode(200).
@@ -136,7 +148,8 @@ public class CourseCollectionsTest {
     }
 
     //修改为取消收藏状态-重复操作
-    public void testDeleteWithCorrectToken2(){
+    @Test
+	public void testDeleteWithCorrectToken2(){
 
         Response response = TestConfig.getOrDeleteExecu("delete", "/classes/526/collections?access_token=9fd75fc6994c9dce896379e2a0cf0c96");
         response.then().

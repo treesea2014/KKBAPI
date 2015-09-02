@@ -1,5 +1,6 @@
 package org.kkb.server.api.restassured.course;
 
+import org.testng.annotations.Test;
 import com.jayway.restassured.response.Response;
 import net.sf.json.JSONObject;
 import org.hamcrest.Matchers;
@@ -18,7 +19,8 @@ import static com.jayway.restassured.path.json.JsonPath.with;
 public class CoutsesTest {
     public static int courseId;
     //没有token
-    public void testWithNoToken(){
+    @Test
+	public void testWithNoToken(){
         JSONObject jsonObject=new JSONObject();
         jsonObject.put("category_id","2");
         jsonObject.put("type","InstructiveCourse");
@@ -29,7 +31,8 @@ public class CoutsesTest {
                 assertThat().statusCode(400);
     }
     //token 失效
-    public void testWithErrorToken(){
+    @Test
+	public void testWithErrorToken(){
         JSONObject jsonObject=new JSONObject();
         jsonObject.put("access_token","13413rasdfasdfasdf");
         jsonObject.put("category_id","2");
@@ -41,7 +44,8 @@ public class CoutsesTest {
                 assertThat().statusCode(401);
     }
     //参数 -category_id 不存在
-    public void testWithErrorCategoryID(){
+    @Test
+	public void testWithErrorCategoryID(){
         JSONObject jsonObject=new JSONObject();
         jsonObject.put("access_token","13413rasdfasdfasdf");
         jsonObject.put("type","InstructiveCourse");
@@ -52,7 +56,8 @@ public class CoutsesTest {
                 assertThat().statusCode(401);
     }
     //创建成功
-    public void testSuc(){
+    @Test
+	public void testSuc(){
         JSONObject jsonObject=new JSONObject();
         jsonObject.put("access_token",TestConfig.getToken("/kauth/authorize?uid=812277&cid=www&tenant_id=1"));
         jsonObject.put("category_id","2");
