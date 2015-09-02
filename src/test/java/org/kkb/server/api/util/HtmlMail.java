@@ -95,7 +95,7 @@ public class HtmlMail {
 			// 设置登录邮件服务器用户名和密码
 			email.setAuthentication(from, pwd);
 			// 设置发件人
-			email.setFrom(from, "APPTest");
+			email.setFrom(from, "APITEST");
 			if (null != to && to.length > 0) {
 				for (int i = 0; i < to.length; i++) {
 					email.addTo(to[i]); // 接收方
