@@ -8,12 +8,14 @@ import net.sf.json.JSONObject;
 import static com.jayway.restassured.RestAssured.given;
 import static com.jayway.restassured.path.json.JsonPath.with;
 
+import java.util.ResourceBundle;
+
 /**
  * ws.wang
  */
 public class TestConfig {
 
-    public static final String path="http://w-api-f1.kaikeba.cn";
+    public static final String path= ResourceBundle.getBundle("api").getString("env");
     //public static final String path="http://release-api.kaikeba.cn";
     //public static final String path="http://w-api-f2.kaikeba.cn";
 
