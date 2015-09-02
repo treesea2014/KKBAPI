@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
  
-<suite name="Suite" parallel="tests">
+<suite name="API测试报告" parallel="tests">
  <listeners>
         <listener class-name="org.kkb.server.api.util.ReporterListener" />
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
     </listeners>
-  <test name="Test01">
+  <test name="课程API">
     <classes>
       <class name="org.kkb.server.api.restassured.course.GetCourseInfoTest"/>
       <class name="org.kkb.server.api.restassured.course.CourseCollectionsTest"/>
@@ -14,7 +14,7 @@
       <class name="org.kkb.server.api.restassured.course.ConcludedEnrollCourseInfoTest"/>
     </classes>
   </test> 
-   <test name="Tess02">
+   <test name="讲师API">
     <classes>
       <class name="org.kkb.server.api.restassured.course.GetCourseInfoTest"/>
       <class name="org.kkb.server.api.restassured.course.CourseCollectionsTest"/>

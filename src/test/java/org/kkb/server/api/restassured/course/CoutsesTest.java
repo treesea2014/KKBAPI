@@ -15,7 +15,7 @@ import static com.jayway.restassured.path.json.JsonPath.with;
  * 增加课程
  * ws.wang
  */
-@Test
+@Test(description="增加")
 public class CoutsesTest {
     public static int courseId;
     //没有token
