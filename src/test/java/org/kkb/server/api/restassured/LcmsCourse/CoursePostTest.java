@@ -263,10 +263,32 @@ public class CoursePostTest {
         Response response = TestConfig.postOrPutExecu("post", "/courses?access_token=" +access_token, jsonObject);
         response.then().
                 log().all().
-                        assertThat().statusCode(200).body("status", equalTo(true)).
-                body("message", equalTo("success")).
+                        assertThat().statusCode(400).body("status", equalTo(false)).
+                body("message", equalTo("讲师不存在")).
                 body("data", equalTo(-2));
 
     }
+    @Test(priority=9 ,description = "重复的讲师ID")
+    public void testPostCourseWithRepteInstructorList(){
 
+        JSONObject jsonObject=new JSONObject();
+        JSONObject jsonObject_sub=new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+
+        jsonObject_sub.put("id", intro_id1);
+        jsonArray.add(jsonObject_sub);
+        jsonObject_sub.put("id", intro_id1);
+        jsonArray.add(jsonObject_sub);
+
+        jsonObject.put("name","API自动化测试课程");
+        jsonObject.put("intro","API自动化测试");
+        jsonObject.put("desc", "本课程介绍了阿里云产品基础架构、ECS 产品概念和功能、ECS运维管理和API编程接口。");
+        jsonObject.put("instructorList", jsonArray);
+
+        Response response = TestConfig.postOrPutExecu("post", "/courses?access_token=" +access_token, jsonObject);
+        response.then().log().all().
+                assertThat().statusCode(400).body("status", equalTo(false)).
+                body("message", equalTo("success")).body("data", equalTo(-2));
+
+    }
 }
