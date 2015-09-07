@@ -14,5 +14,13 @@
       <class name="org.kkb.server.api.restassured.instructors.InstructorsAddTest"/>
     </classes>
     </test>
+   <test name="课程接口">
+    <classes>
+      <class name="org.kkb.server.api.restassured.LcmsCourse.CoursePutTest"/>
+      <class name="org.kkb.server.api.restassured.LcmsCourse.CourseGetTest"/>
+      <class name="org.kkb.server.api.restassured.LcmsCourse.CoursePostTest"/>
+    </classes>
+  </test> 
+    
 </suite> <!-- Suite -->
  
