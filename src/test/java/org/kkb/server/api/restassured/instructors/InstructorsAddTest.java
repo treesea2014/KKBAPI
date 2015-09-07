@@ -121,7 +121,7 @@ public class InstructorsAddTest {
 	 public void testNoTenant(){
 		   tenant_id = "9999999";
 	       logger.info("request Body:{}",jsonObject.toString());
-	       Response response= TestConfig.postOrPutExecu("post","/tenants/1"+tenant_id+"/instructors?access_token="+token, jsonObject);
+	       Response response= TestConfig.postOrPutExecu("post","/tenants/"+tenant_id+"/instructors?access_token="+token, jsonObject);
 	       logger.info("response:{}",response.asString());
 	       response.then().
 	               assertThat().statusCode(400).
