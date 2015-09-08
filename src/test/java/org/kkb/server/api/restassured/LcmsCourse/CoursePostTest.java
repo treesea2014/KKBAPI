@@ -18,7 +18,7 @@ import static org.hamcrest.Matchers.equalTo;
 public class CoursePostTest {
 
     static Integer Course_id=0;
-    String access_token=TestConfig.getTokenbyUserID();
+    String access_token="9fd75fc6994c9dce896379e2a0cf0c96";
     static Integer intro_id1=0;
     static Integer intro_id2=0;
 
@@ -32,16 +32,18 @@ public class CoursePostTest {
 
         jsonObject.put("name", "API自动测试讲师1");
         jsonObject.put("title", "北京航空航天大学经济管理学院讲师、副教授");
-        jsonObject.put("intro", "北京航空航天大学经济管理学院讲师、副教授，北航EMBA教育中心常务副主任、北航MBA教育中心主任、北航中澳国际MBA项目主任经管学院学生职业发展中心主任\\r\\n国家一级职业指导师、心理咨询师，GCDF（全球职业规划师），中科院心理所EAP签约心理咨询师，北京市教委高校青年教师教学技能培训专家组成员");
+        jsonObject.put("intro", "北京航空航天大学经济管理学院讲师、副教授，北航EMBA教育中心常务副主任、北航MBA教育中心主任、北航中澳国际MBA项目主任经管学院学生职业发展中心主任");
         jsonObject.put("desc", "");
         jsonObject.put("avatar","234.jpg");
         jsonObject.put("sina_weibo", "");
         jsonObject.put("tag", "");
         jsonObject.put("tx_weibo", "");
+        System.out.println(jsonObject.toString());
 
-        Response response = TestConfig.postOrPutExecu("post", "tenants/1/instructors?access_token=" + access_token, jsonObject);
+        Response response = TestConfig.postOrPutExecu("post", "/tenants/1/instructors?access_token=" + access_token, jsonObject);
+        System.out.println(response.asString());
         response.then().
-                //log().all().
+                log().all().
                 assertThat().statusCode(200).body("message", equalTo("success"));
 
         String body=response.body().asString();
@@ -51,16 +53,16 @@ public class CoursePostTest {
 
         jsonObject.put("name", "API自动测试讲师2");
         jsonObject.put("title", "北京工业大学经济管理学院讲师、副教授");
-        jsonObject.put("intro", "北京工业大学经济管理学院讲师、副教授，北工大EMBA教育中心常务副主任、北工大MBA教育中心主任、北工大中澳国际MBA项目主任经管学院学生职业发展中心主任\\r\\n国家一级职业指导师、心理咨询师，GCDF（全球职业规划师），中科院心理所EAP签约心理咨询师，北京市教委高校青年教师教学技能培训专家组成员");
+        jsonObject.put("intro", "北京工业大学经济管理学院讲师、副教授，北工大EMBA教育中心常务副主任、北工大MBA教育中心主任、北工大中澳国际MBA项目主任经管学院学生职业发展中心主任");
         jsonObject.put("desc", "");
         jsonObject.put("avatar","234.jpg");
         jsonObject.put("sina_weibo", "");
         jsonObject.put("tag", "");
         jsonObject.put("tx_weibo", "");
 
-        response = TestConfig.postOrPutExecu("post", "tenants/1/instructors?access_token=" + access_token, jsonObject);
+        response = TestConfig.postOrPutExecu("post", "/tenants/1/instructors?access_token=" + access_token, jsonObject);
         response.then().
-                //log().all().
+                log().all().
                 assertThat().statusCode(200).body("message", equalTo("success"));
 
         body=response.body().asString();
@@ -72,7 +74,7 @@ public class CoursePostTest {
         jsonArray.add(jsonObject_sub);
         jsonObject_sub.put("id", intro_id2);
         jsonArray.add(jsonObject_sub);
-
+        jsonObject.clear();
         jsonObject.put("name","API自动化测试课程");
         jsonObject.put("intro","第八章 API自动化测试");
         jsonObject.put("desc", "本课程介绍了阿里云产品基础架构、ECS 产品概念和功能、ECS运维管理和API编程接口。");
@@ -80,6 +82,7 @@ public class CoursePostTest {
 
 
         response = TestConfig.postOrPutExecu("post", "/courses?access_token=", jsonObject);
+        System.out.println(response.asString());
         response.then().
                 log().all().
                 assertThat().statusCode(400).body("message", equalTo("token不能为空"));
@@ -268,6 +271,8 @@ public class CoursePostTest {
                 body("data", equalTo(-2));
 
     }
+    
+    //添加课程--重复的讲师ID
     @Test(priority=9 ,description = "重复的讲师ID")
     public void testPostCourseWithRepteInstructorList(){
 
