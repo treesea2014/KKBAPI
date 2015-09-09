@@ -6,6 +6,7 @@ import com.jayway.restassured.response.Response;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.kkb.server.api.TestConfig;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static org.hamcrest.Matchers.equalTo;
@@ -18,18 +19,13 @@ import static org.hamcrest.Matchers.equalTo;
 public class CoursePostTest {
 
     static Integer Course_id=0;
-    String access_token="9fd75fc6994c9dce896379e2a0cf0c96";
+    String access_token=TestConfig.getTokenbyUserID();
     static Integer intro_id1=0;
     static Integer intro_id2=0;
-
-    //新增课程--无Token
-    @Test(priority=1)
-    public void testPostCourseWithoutToken(){
-
+    //创建两个老师
+    @BeforeClass
+    public void addInstrutstors(){
         JSONObject jsonObject=new JSONObject();
-        JSONObject jsonObject_sub=new JSONObject();
-        JSONArray jsonArray = new JSONArray();
-
         jsonObject.put("name", "API自动测试讲师1");
         jsonObject.put("title", "北京航空航天大学经济管理学院讲师、副教授");
         jsonObject.put("intro", "北京航空航天大学经济管理学院讲师、副教授，北航EMBA教育中心常务副主任、北航MBA教育中心主任、北航中澳国际MBA项目主任经管学院学生职业发展中心主任");
@@ -38,10 +34,8 @@ public class CoursePostTest {
         jsonObject.put("sina_weibo", "");
         jsonObject.put("tag", "");
         jsonObject.put("tx_weibo", "");
-        System.out.println(jsonObject.toString());
 
         Response response = TestConfig.postOrPutExecu("post", "/tenants/1/instructors?access_token=" + access_token, jsonObject);
-        System.out.println(response.asString());
         response.then().
                 log().all().
                 assertThat().statusCode(200).body("message", equalTo("success"));
@@ -69,6 +63,14 @@ public class CoursePostTest {
 
         intro_id2= JsonPath.with(body).get("data");
         if (intro_id2==0 ) throw new AssertionError();
+    }
+    
+    //新增课程--无Token
+    @Test(priority=1)
+    public void testPostCourseWithoutToken(){
+        JSONObject jsonObject=new JSONObject();
+        JSONObject jsonObject_sub=new JSONObject();
+        JSONArray jsonArray = new JSONArray();
 
         jsonObject_sub.put("id", intro_id1);
         jsonArray.add(jsonObject_sub);
@@ -81,8 +83,7 @@ public class CoursePostTest {
         jsonObject.put("instructorList", jsonArray);
 
 
-        response = TestConfig.postOrPutExecu("post", "/courses?access_token=", jsonObject);
-        System.out.println(response.asString());
+        Response response = TestConfig.postOrPutExecu("post", "/courses?access_token=", jsonObject);
         response.then().
                 log().all().
                 assertThat().statusCode(400).body("message", equalTo("token不能为空"));
