@@ -1,5 +1,6 @@
 package org.kkb.server.api.restassured.instructors;
 
+import com.jayway.restassured.path.json.JsonPath;
 import com.jayway.restassured.response.Response;
 
 import net.sf.json.JSONObject;
@@ -7,6 +8,7 @@ import net.sf.json.JSONObject;
 import org.kkb.server.api.TestConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -24,14 +26,36 @@ import static org.hamcrest.Matchers.equalTo;
 public class InstructorsModify {
 	
 	private final static Logger logger = LoggerFactory.getLogger(InstructorsModify.class);
-	
 	JSONObject jsonObject = new JSONObject();
-	String token ;
-	String instructorId;
+	String token =TestConfig.getTokenbyUserID();
+	int instructorId;
+	
+	//创建一个讲师 返回一个 讲师id
+	@BeforeClass
+    public void testAddInstructors(){
+	    logger.info("request Body:{}，{}",jsonObject.toString());
+	    jsonObject.put("avatar", "234.jpg");//头像
+		jsonObject.put("name", "讲师姓名");//姓名
+		jsonObject.put("title", "头衔");//职称
+		jsonObject.put("intro", "介绍");//介绍
+		jsonObject.put("desc", "描述");//
+		jsonObject.put("sina_weibo", "sina_weibo@sina.com");
+		jsonObject.put("tag", "老师");
+		jsonObject.put("tx_weibo", "987@qq.com");
+		Response response= TestConfig.postOrPutExecu("post","/tenants/1/instructors?access_token="+token, jsonObject);
+       logger.info(response.asString());
+       response.then().
+               assertThat().statusCode(200).
+               body("status",equalTo(true)).body("message", equalTo("success"));
+       String body=response.body().asString();
+       instructorId= JsonPath.with(body).get("data");
+    }
+	
+	
 	@BeforeMethod
 	public void initData() {
-		instructorId = "1";
-		token = "79415208f5cab7101d1fcadc922f6ef7";
+		token =TestConfig.getTokenbyUserID();
+		jsonObject.clear();
 		jsonObject.put("avatar", "修改234.jpg");//头像
 		jsonObject.put("name", "修改讲师姓名");//姓名
 		jsonObject.put("title", "修改头衔");//职称
@@ -42,6 +66,7 @@ public class InstructorsModify {
 		jsonObject.put("tx_weibo", "修改987@qq.com");
 
 	}
+
 	
 	@Test(description="正常" ,priority=1)
     public void test(){
@@ -119,7 +144,7 @@ public class InstructorsModify {
 	   }
 	@Test(description="租户不存在",priority=8)
 	 public void testNoTenant(){
-		instructorId = "9999999";
+		instructorId = 999999;
 	       logger.info("request Body:{}",jsonObject.toString());
 			Response response= TestConfig.postOrPutExecu("put","/instructors/"+instructorId+"?access_token="+token, jsonObject);
 	       logger.info("response:{}",response.asString());

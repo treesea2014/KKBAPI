@@ -31,7 +31,7 @@ public class InstructorsAddTest {
 	@BeforeMethod
 	public void initData() {
 		tenant_id = "1";
-		token = "79415208f5cab7101d1fcadc922f6ef7";
+		token = TestConfig.getTokenbyUserID();
 		jsonObject.put("avatar", "234.jpg");//头像
 		jsonObject.put("name", "讲师姓名");//姓名
 		jsonObject.put("title", 1);//职称
@@ -46,7 +46,7 @@ public class InstructorsAddTest {
 	@Test(description="正常" ,priority=1)
     public void test(){
 	    logger.info("request Body:{}，{}",jsonObject.toString());
-		Response response= TestConfig.postOrPutExecu("post","/tenants/1"+tenant_id+"/instructors?access_token="+token, jsonObject);
+		Response response= TestConfig.postOrPutExecu("post","/tenants/"+tenant_id+"/instructors?access_token="+token, jsonObject);
        logger.info(response.asString());
        response.then().
                assertThat().statusCode(200).
@@ -57,7 +57,7 @@ public class InstructorsAddTest {
 	@Test(description="token为空",priority=2)
     public void testErrToken01(){
 		token="";
-		Response response= TestConfig.postOrPutExecu("post","/tenants/1"+tenant_id+"/instructors?access_token="+token, jsonObject);
+		Response response= TestConfig.postOrPutExecu("post","/tenants/"+tenant_id+"/instructors?access_token="+token, jsonObject);
        logger.info(response.asString());
        response.then().
                assertThat().statusCode(400).
@@ -68,7 +68,7 @@ public class InstructorsAddTest {
 	@Test(description="token无效",priority=3)
     public void testErrToken02(){
 		token="111";
-		Response response= TestConfig.postOrPutExecu("post","/tenants/1"+tenant_id+"/instructors?access_token="+token, jsonObject);
+		Response response= TestConfig.postOrPutExecu("post","/tenants/"+tenant_id+"/instructors?access_token="+token, jsonObject);
        logger.info(response.asString());
        response.then().
                assertThat().statusCode(401).
@@ -80,7 +80,7 @@ public class InstructorsAddTest {
 	 public void testNoAvatar(){
 		   jsonObject.remove("avatar");
 	       logger.info("request Body:{}",jsonObject.toString());
-	       Response response= TestConfig.postOrPutExecu("post","/tenants/1"+tenant_id+"/instructors?access_token="+token, jsonObject);
+	       Response response= TestConfig.postOrPutExecu("post","/tenants/"+tenant_id+"/instructors?access_token="+token, jsonObject);
 	       logger.info(response.asString());
 	       response.then().
 	               assertThat().statusCode(400).
@@ -91,7 +91,7 @@ public class InstructorsAddTest {
 	 public void testNoName(){
 		   jsonObject.remove("name");
 	       logger.info("request Body:{}",jsonObject.toString());
-	       Response response= TestConfig.postOrPutExecu("post","/tenants/1"+tenant_id+"/instructors?access_token="+token, jsonObject);
+	       Response response= TestConfig.postOrPutExecu("post","/tenants/"+tenant_id+"/instructors?access_token="+token, jsonObject);
 	       logger.info("response:{}",response.asString());
 	       response.then().
 	               assertThat().statusCode(400).
@@ -101,7 +101,7 @@ public class InstructorsAddTest {
 	 public void testNoInstro(){
 		   jsonObject.remove("intro");
 	       logger.info("request Body:{}",jsonObject.toString());
-	       Response response= TestConfig.postOrPutExecu("post","/tenants/1"+tenant_id+"/instructors?access_token="+token, jsonObject);
+	       Response response= TestConfig.postOrPutExecu("post","/tenants/"+tenant_id+"/instructors?access_token="+token, jsonObject);
 	       logger.info("response:{}",response.asString());
 	       response.then().
 	               assertThat().statusCode(400).
@@ -111,7 +111,7 @@ public class InstructorsAddTest {
 	 public void testNoTitle(){
 		   jsonObject.remove("title");
 	       logger.info("request Body:{}",jsonObject.toString());
-	       Response response= TestConfig.postOrPutExecu("post","/tenants/1"+tenant_id+"/instructors?access_token="+token, jsonObject);
+	       Response response= TestConfig.postOrPutExecu("post","/tenants/"+tenant_id+"/instructors?access_token="+token, jsonObject);
 	       logger.info("response:{}",response.asString());
 	       response.then().
 	               assertThat().statusCode(400).
