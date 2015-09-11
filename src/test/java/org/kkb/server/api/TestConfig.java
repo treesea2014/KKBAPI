@@ -1,23 +1,24 @@
 package org.kkb.server.api;
 
-import com.jayway.restassured.http.ContentType;
-import com.jayway.restassured.response.Response;
-import com.jayway.restassured.specification.RequestSpecification;
-import net.sf.json.JSONObject;
-
 import static com.jayway.restassured.RestAssured.given;
 import static com.jayway.restassured.path.json.JsonPath.with;
 
-import java.util.ResourceBundle;
+import com.jayway.restassured.http.ContentType;
+import com.jayway.restassured.internal.ResponseParserRegistrar;
+import com.jayway.restassured.response.Response;
+import com.jayway.restassured.specification.RequestSpecification;
+
+import net.sf.json.JSONObject;
 
 /**
  * ws.wang
  */
 public class TestConfig {
 
-    public static final String path= ResourceBundle.getBundle("api").getString("env");
-    //public static final String path="http://release-api.kaikeba.cn";
-    //public static final String path="http://w-api-f2.kaikeba.cn";
+//    public static final String path="http://w-api-r1.kaikeba.cn";
+//    public static final String path="http://release-api.kaikeba.cn";
+    public static final String path="http://w-api-f2.kaikeba.cn";
+	
 
     public static RequestSpecification requestSpecification(){
         if(path.contains("cn")){
@@ -65,6 +66,18 @@ public class TestConfig {
         return token;
     }
 
+    public static String getTokenByUsidAndTeid(int user_id, int tenants_id){
+
+        RequestSpecification requestSpecification= TestConfig.requestSpecification();
+
+        String path="/kauth/authorize?uid=" + user_id + "&cid=www&tenant_id=" + tenants_id;
+
+        Response response=TestConfig.getOrDeleteExecu("get", path);
+
+        String token=with(response.body().asString()).get("access_token");
+        return token;
+    }
+    
     public static Response getOrDeleteExecu(String type,String url){
         if(type.equalsIgnoreCase("get")){
             RequestSpecification requestSpecification= TestConfig.requestSpecification().contentType(ContentType.JSON);
@@ -74,7 +87,7 @@ public class TestConfig {
             return response;
         }else{
             RequestSpecification requestSpecification= TestConfig.requestSpecification().contentType(ContentType.JSON);
-
+            
             Response response=requestSpecification.when()
                     .delete(url);
             return response;
@@ -97,5 +110,20 @@ public class TestConfig {
         }
     }
 
+    public static Response postOrPutFileExecu(String type,String url,Object file){
+        if(type.equalsIgnoreCase("post")){
 
+            RequestSpecification requestSpecification= TestConfig.requestSpecification().body(file);
+            Response response=requestSpecification.when()
+                    .post(url);
+            return response;
+        }else{
+            RequestSpecification requestSpecification= TestConfig.requestSpecification().body(file);
+
+            Response response=requestSpecification.when()
+                    .put(url);
+            return response;
+        }
+    }
+    
 }
