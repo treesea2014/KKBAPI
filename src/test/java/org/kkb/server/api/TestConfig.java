@@ -3,6 +3,8 @@ package org.kkb.server.api;
 import static com.jayway.restassured.RestAssured.given;
 import static com.jayway.restassured.path.json.JsonPath.with;
 
+import java.util.ResourceBundle;
+
 import com.jayway.restassured.http.ContentType;
 import com.jayway.restassured.internal.ResponseParserRegistrar;
 import com.jayway.restassured.response.Response;
@@ -17,7 +19,7 @@ public class TestConfig {
 
 //    public static final String path="http://w-api-r1.kaikeba.cn";
 //    public static final String path="http://release-api.kaikeba.cn";
-    public static final String path="http://w-api-f2.kaikeba.cn";
+    public static final String path = ResourceBundle.getBundle("api").getString("env");;
 	
 
     public static RequestSpecification requestSpecification(){
