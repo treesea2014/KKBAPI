@@ -19,7 +19,15 @@ public class TestConfig {
 
 //    public static final String path="http://w-api-r1.kaikeba.cn";
 //    public static final String path="http://release-api.kaikeba.cn";
-    public static final String path = ResourceBundle.getBundle("api").getString("env");;
+	public static ResourceBundle bundle = ResourceBundle.getBundle("api");
+	//请求地址
+    public static final String path = bundle.getString("env");
+    public static final String userid = bundle.getString("userid");
+    public static final String tenantid = bundle.getString("tenantid");
+    public static final String cid = bundle.getString("cid");
+
+    
+    
 	
 
     public static RequestSpecification requestSpecification(){
@@ -76,6 +84,18 @@ public class TestConfig {
 
         Response response=TestConfig.getOrDeleteExecu("get", path);
 
+        String token=with(response.body().asString()).get("access_token");
+        
+        return token;
+    }
+    /**
+     * 获取默认token
+     * @return
+     */
+    public static String getDefaultToken(){
+        String path="/kauth/authorize?uid=" + userid + "&cid="+cid+"&tenant_id=" + tenantid;
+        Response response=TestConfig.getOrDeleteExecu("get", path);
+        //response.then().assertThat().log().all();
         String token=with(response.body().asString()).get("access_token");
         return token;
     }
