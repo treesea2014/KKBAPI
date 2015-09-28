@@ -2,10 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
  
 <suite name="API测试报告" parallel="tests">
- <listeners>
-        <listener class-name="org.kkb.server.api.util.ReporterListener" />
-        <listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
-    </listeners>
+
   <test name="讲师接口">
     <classes>
       <class name="org.kkb.server.api.restassured.instructors.InstructorsQueryById"/>
