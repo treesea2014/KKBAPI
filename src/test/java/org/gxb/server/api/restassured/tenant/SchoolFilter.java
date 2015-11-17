@@ -2,11 +2,15 @@ package org.gxb.server.api.restassured.tenant;
 
 import com.jayway.restassured.response.Response;
 
+import net.sf.saxon.functions.Matches;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 
 import static org.hamcrest.Matchers.equalTo;
+
+import java.util.ArrayList;
 
 import org.gxb.server.api.TestConfig;
 import org.hamcrest.Matchers;
@@ -26,14 +30,14 @@ public class SchoolFilter {
 
 	@Test(description="正常" ,priority=1)
     public void test(){
-		Response response= TestConfig.getOrDeleteExecu("get","/gxb-api/school?filter=tenantId:1");
-       response.then().log().all().
-               assertThat().statusCode(200)
-               
-              // body("data.total", equalto(13)).
+		String  tenantId = "1";
+		Response response= TestConfig.getOrDeleteExecu("get","/school?filter=tenantId:"+tenantId );
+       response.then()
+       			.log().all()
+               .assertThat().statusCode(200)
+               .body("filter.tenantId", equalTo(tenantId))
+              // .body("dataList.tenantId", Matchers.arrayContaining(1))
               ;
-       
-      
     }	
 	
 
