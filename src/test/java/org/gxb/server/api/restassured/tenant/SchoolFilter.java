@@ -31,16 +31,53 @@ public class SchoolFilter {
 	@Test(description="正常" ,priority=1)
     public void test(){
 		String  tenantId = "1";
+		ArrayList tenant = new ArrayList();
+		tenant.add(1);
 		Response response= TestConfig.getOrDeleteExecu("get","/school?filter=tenantId:"+tenantId );
+		
        response.then()
        			.log().all()
                .assertThat().statusCode(200)
                .body("filter.tenantId", equalTo(tenantId))
-              // .body("dataList.tenantId", Matchers.arrayContaining(1))
+               .body("dataList.tenantId", equalTo(tenant))
               ;
     }	
 	
+	@Test(description="没有tenantId" ,priority=2)
+    public void testWithoutTenantId(){
 
+		Response response= TestConfig.getOrDeleteExecu("get","/school?filter=tenantId:" );
+       response.then()
+       			.log().all()
+               .assertThat().statusCode(200)
+               .body("dataList.name", Matchers.hasItem("辽宁科技大学"))
+               .body("dataList.tenantId",  Matchers.hasItem(222))
+              ;
+    }	
+	
+	@Test(description="tenantId为非数字类型时" ,priority=2)
+    public void testWithInvaild(){
+
+		Response response= TestConfig.getOrDeleteExecu("get","/school?filter=tenantId:X" );
+       response.then()
+       			.log().all()
+               .assertThat().statusCode(500)
+               .body("message", Matchers.containsString("NumberFormatException"))
+               .body("type",  equalTo("MyBatisSystemException"))
+              ;
+    }
+	
+	@Test(description="tenantId为超长时" ,priority=2)
+    public void testWithBigNum(){
+
+		Response response= TestConfig.getOrDeleteExecu("get","/school?filter=tenantId:99999999999999999999999999" );
+       response.then()
+       			.log().all()
+               .assertThat().statusCode(500)
+               .body("message", Matchers.containsString("NumberFormatException"))
+               .body("type",  equalTo("MyBatisSystemException"))
+              ;
+    }
 	 
 
 }
