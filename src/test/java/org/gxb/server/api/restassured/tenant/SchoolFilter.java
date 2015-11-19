@@ -54,6 +54,15 @@ public class SchoolFilter {
                .body("dataList.tenantId",  Matchers.hasItem(222))
               ;
     }	
+	@Test(description="输入不存在的tenantId" ,priority=2)
+    public void testWithNotExistTenantId(){
+		String  tenantId = "-1";
+		Response response= TestConfig.getOrDeleteExecu("get","/school?filter=tenantId:" +tenantId);
+       response.then()
+       			.log().all()
+               .assertThat().statusCode(200)
+              ;
+    }	
 	
 	@Test(description="tenantId为非数字类型时" ,priority=2)
     public void testWithInvaild(){
