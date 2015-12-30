@@ -140,7 +140,7 @@ public class ReporterListener extends AbstractReporter
 		}
 		String[] toMail = bundle.getString("toMail").split(";");
 		String env = bundle.getString("env");
-		String url = "http://" + bundle.getString("server") + ":8080"
+		String url = "http://" + bundle.getString("server") 
 				+ bundle.getString("htmlPath") 
 				+ new SimpleDateFormat("yyyyMMddHHmmss").format(reportTime)+File.separator
 				 + INDEX_FILE;
