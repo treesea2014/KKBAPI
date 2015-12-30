@@ -34,7 +34,6 @@ import org.testng.ITestNGMethod;
 import org.testng.ITestResult;
 import org.testng.Reporter;
 import org.testng.xml.XmlSuite;
-import org.uncommons.reportng.AbstractReporter;
 import org.uncommons.reportng.ReportNGException;
 
 /**
