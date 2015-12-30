@@ -2,8 +2,6 @@ package org.gxb.server.api.restassured.video;
 
 import org.gxb.server.api.TestConfig;
 import org.testng.annotations.Test;
-import org.testng.annotations.Test;
-
 import com.jayway.restassured.response.Response;
 
 import net.sf.json.JSONObject;

@@ -5,7 +5,6 @@ import static org.hamcrest.Matchers.equalTo;
 import org.gxb.server.api.TestConfig;
 import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
-import org.testng.annotations.Test;
 
 import com.jayway.restassured.response.Response;
 
