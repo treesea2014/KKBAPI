@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite" parallel="none">
+  <test name="Test">
+    <classes>
+      <class name="org.gxb.server.api.restassured.video.GetVideoQuiz"/>
+      <class name="org.gxb.server.api.restassured.unit.GetContent"/>
+      <class name="org.gxb.server.api.restassured.video.SaveRecentRecord"/>
+      <class name="org.gxb.server.api.restassured.video.GetRecentRecord"/>
+      <class name="org.gxb.server.api.restassured.user.GetUserInfoById"/>
+      <class name="org.gxb.server.api.restassured.tenant.SchoolFilter"/>
+      <class name="org.gxb.server.api.restassured.tenant.GetSchoolByShortName"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
