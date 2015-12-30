@@ -19,7 +19,7 @@ public class TestConfig {
 	public static ResourceBundle bundle = ResourceBundle.getBundle("api");
 	// 请求地址
 	public static final String path = bundle.getString("env");
-	public static final String basePath = "/gxb-api/";
+	public static final String basePath = "";
 
 	public static RequestSpecification requestSpecification() {
 		if (path.contains("cn")) {
