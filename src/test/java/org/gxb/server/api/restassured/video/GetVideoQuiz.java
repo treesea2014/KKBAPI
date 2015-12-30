@@ -1,17 +1,19 @@
 package org.gxb.server.api.restassured.video;
 
-import com.jayway.restassured.response.Response;
-
-import org.testng.annotations.Test;
-
 import org.gxb.server.api.TestConfig;
 import org.hamcrest.Matchers;
+import org.testng.annotations.Test;
+import org.testng.annotations.Test;
+
+import com.jayway.restassured.response.Response;
 
 /**
  * @author treesea888@qq.com
  * @version 1.0.0
  * @date 2015.09.06
- * @decription 查询最近一次学习的记录 http://123.57.210.46:8080/gxb-api/class/2086/chapter/last?userId=1040379
+ * @decription 查询最近一次学习的记录
+ *             http://123.57.210.46:8080/gxb-api/class/2086/chapter/last?userId=
+ *             1040379
  * 
  */
 public class GetVideoQuiz {
@@ -31,18 +33,16 @@ public class GetVideoQuiz {
 	public void testWithInvaild() {
 		String videoId = "x";
 		Response response = TestConfig.getOrDeleteExecu("get", "video/" + videoId + "/quizQuestion");
-		response.then().log().all()
-					.assertThat().statusCode(400)
-					.body("message",Matchers.containsString("NumberFormatException"));
+		response.then().log().all().assertThat().statusCode(400).body("message",
+				Matchers.containsString("NumberFormatException"));
 	}
 
 	@Test(description = "超长数字", priority = 1)
 	public void testWithBigNum() {
 		String videoId = "99999999999999999999999999999";
 		Response response = TestConfig.getOrDeleteExecu("get", "video/" + videoId + "/quizQuestion");
-		response.then().log().all()
-					.assertThat().statusCode(400)
-					.body("message",Matchers.containsString("NumberFormatException"));
+		response.then().log().all().assertThat().statusCode(400).body("message",
+				Matchers.containsString("NumberFormatException"));
 		;
 	}
 
@@ -50,9 +50,7 @@ public class GetVideoQuiz {
 	public void testWithtExist() {
 		String videoId = "-1";
 		Response response = TestConfig.getOrDeleteExecu("get", "video/" + videoId + "/quizQuestion");
-		response.then().log().all()
-					.assertThat().statusCode(200)
-				;
+		response.then().log().all().assertThat().statusCode(200);
 	}
 
 }

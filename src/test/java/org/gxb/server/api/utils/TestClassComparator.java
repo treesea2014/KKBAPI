@@ -2,15 +2,15 @@
 
 /*  2:   */
 /*  3:   */import java.util.Comparator;
+
 /*  4:   */
 import org.testng.IClass;
 
 /*  5:   */
-/*  6:   */class TestClassComparator
-/* 7: */implements Comparator<IClass>
-/* 8: */{
+/*  6:   */class TestClassComparator/* 7: */implements Comparator<IClass>
+/* 8: */ {
 	/* 9: */public int compare(IClass class1, IClass class2)
-	/* 10: */{
+	/* 10: */ {
 		/* 11:29 */return class1.getName().compareTo(class2.getName());
 		/* 12: */}
 	/* 13: */

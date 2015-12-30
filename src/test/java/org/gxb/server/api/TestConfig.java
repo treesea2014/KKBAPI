@@ -1,12 +1,10 @@
 package org.gxb.server.api;
 
 import static com.jayway.restassured.RestAssured.given;
-import static com.jayway.restassured.path.json.JsonPath.with;
 
 import java.util.ResourceBundle;
 
 import com.jayway.restassured.http.ContentType;
-import com.jayway.restassured.internal.ResponseParserRegistrar;
 import com.jayway.restassured.response.Response;
 import com.jayway.restassured.specification.RequestSpecification;
 
@@ -23,7 +21,8 @@ public class TestConfig {
 
 	public static RequestSpecification requestSpecification() {
 		if (path.contains("cn")) {
-			return given().baseUri(path).and().header("Content-Type", "application/json;charset=utf-8").port(8080).basePath(basePath);
+			return given().baseUri(path).and().header("Content-Type", "application/json;charset=utf-8").port(8080)
+					.basePath(basePath);
 
 		} else {
 			return given().baseUri(path).and().header("Content-Type", "application/json").port(8080).basePath(basePath);

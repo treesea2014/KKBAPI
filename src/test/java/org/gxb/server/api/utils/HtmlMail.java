@@ -18,8 +18,7 @@ public class HtmlMail {
 	/**
 	 * slf4j logback
 	 */
-	private final static Logger logger = LoggerFactory
-			.getLogger(HtmlMail.class);
+	private final static Logger logger = LoggerFactory.getLogger(HtmlMail.class);
 
 	public static String hostName = "smtp.cigmall.cn";
 	public static String from = "kfxt@cigmall.cn";
@@ -29,17 +28,14 @@ public class HtmlMail {
 	static {
 		try {
 			bundle = ResourceBundle.getBundle("api");
-			if (bundle.getString("mail.smtp") != null
-					&& !bundle.getString("mail.smtp").trim().equals("")) {
+			if (bundle.getString("mail.smtp") != null && !bundle.getString("mail.smtp").trim().equals("")) {
 				hostName = bundle.getString("mail.smtp");
 			}
-			if (bundle.getString("mail.from") != null
-					&& !bundle.getString("mail.from").trim().equals("")) {
+			if (bundle.getString("mail.from") != null && !bundle.getString("mail.from").trim().equals("")) {
 				from = bundle.getString("mail.from");
 			}
 
-			if (bundle.getString("mail.pwd") != null
-					&& !bundle.getString("mail.pwd").trim().equals("")) {
+			if (bundle.getString("mail.pwd") != null && !bundle.getString("mail.pwd").trim().equals("")) {
 				pwd = bundle.getString("mail.pwd");
 			}
 		} catch (Exception e) {
@@ -84,8 +80,8 @@ public class HtmlMail {
 	 * @param bcc
 	 *            秘密抄送人
 	 */
-	public static void send(final String[] to, final String subject,
-			final String content, final List<String> cc, final List<String> bcc) {
+	public static void send(final String[] to, final String subject, final String content, final List<String> cc,
+			final List<String> bcc) {
 		HtmlEmail email = new HtmlEmail();
 		email.setCharset("UTF-8");
 		try {
