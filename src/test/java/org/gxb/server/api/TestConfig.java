@@ -70,5 +70,17 @@ public class TestConfig {
 			return response;
 		}
 	}
+	
+	public static Response postOrPutFileExecu(String type, String url) {
+		RequestSpecification requestSpecification = TestConfig.requestSpecification();
+		
+		if (type.equalsIgnoreCase("post")) {
+			Response response = requestSpecification.when().post(url);
+			return response;
+		} else {
+			Response response = requestSpecification.when().put(url);
+			return response;
+		}
+	}
 
 }
