@@ -182,8 +182,8 @@ public class ReporterListener extends AbstractReporter {
 				+ "<div style=\"height:20px;width:" + (skip * 100 / (passed + fail + skip))
 				+ "%;background-color:yellow;float:left\"></div>" + "<div style=\"height:20px;width:"
 				+ (fail * 100 / (passed + fail + skip)) + "%;background-color:red;float:left\"></div>" + "</div>";
-		html.append("<h4 style='color:red;'>" + env + "环境     结果统计：" + (passed + fail + skip) + "\t通过:" + passed
-				+ "&nbsp;&nbsp;失败:" + fail + "&nbsp;&nbsp;跳过:" + skip + "&nbsp;&nbsp;通过率:"
+		html.append("<h4 style='color:red;'>" + env + "环境 ，    结果统计：" + (passed + fail + skip) + "，\t通过:" + passed
+				+ "，&nbsp;&nbsp;失败:" + fail + "，&nbsp;&nbsp;跳过:" + skip + "，&nbsp;&nbsp;通过率:"
 				+ (passed * 100 / (passed + fail + skip)) + " %</h4>").append(per).append(sb.toString())
 				.append("</html>");
 
