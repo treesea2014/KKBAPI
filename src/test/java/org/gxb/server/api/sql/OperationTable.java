@@ -3,10 +3,11 @@ package org.gxb.server.api.sql;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ResourceBundle;
 
 public class OperationTable {
-	private String courseDBUrl = "jdbc:mysql://192.168.30.33:3306/course";
-
+	public static ResourceBundle dbBundle = ResourceBundle.getBundle("db");
+	public static final String dbUrl = dbBundle.getString("dbUrl");
 	
 	public int updateCourseStatus(int courseid,int status) throws Exception {
 		String sql = "select count(*) as totalcount from course where course_id = "+courseid+" and status = "+status+"";
@@ -17,7 +18,7 @@ public class OperationTable {
 		int count  = 0;
 
 		try {
-			dbc = new DBConnection(courseDBUrl);
+			dbc = new DBConnection(dbUrl);
 			conn = dbc.GetConnection();
 			st = conn.createStatement();
 			res = st.executeQuery(sql);

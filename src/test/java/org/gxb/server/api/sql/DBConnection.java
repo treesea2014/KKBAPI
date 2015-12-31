@@ -2,18 +2,22 @@ package org.gxb.server.api.sql;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.ResourceBundle;
 
 public class DBConnection {
-	private String DBDRIVER = "com.mysql.jdbc.Driver";
-	private String DBUSER = "root";
-    private String DBPASSWORD  = "123456";
+	public static ResourceBundle dbBundle = ResourceBundle.getBundle("db");
+	// 请求地址
+	public static final String dbDriver = dbBundle.getString("dbDriver");
+	public static final String dbUser = dbBundle.getString("dbUser");
+	public static final String dbPassword = dbBundle.getString("dbPassword");
+
     private Connection conn = null;
     public DBConnection(String DBURL)
     {    	
     	try
     	{
-    		Class.forName(DBDRIVER);
-    		this.conn=DriverManager.getConnection(DBURL,DBUSER,DBPASSWORD);
+    		Class.forName(dbDriver);
+    		this.conn=DriverManager.getConnection(DBURL,dbUser,dbPassword);
     	}
     	catch(Exception ex)
     	{
