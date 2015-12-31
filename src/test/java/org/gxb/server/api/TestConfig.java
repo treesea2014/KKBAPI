@@ -25,7 +25,7 @@ public class TestConfig {
 					.basePath(basePath);
 
 		} else {
-			return given().baseUri(path).and().header("Content-Type", "application/json").port(8080).basePath(basePath);
+			return given().baseUri(path).and().header("Content-Type", "application/json;charset=utf-8").port(8080).basePath(basePath);
 		}
 	}
 
