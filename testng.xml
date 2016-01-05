@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
 <suite name="API测试报告" parallel="tests">
-<listeners>
-		<listener class-name="org.gxb.server.api.utils.ReporterListener" />
-		<listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
-	</listeners>
-  <test name="1">
-    <classes>
-      <class name="org.gxb.server.api.restassured.video.GetVideoQuiz"/>
-      <class name="org.gxb.server.api.restassured.unit.GetContent"/>
-      <class name="org.gxb.server.api.restassured.video.SaveRecentRecord"/>
-      <class name="org.gxb.server.api.restassured.video.GetRecentRecord"/>
-      <class name="org.gxb.server.api.restassured.user.GetUserInfoById"/>
-      <class name="org.gxb.server.api.restassured.tenant.SchoolFilter"/>
-      <class name="org.gxb.server.api.restassured.tenant.GetSchoolByShortName"/>
-    </classes>
-  </test> <!-- Test -->
+  <listeners>
+    <listener class-name="org.gxb.server.api.utils.ReporterListener" />
+    <listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
+  </listeners>
+
+  <test name="课程接口">
+    <packages>
+      <package name="org.gxb.server.api.restassured.course.course"/>
+    </packages>
+  </test>
+
+  <test name="讲师接口">
+    <packages>
+      <package name="org.gxb.server.api.restassured.course.instructor"/>
+    </packages>
+  </test>
+
 </suite> <!-- Suite -->
