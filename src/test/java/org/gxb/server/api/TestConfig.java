@@ -43,21 +43,7 @@ public class TestConfig {
 		}
 	}
 
-	public static Response postOrPutExecu(String type, String url, JSONObject jsonObject) {
-		if (type.equalsIgnoreCase("post")) {
-
-			RequestSpecification requestSpecification = TestConfig.requestSpecification().body(jsonObject);
-			Response response = requestSpecification.when().post(url);
-			return response;
-		} else {
-			RequestSpecification requestSpecification = TestConfig.requestSpecification().body(jsonObject);
-
-			Response response = requestSpecification.when().put(url);
-			return response;
-		}
-	}
-
-	public static Response postOrPutFileExecu(String type, String url, Object file) {
+	public static Response postOrPutExecu(String type, String url, Object file) {
 		if (type.equalsIgnoreCase("post")) {
 
 			RequestSpecification requestSpecification = TestConfig.requestSpecification().body(file);

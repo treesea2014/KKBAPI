@@ -163,7 +163,7 @@ public class HttpRequest {
 	 *            不需要返回结果
 	 * @return
 	 */
-	public static String SendHttpPost(String url,  JSONObject jsonParam) {
+	public static String SendHttpPost(String url,  Object jsonParam) {
 		// post请求返回结果
 		DefaultHttpClient httpClient = new DefaultHttpClient();
 		StringBuilder  responseResult = new StringBuilder();

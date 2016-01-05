@@ -87,8 +87,8 @@ public class EnableCourseTest {
 	public void verifyUnpublishedStatus() {
 		courseid = 3;
 		String paramUrl = url + courseid + "/status/start?loginUserId=123456";
-
 		String strMsg = httpRequest.SendHttpPut(paramUrl, null);
+		
 		String[] data = strMsg.split("&");
 		JSONObject jsonobject = JSONObject.fromObject(data[1]);
 
