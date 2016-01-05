@@ -1,13 +1,9 @@
 package org.gxb.server.api.restassured.course.instructor;
 
 import com.jayway.restassured.response.Response;
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.gxb.server.api.TestConfig;
-import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
-
-import java.util.HashMap;
 
 import static org.hamcrest.Matchers.equalTo;
 
@@ -38,6 +34,7 @@ public class CreateInstructor {
                 .body("wechat", equalTo("微信"))
                 .body("tag", equalTo("微信"));
     }
+
     @Test(description = "title职称输入为空", priority = 2)
     public void testWithInvalidTitle01() {
         JSONObject jo = new JSONObject();

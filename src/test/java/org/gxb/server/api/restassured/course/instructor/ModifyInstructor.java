@@ -2,14 +2,19 @@ package org.gxb.server.api.restassured.course.instructor;
 
 import com.jayway.restassured.response.Response;
 import net.sf.json.JSONObject;
+import org.apache.log4j.spi.LoggerFactory;
 import org.gxb.server.api.TestConfig;
+import org.slf4j.Logger;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static org.hamcrest.Matchers.equalTo;
 
 public class ModifyInstructor {
-    @Test(description = "正常", priority = 1)
-    public void test() {
+    Integer instructorId;
+    private Logger logger = org.slf4j.LoggerFactory.getLogger(ModifyInstructor.class);
+    @BeforeClass
+    public void createInstructor() {
         JSONObject jo = new JSONObject();
         jo.put("title", "教授");
         jo.put("name", "邓树海");
@@ -22,6 +27,25 @@ public class ModifyInstructor {
 
         Response response = TestConfig.postOrPutExecu("post",
                 "instructor?loginUserId=123456&tenantId=1", jo);
+        response.then().log().all();
+        instructorId = response.jsonPath().get("instructorId");
+        logger.info("instructorId:{}",instructorId);
+    }
+
+    @Test(description = "正常", priority = 1)
+    public void test() {
+        JSONObject jo = new JSONObject();
+        jo.put("title", "教授");
+        jo.put("name", "邓树海");
+        jo.put("intro", "著名学者");
+        jo.put("avatar", "www.baidu.com");
+        jo.put("sinaWeibo", "shdeng@sina.com");
+        jo.put("description", "简单描述");
+        jo.put("wechat", "微信");
+        jo.put("tag", "微信");
+
+        Response response = TestConfig.postOrPutExecu("put",
+                "instructor/"+instructorId+"?loginUserId=123456&tenantId=1", jo);
 
         response.then().log().all().assertThat()
                 .statusCode(200)
@@ -47,8 +71,8 @@ public class ModifyInstructor {
         jo.put("wechat", "微信");
         jo.put("tag", "微信");
 
-        Response response = TestConfig.postOrPutExecu("post",
-                "instructor?loginUserId=123456&tenantId=1", jo);
+        Response response = TestConfig.postOrPutExecu("put",
+                "instructor/"+instructorId+"?loginUserId=123456&tenantId=1", jo);
 
         response.then().log().all().assertThat()
                 .statusCode(400)
@@ -68,8 +92,8 @@ public class ModifyInstructor {
         jo.put("wechat", "微信");
         jo.put("tag", "微信");
 
-        Response response = TestConfig.postOrPutExecu("post",
-                "instructor?loginUserId=123456&tenantId=1", jo);
+        Response response = TestConfig.postOrPutExecu("put",
+                "instructor/"+instructorId+"?loginUserId=123456&tenantId=1", jo);
 
         response.then().log().all().assertThat()
                 .statusCode(400)
@@ -89,8 +113,8 @@ public class ModifyInstructor {
         jo.put("wechat", "微信");
         jo.put("tag", "微信");
 
-        Response response = TestConfig.postOrPutExecu("post",
-                "instructor?loginUserId=123456&tenantId=1", jo);
+        Response response = TestConfig.postOrPutExecu("put",
+                "instructor/"+instructorId+"?loginUserId=123456&tenantId=1", jo);
 
         response.then().log().all().assertThat()
                 .statusCode(400)
@@ -110,8 +134,8 @@ public class ModifyInstructor {
         jo.put("wechat", "微信");
         jo.put("tag", "微信");
 
-        Response response = TestConfig.postOrPutExecu("post",
-                "instructor?loginUserId=123456&tenantId=1", jo);
+        Response response = TestConfig.postOrPutExecu("put",
+                "instructor/"+instructorId+"?loginUserId=123456&tenantId=1", jo);
 
         response.then().log().all().assertThat()
                 .statusCode(400)
@@ -131,8 +155,8 @@ public class ModifyInstructor {
         jo.put("wechat", "微信");
         jo.put("tag", "微信");
 
-        Response response = TestConfig.postOrPutExecu("post",
-                "instructor?loginUserId=123456&tenantId=1", jo);
+        Response response = TestConfig.postOrPutExecu("put",
+                "instructor/"+instructorId+"?loginUserId=123456&tenantId=1", jo);
 
         response.then().log().all().assertThat()
                 .statusCode(400)
@@ -152,8 +176,8 @@ public class ModifyInstructor {
         jo.put("wechat", "微信");
         jo.put("tag", "微信");
 
-        Response response = TestConfig.postOrPutExecu("post",
-                "instructor?loginUserId=123456&tenantId=1", jo);
+        Response response = TestConfig.postOrPutExecu("put",
+                "instructor/"+instructorId+"?loginUserId=123456&tenantId=1", jo);
 
         response.then().log().all().assertThat()
                 .statusCode(400)

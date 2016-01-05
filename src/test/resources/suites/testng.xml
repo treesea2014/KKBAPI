@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
- 
+
 <suite name="API测试报告" parallel="tests">
+    <listeners>
+        <listener class-name="org.gxb.server.api.utils.ReporterListener" />
+        <listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
+    </listeners>
 
-  <test name="讲师接口">
-    <classes>
-      <class name="org.kkb.server.api.restassured.instructors.InstructorsQueryById"/>
-      <class name="org.kkb.server.api.restassured.instructors.InstructorsModify"/>
-      <class name="org.kkb.server.api.restassured.instructors.InstructorsQueryTest"/>
-      <class name="org.kkb.server.api.restassured.instructors.InstructorsAddTest"/>
-    </classes>
+    <test name="课程接口">
+        <packages>
+            <package name="org.gxb.server.api.restassured.course.course"/>
+        </packages>
     </test>
-   <test name="课程接口">
-    <classes>
-      <class name="org.kkb.server.api.restassured.LcmsCourse.CourseGetByIdTest"/>
-      <class name="org.kkb.server.api.restassured.LcmsCourse.CoursePutTest"/>
-      <class name="org.kkb.server.api.restassured.LcmsCourse.CourseGetTest"/>
-      <class name="org.kkb.server.api.restassured.LcmsCourse.CoursePostTest"/>
-    </classes>
 
-  </test> 
-    
+    <test name="讲师接口">
+        <packages>
+            <package name="org.gxb.server.api.restassured.course.instructor"/>
+        </packages>
+    </test>
+
 </suite> <!-- Suite -->
  

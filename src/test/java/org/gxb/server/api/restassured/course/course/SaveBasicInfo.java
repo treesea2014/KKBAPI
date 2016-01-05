@@ -1,16 +1,15 @@
 package org.gxb.server.api.restassured.course.course;
 
-import java.util.HashMap;
-
+import com.jayway.restassured.response.Response;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.gxb.server.api.TestConfig;
 import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
-import com.jayway.restassured.response.Response;
+
+import java.util.HashMap;
 
 import static org.hamcrest.Matchers.equalTo;
-
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 
 /**
  * @author shdeng@gaoxiaobang.com
