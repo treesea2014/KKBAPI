@@ -44,17 +44,15 @@ public class TestConfig {
 	}
 
 	public static Response postOrPutExecu(String type, String url, Object file) {
+		RequestSpecification requestSpecification = TestConfig.requestSpecification().body(file);
+		Response response;
 		if (type.equalsIgnoreCase("post")) {
-
-			RequestSpecification requestSpecification = TestConfig.requestSpecification().body(file);
-			Response response = requestSpecification.when().post(url);
-			return response;
+			 response = requestSpecification.when().post(url);
 		} else {
-			RequestSpecification requestSpecification = TestConfig.requestSpecification().body(file);
-
-			Response response = requestSpecification.when().put(url);
-			return response;
+			 response = requestSpecification.when().put(url);
 		}
+		response.then().header("Content-type", "application/json;charset=UTF-8");
+		return response;
 	}
 	
 	public static Response postOrPutFileExecu(String type, String url) {

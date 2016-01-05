@@ -78,6 +78,7 @@ public class ModifyBasicInfo {
 
         Response response = TestConfig.postOrPutExecu("put",
                 "course/"+courseId+"?loginUserId=123456&tenantId=1", jo);
+        //response.then().header("","");
 
         response.then().log().all().assertThat()
                 .statusCode(200)
