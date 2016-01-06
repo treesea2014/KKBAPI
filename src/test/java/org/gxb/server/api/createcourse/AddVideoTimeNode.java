@@ -24,7 +24,7 @@ import net.sf.json.JSONObject;
  * question,course_video_time_node,course_question_relate
  */
 public class AddVideoTimeNode {
-	private static Logger logger = LoggerFactory.getLogger(CourseResourceTest.class);
+	private static Logger logger = LoggerFactory.getLogger(AddVideoTimeNode.class);
 	private OperationTable operationTable = new OperationTable();
 	public ResourceBundle bundle = ResourceBundle.getBundle("api");
 	private static HttpRequest httpRequest = new HttpRequest();

@@ -21,10 +21,10 @@ import net.sf.json.JSONObject;
 /*
  * ----视频时间点添加
  * http://192.168.30.33:8080/gxb-api/course/resourceVideo/7?loginUserId=123456
- * course_video_timenode video
+ * course_video_time_node video
  */
 public class AddResourceVideo {
-	private static Logger logger = LoggerFactory.getLogger(CourseResourceTest.class);
+	private static Logger logger = LoggerFactory.getLogger(AddResourceVideo.class);
 	private OperationTable operationTable = new OperationTable();
 	public ResourceBundle bundle = ResourceBundle.getBundle("api");
 	private static HttpRequest httpRequest = new HttpRequest();

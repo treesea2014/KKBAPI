@@ -89,8 +89,13 @@ public class OperationTable {
 		return count;
 	}
 
-	public void updateCourseStatus(int courseid, int status) throws Exception {
-		String sql = "update course set status = " + status + " where course_id = " + courseid + "";
+	public void updateCourseStatus(int courseid, int status, String flag) throws Exception {
+		String sql;
+		if (flag == null) {
+			sql = "update course set status = " + status + " where course_id = " + courseid + "";
+		} else {
+			sql = "update course set delete_flag = '" + flag + "' where course_id = " + courseid + "";
+		}
 		DBConnection dbc = null;
 		Connection conn = null;
 		Statement st = null;
@@ -316,11 +321,11 @@ public class OperationTable {
 		return count;
 	}
 
-	public int selectCourseQuestionRelate(String contextId,String contextType,String questionid1, String questionid2)
+	public int selectCourseQuestionRelate(String contextId, String contextType, String questionid1, String questionid2)
 			throws Exception {
 		String sql = "select count(*) as totalCount from course_question_relate where context_id ='" + contextId
-				+ "' and context_type='" + contextType + "' and question_id in( '" + questionid1 + "' , '"
-				+ questionid2 + "');";
+				+ "' and context_type='" + contextType + "' and question_id in( '" + questionid1 + "' , '" + questionid2
+				+ "');";
 		DBConnection dbc = null;
 		Connection conn = null;
 		Statement st = null;

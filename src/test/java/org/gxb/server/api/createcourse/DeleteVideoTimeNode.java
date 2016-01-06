@@ -1,9 +1,7 @@
 package org.gxb.server.api.createcourse;
 
 import static org.hamcrest.Matchers.equalTo;
-
 import java.util.ResourceBundle;
-
 import org.gxb.server.api.HttpRequest;
 import org.gxb.server.api.TestConfig;
 import org.gxb.server.api.sql.OperationTable;
@@ -12,9 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 import com.jayway.restassured.response.Response;
-
 import net.sf.json.JSONObject;
 
 /*
@@ -23,7 +19,7 @@ import net.sf.json.JSONObject;
  * course_video_time_node
  */
 public class DeleteVideoTimeNode {
-	private static Logger logger = LoggerFactory.getLogger(CourseResourceTest.class);
+	private static Logger logger = LoggerFactory.getLogger(DeleteVideoTimeNode.class);
 	private OperationTable operationTable = new OperationTable();
 	public ResourceBundle bundle = ResourceBundle.getBundle("api");
 	private static HttpRequest httpRequest = new HttpRequest();

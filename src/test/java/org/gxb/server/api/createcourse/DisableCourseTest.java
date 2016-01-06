@@ -36,18 +36,18 @@ public class DisableCourseTest {
 	private int courseid;
 	private int status;
 	private int disableStatus = 40;
-	
+
 	@BeforeMethod
 	public void InitiaData() {
 		courseid = 17;
 		status = 30;
 		url = path + basePath + "/course/";
 	}
-	
+
 	@Test(priority = 1, description = "status为已发布")
 	public void verifyPublishedStatus() {
 		try {
-			operationTable.updateCourseStatus(courseid, status);
+			operationTable.updateCourseStatus(courseid, status, null);
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -69,14 +69,14 @@ public class DisableCourseTest {
 			}
 		}
 	}
-	
+
 	@Test(priority = 2, description = "status为未发布")
 	public void verifyUnpublishedStatus() {
 		courseid = 11;
 		status = 10;
-		
+
 		try {
-			operationTable.updateCourseStatus(courseid, status);
+			operationTable.updateCourseStatus(courseid, status, null);
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -98,7 +98,7 @@ public class DisableCourseTest {
 			}
 		}
 	}
-	
+
 	@Test(priority = 3, description = "status为已停用")
 	public void verifyDisableStatus() {
 		courseid = 71;
@@ -134,7 +134,7 @@ public class DisableCourseTest {
 			Assert.assertEquals(jsonobject.get("type").toString(), "ServiceException", "type提示信息不正确");
 		}
 	}
-	
+
 	@Test(priority = 5, description = "course为字符串")
 	public void verifyInvalidCourse() {
 		Response response = TestConfig.postOrPutFileExecu("put",

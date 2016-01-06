@@ -14,7 +14,7 @@ import com.jayway.restassured.response.Response;
  * course_video_time_node
  */
 public class GetVideoTimeNode {
-	private static Logger logger = LoggerFactory.getLogger(CourseResourceTest.class);
+	private static Logger logger = LoggerFactory.getLogger(GetVideoTimeNode.class);
 	private String videoTimeNode;
 
 	@BeforeMethod
