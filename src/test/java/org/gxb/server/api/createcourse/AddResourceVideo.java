@@ -62,7 +62,7 @@ public class AddResourceVideo {
 		videoId = "999999";
 
 		String paramUrl = url + "resourceVideo/" + videoId + "?loginUserId=" + loginUserId;
-		String strMsg = httpRequest.SendHttpPost(paramUrl, jsonObject);
+		String strMsg = httpRequest.sendHttpPost(paramUrl, jsonObject);
 		String[] data = strMsg.split("&");
 		JSONObject jsonobject = JSONObject.fromObject(data[1]);
 

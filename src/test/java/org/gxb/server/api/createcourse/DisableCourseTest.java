@@ -104,7 +104,7 @@ public class DisableCourseTest {
 		courseid = 71;
 		String paramUrl = url + courseid + "/status/disable?loginUserId=123456";
 
-		String strMsg = httpRequest.SendHttpPut(paramUrl, null);
+		String strMsg = httpRequest.sendHttpPut(paramUrl, null);
 		String[] data = strMsg.split("&");
 		JSONObject jsonobject = JSONObject.fromObject(data[1]);
 
@@ -122,7 +122,7 @@ public class DisableCourseTest {
 		courseid = 999999;
 		String paramUrl = url + courseid + "/status/disable?loginUserId=123456";
 
-		String strMsg = httpRequest.SendHttpPut(paramUrl, null);
+		String strMsg = httpRequest.sendHttpPut(paramUrl, null);
 		String[] data = strMsg.split("&");
 		JSONObject jsonobject = JSONObject.fromObject(data[1]);
 

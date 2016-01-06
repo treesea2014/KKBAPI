@@ -21,7 +21,7 @@ import net.sf.json.JSONObject;
 /*
  * ----添加时间点
  * http://192.168.30.33:8080/gxb-api/course/videoTimeNode/1?loginUserId=123456
- * question,course_video_timenode,course_question_relate
+ * question,course_video_time_node,course_question_relate
  */
 public class AddVideoTimeNode {
 	private static Logger logger = LoggerFactory.getLogger(CourseResourceTest.class);
@@ -88,7 +88,7 @@ public class AddVideoTimeNode {
 		jsonArray.add(jsonObject2);
 
 		String paramUrl = url + "videoTimeNode/" + videoTimeNode + "?loginUserId=" + loginUserId;
-		String strMsg = httpRequest.SendHttpPost(paramUrl, jsonArray);
+		String strMsg = httpRequest.sendHttpPost(paramUrl, jsonArray);
 		String[] data = strMsg.split("&");
 		JSONObject jsonobject = JSONObject.fromObject(data[1]);
 
@@ -158,9 +158,8 @@ public class AddVideoTimeNode {
 		jsonObject1.put("questionId", questionId1);
 		jsonArray.add(jsonObject1);
 
-
 		String paramUrl = url + "videoTimeNode/" + videoTimeNode + "?loginUserId=" + loginUserId;
-		String strMsg = httpRequest.SendHttpPost(paramUrl, jsonArray);
+		String strMsg = httpRequest.sendHttpPost(paramUrl, jsonArray);
 		String[] data = strMsg.split("&");
 		JSONObject jsonobject = JSONObject.fromObject(data[1]);
 

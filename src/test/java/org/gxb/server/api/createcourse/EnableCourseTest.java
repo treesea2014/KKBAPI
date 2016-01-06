@@ -87,7 +87,7 @@ public class EnableCourseTest {
 	public void verifyUnpublishedStatus() {
 		courseid = 3;
 		String paramUrl = url + courseid + "/status/start?loginUserId=123456";
-		String strMsg = httpRequest.SendHttpPut(paramUrl, null);
+		String strMsg = httpRequest.sendHttpPut(paramUrl, null);
 		
 		String[] data = strMsg.split("&");
 		JSONObject jsonobject = JSONObject.fromObject(data[1]);
@@ -106,7 +106,7 @@ public class EnableCourseTest {
 		courseid = 17;
 		String paramUrl = url + courseid + "/status/start?loginUserId=123456";
 
-		String strMsg = httpRequest.SendHttpPut(paramUrl, null);
+		String strMsg = httpRequest.sendHttpPut(paramUrl, null);
 		String[] data = strMsg.split("&");
 		JSONObject jsonobject = JSONObject.fromObject(data[1]);
 
@@ -124,7 +124,7 @@ public class EnableCourseTest {
 		courseid = 999999;
 		String paramUrl = url + courseid + "/status/start?loginUserId=123456";
 
-		String strMsg = httpRequest.SendHttpPut(paramUrl, null);
+		String strMsg = httpRequest.sendHttpPut(paramUrl, null);
 		String[] data = strMsg.split("&");
 		JSONObject jsonobject = JSONObject.fromObject(data[1]);
 
