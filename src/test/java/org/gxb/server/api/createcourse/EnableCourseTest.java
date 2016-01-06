@@ -40,11 +40,11 @@ public class EnableCourseTest {
 		url = path + basePath + "/course/";
 	}
 
-	//failed  需验证
+	// failed 需验证
 	@Test(priority = 1, description = "status为停用")
 	public void verifyDisableStatus() {
 		try {
-			operationTable.updateCourseStatus(courseid, disableStatus);
+			operationTable.updateCourseStatus(courseid, disableStatus, null);
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -82,13 +82,13 @@ public class EnableCourseTest {
 			}
 		}
 	}
-	
+
 	@Test(priority = 2, description = "status为未发布")
 	public void verifyUnpublishedStatus() {
 		courseid = 3;
 		String paramUrl = url + courseid + "/status/start?loginUserId=123456";
 		String strMsg = httpRequest.sendHttpPut(paramUrl, null);
-		
+
 		String[] data = strMsg.split("&");
 		JSONObject jsonobject = JSONObject.fromObject(data[1]);
 
@@ -100,7 +100,7 @@ public class EnableCourseTest {
 			Assert.assertEquals(jsonobject.get("type").toString(), "ServiceException", "type提示信息不正确");
 		}
 	}
-	
+
 	@Test(priority = 3, description = "status为已发布")
 	public void verifyPublishedStatus() {
 		courseid = 17;
@@ -136,7 +136,7 @@ public class EnableCourseTest {
 			Assert.assertEquals(jsonobject.get("type").toString(), "ServiceException", "type提示信息不正确");
 		}
 	}
-	
+
 	@Test(priority = 5, description = "course为字符串")
 	public void verifyInvalidCourse() {
 		Response response = TestConfig.postOrPutFileExecu("put",

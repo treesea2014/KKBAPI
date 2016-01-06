@@ -20,7 +20,7 @@ import net.sf.json.JSONObject;
  * course_video_time_node
  */
 public class UpdateVideoTimeNode {
-	private static Logger logger = LoggerFactory.getLogger(CourseResourceTest.class);
+	private static Logger logger = LoggerFactory.getLogger(UpdateVideoTimeNode.class);
 	private OperationTable operationTable = new OperationTable();
 	public ResourceBundle bundle = ResourceBundle.getBundle("api");
 	private static HttpRequest httpRequest = new HttpRequest();
