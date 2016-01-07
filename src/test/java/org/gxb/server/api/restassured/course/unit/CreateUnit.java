@@ -11,11 +11,17 @@ import org.slf4j.Logger;
 import org.testng.annotations.Test;
 
 
+import java.util.ResourceBundle;
 
 import static org.hamcrest.Matchers.equalTo;
 
 public class CreateUnit {
     private Logger logger = LoggerFactory.getLogger(CreateUnit.class);
+   	public static ResourceBundle bundle = ResourceBundle.getBundle("api");
+    // 请求地址
+    public static final String path = bundle.getString("env");
+    public static final String basePath = bundle.getString("apiBasePath");
+    String Url = path + basePath;
     @Test(description = "正常", priority = 1)
     public void test() {
         JSONObject jo = new JSONObject();
@@ -89,7 +95,7 @@ public class CreateUnit {
         jo.put("title", "我是标题");
         jo.put("position", 999);
 
-        String response = HttpRequest.sendHttpPost("http://192.168.30.33:8080/gxb-api/course/-9/unit?loginUserId=123456", jo);
+        String response = HttpRequest.sendHttpPost(Url+"course/-9/unit?loginUserId=123456", jo);
         response =  response.substring(response.indexOf("&")+1,response.length());
         JSONObject result = JSONObject.fromObject(response);
 
