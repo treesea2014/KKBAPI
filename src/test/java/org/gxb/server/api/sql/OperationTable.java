@@ -347,4 +347,58 @@ public class OperationTable {
 		}
 		return count;
 	}
+	
+	public void updateCourseQuiz(int quizid, int flag) throws Exception {
+		String sql = "update course_quiz set delete_flag = " + flag + " where quiz_id = " + quizid + "";
+		DBConnection dbc = null;
+		Connection conn = null;
+		Statement st = null;
+
+		try {
+			dbc = new DBConnection(dbUrl);
+			conn = dbc.GetConnection();
+			st = conn.createStatement();
+			st.executeUpdate(sql);
+			conn.close();
+			st.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void updateCourseAssignment(int assignmentid, int flag) throws Exception {
+		String sql = "update course_assignment set delete_flag = " + flag + " where assignment_id = " + assignmentid + "";
+		DBConnection dbc = null;
+		Connection conn = null;
+		Statement st = null;
+
+		try {
+			dbc = new DBConnection(dbUrl);
+			conn = dbc.GetConnection();
+			st = conn.createStatement();
+			st.executeUpdate(sql);
+			conn.close();
+			st.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void updateCourseChapter(int id, int flag,String contenttype) throws Exception {
+		String sql = "update course_chapter set delete_flag = " + flag + " where content_id = " + id + " and content_type='"+contenttype+"'";
+		DBConnection dbc = null;
+		Connection conn = null;
+		Statement st = null;
+
+		try {
+			dbc = new DBConnection(dbUrl);
+			conn = dbc.GetConnection();
+			st = conn.createStatement();
+			st.executeUpdate(sql);
+			conn.close();
+			st.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
