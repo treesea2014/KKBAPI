@@ -86,7 +86,7 @@ public class SaveBasicInfo {
 
         response.then().log().all().assertThat()
                 .statusCode(400)
-                .body("message", equalTo("name长度需要在1和32之间,"))
+                .body("message", Matchers.containsString("1"))
                 .body("type", equalTo("MethodArgumentNotValidException"));
 
     }
@@ -120,7 +120,7 @@ public class SaveBasicInfo {
 
         response.then().log().all().assertThat()
                 .statusCode(400)
-                .body("message", equalTo("name长度需要在1和32之间,"))
+                .body("message", Matchers.containsString("32"))
                 .body("type", equalTo("MethodArgumentNotValidException"));
 
     }
@@ -154,7 +154,7 @@ public class SaveBasicInfo {
 
         response.then().log().all().assertThat()
                 .statusCode(400)
-                .body("message", equalTo("intro课程介绍不能为空,"))
+                .body("message", Matchers.containsString("1"))
                 .body("type", equalTo("MethodArgumentNotValidException"));
     }
 
@@ -187,7 +187,7 @@ public class SaveBasicInfo {
 
         response.then().log().all().assertThat()
                 .statusCode(400)
-                .body("message", equalTo("intro长度需要在1和64之间,"))
+                .body("message", Matchers.containsString("64"))
                 .body("type", equalTo("MethodArgumentNotValidException"));
     }
 
@@ -220,7 +220,7 @@ public class SaveBasicInfo {
 
         response.then().log().all().assertThat()
                 .statusCode(400)
-                .body("message", equalTo("description不能为空,"))
+                .body("message", equalTo("courseInfo.description不能为空,"))
                 .body("type", equalTo("MethodArgumentNotValidException"));
     }
 
@@ -285,6 +285,8 @@ public class SaveBasicInfo {
 
         response.then().log().all().assertThat()
                 .statusCode(400)
+                .body("message",Matchers.containsString("courseInfo.description"))
+                .body("code",equalTo(400))
         ;
     }
 

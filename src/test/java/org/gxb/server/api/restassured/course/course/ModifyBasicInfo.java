@@ -77,7 +77,7 @@ public class ModifyBasicInfo {
         jo.put("instructorList", instructorListArray);
 
         Response response = TestConfig.postOrPutExecu("put",
-                "course/"+courseId+"?loginUserId=123456&tenantId=1", jo);
+                "course/"+303+"?loginUserId=123456&tenantId=1", jo);
         //response.then().header("","");
 
         response.then().log().all().assertThat()
@@ -118,7 +118,7 @@ public class ModifyBasicInfo {
 
         response.then().log().all().assertThat()
                 .statusCode(400)
-                .body("message", equalTo("namelength must be between 1 and 32,"))
+                .body("message", equalTo("name长度需要在1和32之间,"))
                 .body("type", equalTo("MethodArgumentNotValidException"));
 
     }
@@ -152,7 +152,7 @@ public class ModifyBasicInfo {
 
         response.then().log().all().assertThat()
                 .statusCode(400)
-                .body("message", equalTo("namelength must be between 1 and 32,"))
+                .body("message", equalTo("name长度需要在1和32之间,"))
                 .body("type", equalTo("MethodArgumentNotValidException"));
 
     }
@@ -186,7 +186,7 @@ public class ModifyBasicInfo {
 
         response.then().log().all().assertThat()
                 .statusCode(400)
-                .body("message", equalTo("intro课程介绍不能为空,"))
+                .body("message", equalTo("intro课程介绍不能为空,intro长度需要在1和64之间,"))
                 .body("type", equalTo("MethodArgumentNotValidException"));
     }
 
@@ -252,7 +252,7 @@ public class ModifyBasicInfo {
 
         response.then().log().all().assertThat()
                 .statusCode(400)
-                .body("message", equalTo("description不能为空,"))
+                .body("message", equalTo("courseInfo.description不能为空,"))
                 .body("type", equalTo("MethodArgumentNotValidException"));
     }
 

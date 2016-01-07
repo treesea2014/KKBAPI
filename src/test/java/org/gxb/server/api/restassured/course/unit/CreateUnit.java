@@ -1,54 +1,46 @@
 package org.gxb.server.api.restassured.course.unit;
 
+import com.jayway.restassured.path.json.JsonPath;
 import com.jayway.restassured.response.Response;
 import net.sf.json.JSONObject;
+import org.gxb.server.api.HttpRequest;
 import org.gxb.server.api.TestConfig;
+import org.slf4j.LoggerFactory;
+import org.testng.Assert;
+import org.slf4j.Logger;
 import org.testng.annotations.Test;
+
+
 
 import static org.hamcrest.Matchers.equalTo;
 
 public class CreateUnit {
+    private Logger logger = LoggerFactory.getLogger(CreateUnit.class);
     @Test(description = "正常", priority = 1)
     public void test() {
         JSONObject jo = new JSONObject();
-        jo.put("title", "教授");
-        jo.put("name", "邓树海");
-        jo.put("intro", "著名学者");
-        jo.put("avatar", "www.baidu.com");
-        jo.put("sinaWeibo", "shdeng@sina.com");
-        jo.put("description", "简单描述");
-        jo.put("wechat", "微信");
-        jo.put("tag", "微信");
-
+        jo.put("title", "API测试第一章");
+        jo.put("position", 999);
         Response response = TestConfig.postOrPutExecu("post",
-                "instructor?loginUserId=123456&tenantId=1", jo);
+                "course/232/unit?loginUserId=5", jo);
 
         response.then().log().all().assertThat()
                 .statusCode(200)
-                .body("name", equalTo("邓树海"))
-                .body("title", equalTo("教授"))
-                .body("intro", equalTo("著名学者"))
-                .body("description", equalTo("简单描述"))
-                .body("avatar", equalTo("www.baidu.com"))
-                .body("sinaWeibo", equalTo("shdeng@sina.com"))
-                .body("wechat", equalTo("微信"))
-                .body("tag", equalTo("微信"));
+                .body("courseId", equalTo(232))
+                .body("title", equalTo("API测试第一章"))
+                .body("position", equalTo(999))
+                .body("userId", equalTo(5))
+                .body("editorId",equalTo(5))
+                .body("status", equalTo("10"));
     }
 
-    @Test(description = "title职称输入为空", priority = 2)
+    @Test(description = "title不能为空", priority = 2)
     public void testWithInvalidTitle01() {
         JSONObject jo = new JSONObject();
         jo.put("title", "");
-        jo.put("name", "邓树海");
-        jo.put("intro", "著名学者");
-        jo.put("avatar", "www.baidu.com");
-        jo.put("sinaWeibo", "shdeng@sina.com");
-        jo.put("description", "简单描述");
-        jo.put("wechat", "微信");
-        jo.put("tag", "微信");
-
+        jo.put("position", 999);
         Response response = TestConfig.postOrPutExecu("post",
-                "instructor?loginUserId=123456&tenantId=1", jo);
+                "course/232/unit?loginUserId=5", jo);
 
         response.then().log().all().assertThat()
                 .statusCode(400)
@@ -56,108 +48,54 @@ public class CreateUnit {
                 .body("type", equalTo("MethodArgumentNotValidException"));
     }
 
-    @Test(description = "title职称输入为超长33", priority = 3)
+    @Test(description = "title不能超长", priority = 3)
     public void testWithInvalidTitle02() {
         JSONObject jo = new JSONObject();
-        jo.put("title", "头衔头衔头衔头衔头衔头衔头衔头衔头衔头衔头衔头衔头衔头衔头衔12");
-        jo.put("name", "邓树海");
-        jo.put("intro", "著名学者");
-        jo.put("avatar", "www.baidu.com");
-        jo.put("sinaWeibo", "shdeng@sina.com");
-        jo.put("description", "简单描述");
-        jo.put("wechat", "微信");
-        jo.put("tag", "微信");
-
+        jo.put("title",  "标题超长的时候标题超长的时候标题超长的时候标题超长的时候标题" +
+                "标题超长的时候标题超长的时候标题超长的时候标题超长的时候标题超长的时候" +
+                "标题超长的时候标题超长的时候标题超长的时候标题超长的时候标题超长的时候" +
+                "标题超长的时候标题超长的时候标题超长的时候标题超长的时候标题超长的时候" +
+                "标题超长的时候标题超长的时候标题超长的时候标题超长的时候标题超长的时候" +
+                "标题超长的时候标题超长的时候标题超长的时候标题超长的时候标题超长的时候" +
+                "标题超长的时候标题超长的时候标题超长的时候标题超长的时候标题超长的时候" +
+                "标题超长的时候标题超长的时候标题超长的时候标题超长的时候标题超长的时候" +
+                "候标题超长的时候标题超长的时候标题超长的时候标题超长的时候标题超长的时");
+        jo.put("position", 999);
         Response response = TestConfig.postOrPutExecu("post",
-                "instructor?loginUserId=123456&tenantId=1", jo);
+                "course/232/unit?loginUserId=5", jo);
 
         response.then().log().all().assertThat()
                 .statusCode(400)
-                .body("message", equalTo("title 超长"))
+                .body("message", equalTo("title不能超长,"))
                 .body("type", equalTo("MethodArgumentNotValidException"));
     }
 
-    @Test(description = "name教师姓名输入为空", priority = 4)
-    public void testWithInvalidName01() {
+    @Test(description = "position不能为空", priority = 4)
+    public void testWithInvalidPosition01() {
         JSONObject jo = new JSONObject();
-        jo.put("title", "头衔");
-        jo.put("name", "");
-        jo.put("intro", "著名学者");
-        jo.put("avatar", "www.baidu.com");
-        jo.put("sinaWeibo", "shdeng@sina.com");
-        jo.put("description", "简单描述");
-        jo.put("wechat", "微信");
-        jo.put("tag", "微信");
-
+        jo.put("title", "我是标题");
         Response response = TestConfig.postOrPutExecu("post",
-                "instructor?loginUserId=123456&tenantId=1", jo);
+                "course/232/unit?loginUserId=5", jo);
 
         response.then().log().all().assertThat()
                 .statusCode(400)
-                .body("message", equalTo("name不能为空,"))
+                .body("message", equalTo("position不能为null,"))
                 .body("type", equalTo("MethodArgumentNotValidException"));
     }
 
-    @Test(description = "intro输入为空", priority = 5)
-    public void testWithInvalidItro01() {
+    @Test(description = "课程不存在", priority = 5)
+    public void testWithNotExistCourse() {
         JSONObject jo = new JSONObject();
-        jo.put("title", "教授");
-        jo.put("name", "邓树海");
-        jo.put("intro", "");
-        jo.put("avatar", "www.baidu.com");
-        jo.put("sinaWeibo", "shdeng@sina.com");
-        jo.put("description", "简单描述");
-        jo.put("wechat", "微信");
-        jo.put("tag", "微信");
+        jo.put("title", "我是标题");
+        jo.put("position", 999);
 
-        Response response = TestConfig.postOrPutExecu("post",
-                "instructor?loginUserId=123456&tenantId=1", jo);
+        String response = HttpRequest.sendHttpPost("http://192.168.30.33:8080/gxb-api/course/-9/unit?loginUserId=123456", jo);
+        response =  response.substring(response.indexOf("&")+1,response.length());
+        JSONObject result = JSONObject.fromObject(response);
 
-        response.then().log().all().assertThat()
-                .statusCode(400)
-                .body("message", equalTo("intro不能为空,"))
-                .body("type", equalTo("MethodArgumentNotValidException"));
-    }
+        Assert.assertEquals(1000,result.get("code"));
+        Assert.assertEquals("课程不存在",result.get("message"));
+        Assert.assertEquals("ServiceException",result.get("type"));
 
-    @Test(description = "intro输入为超长65", priority = 6)
-    public void testWithInvalidIntro02() {
-        JSONObject jo = new JSONObject();
-        jo.put("title", "教授");
-        jo.put("name", "邓树海");
-        jo.put("intro", "著名学者著名学者著名学者著名学者著名学者著名学者著名学者著名学者著名学者著名学者著名学者著名学者著名学者著名学者著名学者著名学者");
-        jo.put("avatar", "www.baidu.com");
-        jo.put("sinaWeibo", "shdeng@sina.com");
-        jo.put("description", "简单描述");
-        jo.put("wechat", "微信");
-        jo.put("tag", "微信");
-
-        Response response = TestConfig.postOrPutExecu("post",
-                "instructor?loginUserId=123456&tenantId=1", jo);
-
-        response.then().log().all().assertThat()
-                .statusCode(400)
-                .body("message", equalTo("intro超长"))
-                .body("type", equalTo("MethodArgumentNotValidException"));
-    }
-
-    @Test(description = "avatar输入为空", priority = 7)
-    public void testWithInvalidntro01() {
-        JSONObject jo = new JSONObject();
-        jo.put("title", "教授");
-        jo.put("name", "邓树海");
-        jo.put("intro", "简介");
-        jo.put("avatar", "");
-        jo.put("sinaWeibo", "shdeng@sina.com");
-        jo.put("description", "简单描述");
-        jo.put("wechat", "微信");
-        jo.put("tag", "微信");
-
-        Response response = TestConfig.postOrPutExecu("post",
-                "instructor?loginUserId=123456&tenantId=1", jo);
-
-        response.then().log().all().assertThat()
-                .statusCode(400)
-                .body("message", equalTo("avatar不能为空,"))
-                .body("type", equalTo("MethodArgumentNotValidException"));
     }
 }

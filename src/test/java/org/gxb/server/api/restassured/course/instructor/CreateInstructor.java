@@ -52,7 +52,7 @@ public class CreateInstructor {
 
         response.then().log().all().assertThat()
                 .statusCode(400)
-                .body("message", equalTo("titlemay not be empty,"))
+                .body("message", equalTo("title不能为空,"))
                 .body("type", equalTo("MethodArgumentNotValidException"));
     }
 
@@ -94,7 +94,7 @@ public class CreateInstructor {
 
         response.then().log().all().assertThat()
                 .statusCode(400)
-                .body("message", equalTo("namemay not be empty,"))
+                .body("message", equalTo("name不能为空,"))
                 .body("type", equalTo("MethodArgumentNotValidException"));
     }
 
@@ -115,7 +115,7 @@ public class CreateInstructor {
 
         response.then().log().all().assertThat()
                 .statusCode(400)
-                .body("message", equalTo("intromay not be empty,"))
+                .body("message", equalTo("intro不能为空,"))
                 .body("type", equalTo("MethodArgumentNotValidException"));
     }
 
@@ -157,7 +157,7 @@ public class CreateInstructor {
 
         response.then().log().all().assertThat()
                 .statusCode(400)
-                .body("message", equalTo("avatarmay not be empty,"))
+                .body("message", equalTo("avatar不能为空,"))
                 .body("type", equalTo("MethodArgumentNotValidException"));
     }
 }
