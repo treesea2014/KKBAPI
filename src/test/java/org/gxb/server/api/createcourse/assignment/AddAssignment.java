@@ -27,13 +27,11 @@ public class AddAssignment {
 	private static HttpRequest httpRequest = new HttpRequest();
 	public String path = bundle.getString("env");
 	public String basePath = "/" + bundle.getString("apiBasePath");
-	private String url;
 	private int itemId;
 	private int userId;
 
 	@BeforeMethod
 	public void InitiaData() {
-		url = path + basePath + "/course/";
 		itemId = 200;
 		userId = 2001;
 	}
@@ -102,7 +100,7 @@ public class AddAssignment {
 		chapterJson.put("position", position);
 		chapterJson.put("assignment", assignmentJson);
 
-		String paramUrl = url + "item/" + itemId + "/assignment?loginUserId=" + userId + "&tenantId=13";
+		String paramUrl = 	path + basePath + "/course/item/" + itemId + "/assignment?loginUserId=" + userId + "&tenantId=13";
 		String strMsg = httpRequest.sendHttpPost(paramUrl, chapterJson);
 		String[] data = strMsg.split("&");
 		JSONObject jsonobject = JSONObject.fromObject(data[1]);

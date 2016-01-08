@@ -18,7 +18,6 @@ import com.jayway.restassured.response.Response;
 public class CourseResourceTest {
 	private static Logger logger = LoggerFactory.getLogger(CourseResourceTest.class);
 	private OperationTable operationTable = new OperationTable();
-	private static HttpRequest httpRequest = new HttpRequest();
 	private int courseid;
 
 	@BeforeMethod
