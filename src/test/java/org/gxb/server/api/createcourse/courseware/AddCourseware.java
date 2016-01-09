@@ -393,7 +393,7 @@ public class AddCourseware {
 	}
 
 	@Test(priority = 10, description = "title为空")
-	public void verifyInvalidAssTitle_001() {
+	public void verifyInvalidCourseTitle_001() {
 		String title = "test11";
 		int documentId = 1001;
 		int position = 11;
@@ -426,7 +426,7 @@ public class AddCourseware {
 
 	// failed
 	@Test(priority = 11, description = "title长度为32")
-	public void verifyInvalidAssTitle_002() {
+	public void verifyInvalidCourseTitle_002() {
 		String title = "test11";
 		int documentId = 1001;
 		int position = 11;
@@ -522,6 +522,38 @@ public class AddCourseware {
 		}
 
 		response.then().assertThat().statusCode(400).body("type", equalTo("InvalidFormatException"));
+	}
+	
+	//failed
+	@Test(priority = 14, description = "documentId在document表中不存在")
+	public void verifyInvalidDocumentId_003() {
+		String title = "课件1001";
+		int documentId = 1;
+		int position = 11;
+
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("documentId", documentId);
+
+		JSONArray jsonArray = new JSONArray();
+		jsonArray.add(jsonObject);
+
+		JSONObject coursewareJson = new JSONObject();
+		coursewareJson.put("title", "web前端11");
+		coursewareJson.put("documentList", jsonArray);
+
+		JSONObject chapterJson = new JSONObject();
+		chapterJson.put("title", title);
+		chapterJson.put("position", position);
+		chapterJson.put("courseware", coursewareJson);
+
+		Response response = TestConfig.postOrPutExecu("post",
+				"/course/item/" + itemId + "/courseware?loginUserId=" + userId, chapterJson);
+
+		if (response.getStatusCode() == 500) {
+			logger.info("新建课件接口##" + response.prettyPrint());
+		}
+
+		response.then().assertThat().statusCode(400).body("message", equalTo("documentId不存在"));
 	}
 
 }
