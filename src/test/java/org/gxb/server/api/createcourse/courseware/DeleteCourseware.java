@@ -12,9 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 import com.jayway.restassured.response.Response;
-
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -24,7 +22,7 @@ import net.sf.json.JSONObject;
  *  course_chapter,course_courseware,document,itemid从course_item表中取到
  */
 public class DeleteCourseware {
-	private static Logger logger = LoggerFactory.getLogger(ResourceBundle.class);
+	private static Logger logger = LoggerFactory.getLogger(DeleteCourseware.class);
 	private OperationTable operationTable = new OperationTable();
 	public ResourceBundle bundle = ResourceBundle.getBundle("api");
 	private static HttpRequest httpRequest = new HttpRequest();

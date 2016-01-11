@@ -51,6 +51,7 @@ public class PublishCourseTest {
 			logger.info("发布课程接口##verifyPublishedStatus##" + response.prettyPrint());
 		} else {
 			response.then().assertThat().statusCode(200);
+			Assert.assertEquals(Boolean.parseBoolean(response.prettyPrint()), true, "发布失败");
 			try {
 				int actualNum = operationTable.selectCourseStatus(courseid, status);
 				Assert.assertEquals(actualNum, 1, "发布状态未改变");

@@ -19,7 +19,7 @@ import net.sf.json.JSONObject;
  *  course_chapter,course_courseware,document,itemid从course_item表中取到
  */
 public class GetCourseware {
-	private static Logger logger = LoggerFactory.getLogger(AddCourseware.class);
+	private static Logger logger = LoggerFactory.getLogger(GetCourseware.class);
 	public ResourceBundle bundle = ResourceBundle.getBundle("api");
 	public String path = bundle.getString("env");
 	public String basePath = "/" + bundle.getString("apiBasePath");
