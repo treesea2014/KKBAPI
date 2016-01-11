@@ -42,7 +42,7 @@ public class PublishCourseTest {
 		url = path + basePath + "/course/";
 	}
 
-	//failed 需验证
+	//pass 需验证
 	@Test(priority = 1, description = "status为已发布")
 	public void verifyPublishedStatus() {
 		Response response = TestConfig.postOrPutFileExecu("put",
@@ -62,21 +62,15 @@ public class PublishCourseTest {
 		}
 	}
 
+	//failed
 	@Test(priority = 2, description = "status为未发布")
 	public void verifyUnpublishedStatus() {
-		courseid = 3;
-		String paramUrl = url + courseid + "/status/publish?loginUserId=123456";
-
-		String strMsg = httpRequest.sendHttpPut(paramUrl, null);
-		String[] data = strMsg.split("&");
-		JSONObject jsonobject = JSONObject.fromObject(data[1]);
-
-		if (data[0] == "500") {
-			logger.info("发布课程接口##verifyUnpublishedStatus##" + strMsg);
-		} else {
-			Assert.assertEquals(jsonobject.get("code").toString(), "1000", "状态码不正确");
-			Assert.assertEquals(jsonobject.get("message").toString(), "课程封面未达到发布标准", "message提示信息不正确");
-		}
+		courseid = 2;
+		Response response = TestConfig.postOrPutFileExecu("put",
+				"/course/" + courseid + "/status/publish?loginUserId=123456");
+		
+		response.then().assertThat().statusCode(200);
+		Assert.assertEquals(Boolean.parseBoolean(response.prettyPrint()), true, "发布失败");
 	}
 
 	@Test(priority = 3, description = "status为停用")
@@ -124,14 +118,72 @@ public class PublishCourseTest {
 		}
 	}
 
-	@Test(priority = 6, description = "course为空")
-	public void verifyEmptyCourse() {
-		Response response = TestConfig.postOrPutFileExecu("put", "/course/status/publish?loginUserId=123456");
-		if (response.getStatusCode() == 500) {
-			logger.info("发布课程接口##verifyEmptyCourse##" + response.prettyPrint());
+	@Test(priority = 6, description = "课程信息不存在")
+	public void verifyInvalidCourse_001() {
+		courseid = 10;
+		String paramUrl = url + courseid + "/status/publish?loginUserId=123456";
+
+		String strMsg = httpRequest.sendHttpPut(paramUrl, null);
+		String[] data = strMsg.split("&");
+		JSONObject jsonobject = JSONObject.fromObject(data[1]);
+
+		if (data[0] == "500") {
+			logger.info("发布课程接口##verifyUnpublishedStatus##" + strMsg);
 		} else {
-			response.then().assertThat().statusCode(403);
+			Assert.assertEquals(jsonobject.get("code").toString(), "1000", "状态码不正确");
+			Assert.assertEquals(jsonobject.get("message").toString(), "课程信息未达到发布标准", "message提示信息不正确");
 		}
 	}
 
+	@Test(priority = 7, description = "课程封面不存在")
+	public void verifyInvalidCourse_002() {
+		courseid = 513;
+		String paramUrl = url + courseid + "/status/publish?loginUserId=123456";
+
+		String strMsg = httpRequest.sendHttpPut(paramUrl, null);
+		String[] data = strMsg.split("&");
+		JSONObject jsonobject = JSONObject.fromObject(data[1]);
+
+		if (data[0] == "500") {
+			logger.info("发布课程接口##verifyUnpublishedStatus##" + strMsg);
+		} else {
+			Assert.assertEquals(jsonobject.get("code").toString(), "1000", "状态码不正确");
+			Assert.assertEquals(jsonobject.get("message").toString(), "课程封面未达到发布标准", "message提示信息不正确");
+		}
+	}
+	
+	@Test(priority = 8, description = "课程内容不存在")
+	public void verifyInvalidCourse_003() {
+		courseid = 535;
+		String paramUrl = url + courseid + "/status/publish?loginUserId=123456";
+
+		String strMsg = httpRequest.sendHttpPut(paramUrl, null);
+		String[] data = strMsg.split("&");
+		JSONObject jsonobject = JSONObject.fromObject(data[1]);
+
+		if (data[0] == "500") {
+			logger.info("发布课程接口##verifyUnpublishedStatus##" + strMsg);
+		} else {
+			Assert.assertEquals(jsonobject.get("code").toString(), "1000", "状态码不正确");
+			Assert.assertEquals(jsonobject.get("message").toString(), "课程内容未达到发布标准", "message提示信息不正确");
+		}
+	}
+	
+	@Test(priority = 8, description = "课程资源不存在")
+	public void verifyInvalidCourse_004() {
+		courseid = 407;
+		String paramUrl = url + courseid + "/status/publish?loginUserId=123456";
+
+		String strMsg = httpRequest.sendHttpPut(paramUrl, null);
+		String[] data = strMsg.split("&");
+		JSONObject jsonobject = JSONObject.fromObject(data[1]);
+
+		if (data[0] == "500") {
+			logger.info("发布课程接口##verifyUnpublishedStatus##" + strMsg);
+		} else {
+			Assert.assertEquals(jsonobject.get("code").toString(), "1000", "状态码不正确");
+			Assert.assertEquals(jsonobject.get("message").toString(), "课程资源未达到发布标准", "message提示信息不正确");
+		}
+	}
+	
 }

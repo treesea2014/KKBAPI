@@ -55,7 +55,7 @@ public class DeleteCourse {
 	}
 	
 	@Test(priority = 2, description = "course已经删除")
-	public void verifyDeletedVideoTimeNode() {
+	public void verifyDeletedCourse() {
 		String paramUrl = url  + courseid + "?loginUserId=1&tenantId=1";
 		String strMsg = httpRequest.sendHttpDelete(paramUrl);
 		String[] data = strMsg.split("&");
@@ -71,7 +71,7 @@ public class DeleteCourse {
 	}
 	
 	@Test(priority = 3, description = "course不存在")
-	public void verifyNotExistVideoTimeNode() {
+	public void verifyNotExistCourse() {
 		courseid = 999999;
 		
 		String paramUrl = url  + courseid + "?loginUserId=1&tenantId=1";
@@ -89,7 +89,7 @@ public class DeleteCourse {
 	}
 	
 	@Test(priority = 4, description = "无效的course")
-	public void verifyInvalidVideoTimeNode() {
+	public void verifyInvalidCourse() {
 		Response response = TestConfig.getOrDeleteExecu("delete",
 				"/course/" + "qw12" + "?loginUserId=1&tenantId=1");
 
@@ -100,21 +100,10 @@ public class DeleteCourse {
 		response.then().assertThat().statusCode(400).body("type", equalTo("NumberFormatException"));
 	}
 	
-	@Test(priority = 5, description = "course为空")
-	public void verifyEmptyVideoTimeNode() {
-		Response response = TestConfig.getOrDeleteExecu("delete",
-				"/course/?loginUserId=1&tenantId=1");
-
-		if (response.getStatusCode() == 500) {
-			logger.info("删除课程接口##verifyEmptyVideoTimeNode##" + response.prettyPrint());
-		}
-
-		response.then().assertThat().statusCode(400).body("type", equalTo("HttpRequestMethodNotSupportedException"));
-	}
 	
-	@Test(priority = 6, description = "此课程已开该班次")
+	@Test(priority = 5, description = "此课程已开该班次")
 	public void verifyCourseOpenedClass() {
-		courseid = 4;
+		courseid = 2;
 		
 		String paramUrl = url  + courseid + "?loginUserId=1&tenantId=1";
 		String strMsg = httpRequest.sendHttpDelete(paramUrl);
@@ -131,7 +120,7 @@ public class DeleteCourse {
 	}
 
 	//failed
-	@Test(priority = 7, description = "loginuserid为空")
+	@Test(priority = 6, description = "loginuserid为空")
 	public void verifyEmptyUserId() {
 		courseid = 31;
 	
