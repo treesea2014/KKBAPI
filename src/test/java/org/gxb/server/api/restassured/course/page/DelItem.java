@@ -1,4 +1,4 @@
-package org.gxb.server.api.restassured.course.item;
+package org.gxb.server.api.restassured.course.page;
 
 import com.jayway.restassured.response.Response;
 import net.sf.json.JSONArray;
@@ -20,7 +20,7 @@ import java.util.ResourceBundle;
  * 查询课程信息接口
  */
 public class DelItem {
-    private Logger logger = LoggerFactory.getLogger(CreateItem.class);
+    private Logger logger = LoggerFactory.getLogger(CreatePage.class);
     public static ResourceBundle bundle = ResourceBundle.getBundle("api");
     // 请求地址
     public static final String path = bundle.getString("env");

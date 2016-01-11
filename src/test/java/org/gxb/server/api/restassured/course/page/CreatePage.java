@@ -1,11 +1,10 @@
-package org.gxb.server.api.restassured.course.item;
+package org.gxb.server.api.restassured.course.page;
 
 import com.jayway.restassured.response.Response;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.gxb.server.api.HttpRequest;
 import org.gxb.server.api.TestConfig;
-import org.hamcrest.Matchers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -17,14 +16,14 @@ import java.util.ResourceBundle;
 
 import static org.hamcrest.Matchers.equalTo;
 
-public class CreateItem {
-    private Logger logger = LoggerFactory.getLogger(CreateItem.class);
+public class CreatePage {
+    private Logger logger = LoggerFactory.getLogger(CreatePage.class);
    	public static ResourceBundle bundle = ResourceBundle.getBundle("api");
     // 请求地址
     public static final String path = bundle.getString("env");
     public static final String basePath = bundle.getString("apiBasePath");
     String Url = path + basePath;
-    Integer unitId;
+    Integer itemId;
     @BeforeClass(description = "课程结构course-unit－item－chapter")
     public void init() {
         JSONObject jo = new JSONObject();
@@ -60,13 +59,22 @@ public class CreateItem {
         jo1.put("position", 999);
         response = TestConfig.postOrPutExecu("post",
                 "course/"+courseId+"/unit?loginUserId=5", jo1);
-        unitId = response.jsonPath().get("unitId");
+       Integer unitId = response.jsonPath().get("unitId");
+
+        JSONObject jo2 = new JSONObject();
+        jo2.put("title", "第一节xxx");
+        jo2.put("position", 999);
+         response = TestConfig.postOrPutExecu("post",
+                "course/unit/"+unitId+"/item?loginUserId=1234", jo2);
+        itemId = response.jsonPath().getInt("itemId");
     }
 
     @Test(description = "正常", priority = 1)
     public void test() {
         JSONObject jo = new JSONObject();
         jo.put("title", "第一节xxx");
+
+
         jo.put("position", 999);
         Response response = TestConfig.postOrPutExecu("post",
                 "course/unit/"+unitId+"/item?loginUserId=1234", jo);
