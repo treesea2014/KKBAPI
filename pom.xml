@@ -251,8 +251,10 @@
                 <configuration>
                     <suiteXmlFiles>
                         <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
+                        <encoding>UTF-8</encoding>
                     </suiteXmlFiles>
                     <!-- <reportsDirectory>test-output</reportsDirectory> -->
+
                 </configuration>
             </plugin>
         </plugins>
