@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import static org.hamcrest.Matchers.equalTo;
@@ -29,9 +30,7 @@ public class GetCategory {
 
     @Test(description = "正常",priority = 1)
     public void test(){
-       HashMap<String, Object> categoryList = new HashMap<String, Object>();
-        categoryList.put("categoryId", 1);
-        categoryList.put("categoryName", "java相关");
+
         Response response = TestConfig.getOrDeleteExecu("get", "/tenant/111/category");
         Object o = response.jsonPath().get("childList.categoryName");
         o.toString();
@@ -42,6 +41,15 @@ public class GetCategory {
                 .body("tenantId", Matchers.hasItem(111))
 
                 ;
+    }
+    @Test(description = "内容为空",priority = 2)
+    public void testWithErrorTenId(){
+
+        Response response = TestConfig.getOrDeleteExecu("get", "/tenant/-1/category");
+        response.then().log().all().assertThat()
+                .statusCode(200)
+                .body(Matchers.containsString(""))
+        ;
     }
 
 
