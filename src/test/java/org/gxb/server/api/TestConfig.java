@@ -51,7 +51,7 @@ public class TestConfig {
 		} else {
 			 response = requestSpecification.when().put(url);
 		}
-		response.then().header("Content-type", "application/json;charset=UTF-8");
+		//response.then().header("Content-Type", "application/json;charset=utf-8");
 		return response;
 	}
 	

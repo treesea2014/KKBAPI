@@ -2,21 +2,50 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 <suite name="API测试报告" parallel="tests">
-  <listeners>
-    <listener class-name="org.gxb.server.api.utils.ReporterListener" />
-    <listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
-  </listeners>
+    <listeners>
+        <listener class-name="org.gxb.server.api.utils.ReporterListener"/>
+        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
+    </listeners>
 
-  <test name="课程接口">
-    <packages>
-      <package name="org.gxb.server.api.restassured.course.course"/>
-    </packages>
-  </test>
+    <test name="类别接口">
+        <packages>
+            <package name="org.gxb.server.api.restassured.course.category"/>
+        </packages>
+    </test>
+    <test name="课程封面接口">
+        <packages>
+            <package name="org.gxb.server.api.restassured.course.cover"/>
+        </packages>
+    </test>
+    <test name="课程基本信息接口">
+        <packages>
+            <package name="org.gxb.server.api.restassured.course.course"/>
+        </packages>
+    </test>
 
-  <test name="讲师接口">
-    <packages>
-      <package name="org.gxb.server.api.restassured.course.instructor"/>
-    </packages>
-  </test>
+    <test name="讲师接口">
+        <packages>
+            <package name="org.gxb.server.api.restassured.course.instructor"/>
+        </packages>
+    </test>
+
+    <test name="item接口">
+        <packages>
+            <package name="org.gxb.server.api.restassured.course.item"/>
+        </packages>
+    </test>
+
+    <test name="page接口">
+        <packages>
+            <package name="org.gxb.server.api.restassured.course.page"/>
+        </packages>
+    </test>
+
+    <test name="unit接口">
+        <packages>
+            <package name="org.gxb.server.api.restassured.course.unit"/>
+        </packages>
+    </test>
+
 
 </suite> <!-- Suite -->
