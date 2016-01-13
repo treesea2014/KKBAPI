@@ -4,103 +4,71 @@ import com.jayway.restassured.response.Response;
 import net.sf.json.JSONObject;
 import org.gxb.server.api.HttpRequest;
 import org.gxb.server.api.TestConfig;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
-import org.slf4j.Logger;
 import org.testng.annotations.Test;
-
 
 import java.util.ResourceBundle;
 
 import static org.hamcrest.Matchers.equalTo;
+/**
+ * 班次创建单元
+ * 192.168.30.33:8080/gxb-api/classes/1/unit?loginUserId=123&tenantId=1
+ * 涉及表class_unit
+ */
 
 public class CreateUnit {
     private Logger logger = LoggerFactory.getLogger(CreateUnit.class);
-   	public static ResourceBundle bundle = ResourceBundle.getBundle("api");
-    // 请求地址
-    public static final String path = bundle.getString("env");
-    public static final String basePath = bundle.getString("apiBasePath");
-    String Url = path + basePath;
     @Test(description = "正常", priority = 1)
     public void test() {
         JSONObject jo = new JSONObject();
-        jo.put("title", "API测试第一章");
-        jo.put("position", 999);
+        jo.put("title", "测试单元xxsea");
+        jo.put("unlockAt", "1450947971236");
+        jo.put("endAt", "1450947971231");
         Response response = TestConfig.postOrPutExecu("post",
-                "course/232/unit?loginUserId=5", jo);
+                "classes/1/unit?loginUserId=123&tenantId=1", jo);
 
         response.then().log().all().assertThat()
                 .statusCode(200)
-                .body("courseId", equalTo(232))
-                .body("title", equalTo("API测试第一章"))
-                .body("position", equalTo(999))
-                .body("userId", equalTo(5))
-                .body("editorId",equalTo(5))
-                .body("status", equalTo("10"));
-    }
+                .body("classId", equalTo(1))
+                .body("userId", equalTo(123))
+                .body("editorId", equalTo(123))
+                .body("userId", equalTo(123))
+                .body("tenantId",equalTo(1))
+                .body("title", equalTo("测试单元xxsea"));
 
-    @Test(description = "title不能为空", priority = 2)
+    }
+    @Test(description = "title不能为空", priority = 1)
     public void testWithInvalidTitle01() {
         JSONObject jo = new JSONObject();
         jo.put("title", "");
-        jo.put("position", 999);
+        jo.put("unlockAt", "1450947971236");
         Response response = TestConfig.postOrPutExecu("post",
-                "course/232/unit?loginUserId=5", jo);
+                "classes/1/unit?loginUserId=123&tenantId=1", jo);
 
         response.then().log().all().assertThat()
                 .statusCode(400)
                 .body("message", equalTo("title不能为空,"))
-                .body("type", equalTo("MethodArgumentNotValidException"));
+                .body("code", equalTo(400))
+                .body("type", equalTo("MethodArgumentNotValidException"))
+                ;
     }
 
-    @Test(description = "title不能超长", priority = 3)
+    @Test(description = "title超长", priority = 2)
     public void testWithInvalidTitle02() {
         JSONObject jo = new JSONObject();
-        jo.put("title",  "标题超长的时候标题超长的时候标题超长的时候标题超长的时候标题" +
-                "标题超长的时候标题超长的时候标题超长的时候标题超长的时候标题超长的时候" +
-                "标题超长的时候标题超长的时候标题超长的时候标题超长的时候标题超长的时候" +
-                "标题超长的时候标题超长的时候标题超长的时候标题超长的时候标题超长的时候" +
-                "标题超长的时候标题超长的时候标题超长的时候标题超长的时候标题超长的时候" +
-                "标题超长的时候标题超长的时候标题超长的时候标题超长的时候标题超长的时候" +
-                "标题超长的时候标题超长的时候标题超长的时候标题超长的时候标题超长的时候" +
-                "标题超长的时候标题超长的时候标题超长的时候标题超长的时候标题超长的时候" +
-                "候标题超长的时候标题超长的时候标题超长的时候标题超长的时候标题超长的时");
-        jo.put("position", 999);
+        jo.put("title", "32位字符校验32位字符校验32位字符校验32位字符校验32位字");
+        jo.put("unlockAt", "1450947971236");
         Response response = TestConfig.postOrPutExecu("post",
-                "course/232/unit?loginUserId=5", jo);
+                "classes/1/unit?loginUserId=123&tenantId=1", jo);
 
         response.then().log().all().assertThat()
                 .statusCode(400)
-                .body("message", equalTo("title不能超长,"))
-                .body("type", equalTo("MethodArgumentNotValidException"));
+                .body("message", equalTo("title不能为空,title长度应该在1-32之间"))
+                .body("type", equalTo("MethodArgumentNotValidException"))
+        ;
     }
 
-    @Test(description = "position不能为空", priority = 4)
-    public void testWithInvalidPosition01() {
-        JSONObject jo = new JSONObject();
-        jo.put("title", "我是标题");
-        Response response = TestConfig.postOrPutExecu("post",
-                "course/232/unit?loginUserId=5", jo);
 
-        response.then().log().all().assertThat()
-                .statusCode(400)
-                .body("message", equalTo("position不能为null,"))
-                .body("type", equalTo("MethodArgumentNotValidException"));
-    }
-
-    @Test(description = "课程不存在", priority = 5)
-    public void testWithNotExistCourse() {
-        JSONObject jo = new JSONObject();
-        jo.put("title", "我是标题");
-        jo.put("position", 999);
-
-        String response = HttpRequest.sendHttpPost(Url+"course/-9/unit?loginUserId=123456", jo);
-        response =  response.substring(response.indexOf("&")+1,response.length());
-        JSONObject result = JSONObject.fromObject(response);
-
-        Assert.assertEquals(1000,result.get("code"));
-        Assert.assertEquals("课程不存在",result.get("message"));
-        Assert.assertEquals("ServiceException",result.get("type"));
-
-    }
 }
