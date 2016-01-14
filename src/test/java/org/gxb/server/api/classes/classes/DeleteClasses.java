@@ -22,7 +22,6 @@ import net.sf.json.JSONObject;
  */
 public class DeleteClasses {
 	private static Logger logger = LoggerFactory.getLogger(DeleteClasses.class);
-	private OperationTable operationTable = new OperationTable();
 	public ResourceBundle bundle = ResourceBundle.getBundle("api");
 	private static HttpRequest httpRequest = new HttpRequest();
 	public String path = bundle.getString("env");
@@ -80,11 +79,11 @@ public class DeleteClasses {
 				"/classes/" + classId + "?loginUserId=" + userId);
 
 		if (deleteResponse.getStatusCode() == 500) {
-			logger.info("删除班次接口##" + response.prettyPrint());
+			logger.info("删除班次接口##" + deleteResponse.prettyPrint());
 		}
 
 		deleteResponse.then().assertThat().statusCode(200);
-		Assert.assertEquals(Boolean.parseBoolean(deleteResponse.prettyPrint()), true, "删除课程删除失败");
+		Assert.assertEquals(Boolean.parseBoolean(deleteResponse.prettyPrint()), true, "删除班次失败");
 		
 		//删除已删除的班次
 		String paramUrl = path + basePath + "/classes/"  + classId + "?loginUserId=" + userId;
@@ -98,7 +97,7 @@ public class DeleteClasses {
 	}
 
 	
-	@Test(priority = 2, description = "course不存在")
+	@Test(priority = 2, description = "class不存在")
 	public void verifyNotExistCourse() {
 		classId = 999999;
 		

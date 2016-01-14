@@ -113,6 +113,29 @@ public class OperationTable {
 		}
 	}
 
+	public void updateClass(int classid, String status, String flag) throws Exception {
+		String sql;
+		if (flag == null) {
+			sql = "update class set status = " + status + " where class_id = " + classid + "";
+		} else {
+			sql = "update class set delete_flag = '" + flag + "' where class_id = " + classid + "";
+		}
+		DBConnection dbc = null;
+		Connection conn = null;
+		Statement st = null;
+
+		try {
+			dbc = new DBConnection(dbUrl);
+			conn = dbc.GetConnection();
+			st = conn.createStatement();
+			st.executeUpdate(sql);
+			conn.close();
+			st.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public int selectCourseUnitStatus(int courseid, int status) throws Exception {
 		String sql = "select count(*) as totalcount from course_unit where course_id = " + courseid + " and status = "
 				+ status + "";
