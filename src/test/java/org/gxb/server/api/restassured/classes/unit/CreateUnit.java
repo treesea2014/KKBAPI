@@ -49,7 +49,7 @@ public class CreateUnit {
 
         response.then().log().all().assertThat()
                 .statusCode(400)
-                .body("message", equalTo("title不能为空,"))
+                .body("message", equalTo("title长度需要在1和32之间,title不能为空,"))
                 .body("code", equalTo(400))
                 .body("type", equalTo("MethodArgumentNotValidException"))
                 ;
@@ -58,14 +58,14 @@ public class CreateUnit {
     @Test(description = "title超长", priority = 2)
     public void testWithInvalidTitle02() {
         JSONObject jo = new JSONObject();
-        jo.put("title", "32位字符校验32位字符校验32位字符校验32位字符校验32位字");
+        jo.put("title", "32位字符校验32位字符校验32位字符校验32位字符校验32位字111");
         jo.put("unlockAt", "1450947971236");
         Response response = TestConfig.postOrPutExecu("post",
                 "classes/1/unit?loginUserId=123&tenantId=1", jo);
 
         response.then().log().all().assertThat()
                 .statusCode(400)
-                .body("message", equalTo("title不能为空,title长度应该在1-32之间"))
+                .body("message", equalTo("title长度需要在1和32之间,"))
                 .body("type", equalTo("MethodArgumentNotValidException"))
         ;
     }

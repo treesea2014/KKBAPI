@@ -1,0 +1,152 @@
+package org.gxb.server.api.restassured.classes.page;
+
+import com.jayway.restassured.response.Response;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import org.gxb.server.api.HttpRequest;
+import org.gxb.server.api.TestConfig;
+import org.gxb.server.api.restassured.classes.item.CreateItem;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+import java.util.HashMap;
+import java.util.ResourceBundle;
+
+import static org.hamcrest.Matchers.equalTo;
+
+public class ModifyPage {
+    private Logger logger = LoggerFactory.getLogger(CreateItem.class);
+    public static ResourceBundle bundle = ResourceBundle.getBundle("api");
+    // 请求地址
+    public static final String path = bundle.getString("env");
+    public static final String basePath = bundle.getString("apiBasePath");
+    String Url = path + basePath;
+    Integer unitId;
+    Integer itemId;
+    Integer pageId;
+    @BeforeClass(description = "获取itemid")
+    public void init() {
+        JSONObject jo = new JSONObject();
+        jo.put("title", "测试单元xxsea");
+        jo.put("unlockAt", "1450947971236");
+        jo.put("endAt", "1450947971231");
+        Response response = TestConfig.postOrPutExecu("post",
+                "classes/1/unit?loginUserId=123&tenantId=1", jo);
+        //创建unit后unitId
+        unitId = response.jsonPath().get("unitId");
+
+        JSONObject jo1 = new JSONObject();
+        jo1.put("title", "测试TREeseaitemt");
+        // jo.put("unlockAt", 1450947971236);
+        response = TestConfig.postOrPutExecu("post",
+                "classes/1/unit/"+unitId+"/item?loginUserId=123&tenantId=1", jo1);
+        //创建item后 itemId
+        itemId = response.jsonPath().get("itemId");
+
+        HashMap<String, String> classPage = new HashMap<String, String>();
+        classPage.put("title", "我是classPage");
+        classPage.put("body", "测试内容");
+        classPage.put("link", "www.test.ss");
+        classPage.put("type", "Link");
+
+        JSONObject jo2 = new JSONObject();
+        jo2.put("title", "我是page标题");
+        jo2.put("position", 888);
+        jo2.put("classPage",JSONObject.fromObject(classPage));
+        logger.info("jo:{}",jo2);
+        response = TestConfig.postOrPutExecu("post",
+                "/classes/1/unit/"+unitId+"/item/"+itemId+"/chapter/page?loginUserId=123&tenantId=1", jo2);
+        logger.info("jo:{}",response.toString());
+
+        pageId = response.jsonPath().get("classPage.pageId");
+    }
+    @Test(description = "正常", priority = 1)
+    public void test() {
+        JSONObject jo = new JSONObject();
+        jo.put("title", "我是page标题修改");
+        jo.put("body", "我是body修改");
+        jo.put("type", "我是type修改");
+        jo.put("link", "我是link修改");
+        logger.info("jo:{}",jo);
+        Response response = TestConfig.postOrPutExecu("put",
+                "/class_page/"+pageId+"?loginUserId=123&tenantId=1", jo);
+
+        response.then().log().all().assertThat()
+                .statusCode(200)
+                .body( equalTo("true"));
+    }
+
+    @Test(description = "title不能为空", priority = 2)
+    public void testWithInvalidTitle01() {
+        JSONObject jo = new JSONObject();
+        //jo.put("title", "我是page标题修改");
+        jo.put("body", "我是body修改");
+        jo.put("type", "我是type修改");
+        jo.put("link", "我是link修改");
+        logger.info("jo:{}",jo);
+        Response response = TestConfig.postOrPutExecu("put",
+                "/class_page/"+pageId+"?loginUserId=123&tenantId=1", jo);
+
+        response.then().log().all().assertThat()
+                .statusCode(400)
+                .body("message", equalTo("title不能为空,"))
+                .body("type", equalTo("MethodArgumentNotValidException"))
+        ;
+    }
+
+    @Test(description = "title不能超长", priority = 3)
+    public void testWithInvalidTitle02() {
+        JSONObject jo = new JSONObject();
+        jo.put("title", "测试页面测试页面测试页面测试页面测试页面测试页面测试页面测试页面测试页面测测试页面试页面测试页面");
+        jo.put("body", "我是body修改");
+        jo.put("type", "我是type修改");
+        jo.put("link", "我是link修改");
+        logger.info("jo:{}",jo);
+        Response response = TestConfig.postOrPutExecu("put",
+                "/class_page/"+pageId+"?loginUserId=123&tenantId=1", jo);
+
+        response.then().log().all().assertThat()
+                .statusCode(400)
+                .body("message", equalTo("title不能超长,"))
+                .body("type", equalTo("MethodArgumentNotValidException"));
+    }
+
+    @Test(description = "type不能为空", priority = 4)
+    public void testWithInvalidType01() {
+        JSONObject jo = new JSONObject();
+        jo.put("title", "测试页面测试页面测试页面测试页面测试页面测试页面测试页面测试页面测试页面测测试页面试页面测试页面");
+        jo.put("body", "我是body修改");
+        //jo.put("type", "我是type修改");
+        jo.put("link", "我是link修改");
+        logger.info("jo:{}",jo);
+        Response response = TestConfig.postOrPutExecu("put",
+                "/class_page/"+pageId+"?loginUserId=123&tenantId=1", jo);
+
+        response.then().log().all().assertThat()
+                .statusCode(400)
+                .body("message", equalTo("type不能为空,"))
+                .body("type", equalTo("MethodArgumentNotValidException"));
+    }
+
+    @Test(description = "type类型错误", priority = 5)
+    public void testWithInvalidType02() {
+        JSONObject jo = new JSONObject();
+        jo.put("title", "测试页面测试页面测试页面测试页面测试页面测试页面测试页面测试页面测试页面测测试页面试页面测试页面");
+        jo.put("body", "我是body修改");
+        //jo.put("type", "我是type修改");
+        jo.put("link", "我是link修改");
+        logger.info("jo:{}",jo);
+        Response response = TestConfig.postOrPutExecu("put",
+                "/class_page/"+pageId+"?loginUserId=123&tenantId=1", jo);
+
+        response.then().log().all().assertThat()
+                .statusCode(400)
+                .body("message", equalTo("type类型错误,"))
+                .body("type", equalTo("MethodArgumentNotValidException"));
+    }
+
+
+}
