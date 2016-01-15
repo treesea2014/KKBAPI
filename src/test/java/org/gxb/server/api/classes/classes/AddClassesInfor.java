@@ -17,8 +17,8 @@ import net.sf.json.JSONObject;
 /*
  * 192.168.30.33:8080/gxb-api/classes?loginUserId=123&tenantId=1
  */
-public class AddClasses {
-	private static Logger logger = LoggerFactory.getLogger(AddClasses.class);
+public class AddClassesInfor {
+	private static Logger logger = LoggerFactory.getLogger(AddClassesInfor.class);
 	public ResourceBundle bundle = ResourceBundle.getBundle("api");
 	private static HttpRequest httpRequest = new HttpRequest();
 	public String path = bundle.getString("env");
@@ -771,7 +771,7 @@ public class AddClasses {
 	}
 
 	// failed
-	@Test(priority = 18, description = "classname长度为32")
+	@Test(priority = 18, description = "classname长度超出32")
 	public void verifyInvalidClassName_002() {
 		JSONObject classInfoObject = new JSONObject();
 		classInfoObject.put("description", "课程介绍_test1001");

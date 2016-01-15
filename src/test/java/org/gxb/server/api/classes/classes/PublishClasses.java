@@ -16,7 +16,7 @@ import net.sf.json.JSONObject;
 /*
  * ----发布班次
  * http://192.168.30.33:8080/gxb-api/classes/3/publish?loginUserId=123
- * class class_unit class_item class_chapter class_assignment class_quiz class_page class_courseware class_topic
+ * class class_set class_info class_chapter
  */
 
 public class PublishClasses {
