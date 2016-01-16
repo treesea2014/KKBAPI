@@ -12,7 +12,7 @@ public class OperationTable {
 	public static final String dbUrl = dbBundle.getString("dbUrl");
 
 	public int selectCourseStatus(int courseid, int status) throws Exception {
-		String sql = "select count(*) as totalcount from course where course_id = " + courseid + " and status = "
+		String sql = "select count(1) as totalcount from course where course_id = " + courseid + " and status = "
 				+ status + "";
 		DBConnection dbc = null;
 		Connection conn = null;
@@ -29,6 +29,36 @@ public class OperationTable {
 				count = res.getInt("totalcount");
 			}
 			System.out.println("select course success!");
+			conn.close();
+			st.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+
+	public int selectClass(String courseid, String classid) throws Exception {
+		String sql;
+		if (courseid == null && classid == null) {
+			sql = "select count(1) as totalcount from class";
+		} else {
+			sql = "select count(1) as totalcount from class where course_id = '" + courseid + "' and class_id = '"
+					+ classid + "'";
+		}
+		DBConnection dbc = null;
+		Connection conn = null;
+		Statement st = null;
+		ResultSet res = null;
+		int count = 0;
+
+		try {
+			dbc = new DBConnection(dbUrl);
+			conn = dbc.GetConnection();
+			st = conn.createStatement();
+			res = st.executeQuery(sql);
+			while (res.next()) {
+				count = res.getInt("totalcount");
+			}
 			conn.close();
 			st.close();
 		} catch (Exception e) {
@@ -135,7 +165,7 @@ public class OperationTable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public int selectCourseUnitStatus(int courseid, int status) throws Exception {
 		String sql = "select count(*) as totalcount from course_unit where course_id = " + courseid + " and status = "
 				+ status + "";
@@ -370,7 +400,7 @@ public class OperationTable {
 		}
 		return count;
 	}
-	
+
 	public void updateCourseQuiz(int quizid, int flag) throws Exception {
 		String sql = "update course_quiz set delete_flag = " + flag + " where quiz_id = " + quizid + "";
 		DBConnection dbc = null;
@@ -388,9 +418,10 @@ public class OperationTable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void updateCourseAssignment(int assignmentid, int flag) throws Exception {
-		String sql = "update course_assignment set delete_flag = " + flag + " where assignment_id = " + assignmentid + "";
+		String sql = "update course_assignment set delete_flag = " + flag + " where assignment_id = " + assignmentid
+				+ "";
 		DBConnection dbc = null;
 		Connection conn = null;
 		Statement st = null;
@@ -406,9 +437,10 @@ public class OperationTable {
 			e.printStackTrace();
 		}
 	}
-	
-	public void updateCourseChapter(int id, int flag,String contenttype) throws Exception {
-		String sql = "update course_chapter set delete_flag = " + flag + " where content_id = " + id + " and content_type='"+contenttype+"'";
+
+	public void updateCourseChapter(int id, int flag, String contenttype) throws Exception {
+		String sql = "update course_chapter set delete_flag = " + flag + " where content_id = " + id
+				+ " and content_type='" + contenttype + "'";
 		DBConnection dbc = null;
 		Connection conn = null;
 		Statement st = null;

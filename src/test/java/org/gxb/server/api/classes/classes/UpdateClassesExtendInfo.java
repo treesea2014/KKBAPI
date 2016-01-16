@@ -4,10 +4,10 @@ import static org.hamcrest.Matchers.equalTo;
 import java.util.ResourceBundle;
 import org.gxb.server.api.HttpRequest;
 import org.gxb.server.api.TestConfig;
-import org.hamcrest.Matchers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import com.jayway.restassured.response.Response;
@@ -16,7 +16,7 @@ import net.sf.json.JSONObject;
 
 //failed
 public class UpdateClassesExtendInfo {
-	private static Logger logger = LoggerFactory.getLogger(AddClassesInfor.class);
+	private static Logger logger = LoggerFactory.getLogger(UpdateClassesExtendInfo.class);
 	public ResourceBundle bundle = ResourceBundle.getBundle("api");
 	private static HttpRequest httpRequest = new HttpRequest();
 	public String path = bundle.getString("env");
@@ -27,7 +27,7 @@ public class UpdateClassesExtendInfo {
 	private int tenantId;
 	
 
-	@BeforeMethod
+	@BeforeClass
 	public void InitiaData() {
 		tenantId = 12;
 		loginUserId = 2001;

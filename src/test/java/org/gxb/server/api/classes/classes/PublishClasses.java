@@ -21,7 +21,6 @@ import net.sf.json.JSONObject;
 
 public class PublishClasses {
 	public ResourceBundle bundle = ResourceBundle.getBundle("api");
-	private OperationTable operationTable = new OperationTable();
 	private static HttpRequest httpRequest = new HttpRequest();
 	private static Logger logger = LoggerFactory.getLogger(PublishClasses.class);
 	public String path = bundle.getString("env");

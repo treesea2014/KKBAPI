@@ -1,22 +1,15 @@
 package org.gxb.server.api.classes.classes;
 
 import static org.hamcrest.Matchers.equalTo;
-
 import java.util.ResourceBundle;
-
 import org.gxb.server.api.HttpRequest;
 import org.gxb.server.api.TestConfig;
-import org.gxb.server.api.course.assignment.UpdateAssignment;
-import org.hamcrest.Matchers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 import com.jayway.restassured.response.Response;
-
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -26,7 +19,7 @@ import net.sf.json.JSONObject;
  * class 
  */
 public class UpdateTeachMode {
-	private static Logger logger = LoggerFactory.getLogger(UpdateAssignment.class);
+	private static Logger logger = LoggerFactory.getLogger(UpdateTeachMode.class);
 	public ResourceBundle bundle = ResourceBundle.getBundle("api");
 	private static HttpRequest httpRequest = new HttpRequest();
 	public String path = bundle.getString("env");
