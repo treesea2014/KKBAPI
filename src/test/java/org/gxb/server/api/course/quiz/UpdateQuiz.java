@@ -38,7 +38,7 @@ public class UpdateQuiz {
 	@BeforeMethod
 	public void InitiaData() {
 		url = path + basePath + "/course/";
-		quizId = 3;
+		quizId = 30;
 		userId = "1001";
 	}
 
@@ -284,7 +284,7 @@ public class UpdateQuiz {
 		response.then().assertThat().statusCode(400).body("type", equalTo("InvalidFormatException"));
 	}
 	
-	//failed
+	//pass
 	@Test(priority = 10, description = "questionId不存在")
 	public void verifyNotExistQuestionId() {
 		int questionid = 1;
@@ -299,17 +299,21 @@ public class UpdateQuiz {
 		jsonObject.put("title", title);
 		jsonObject.put("questionList", jsonArray);
 
-		Response response = TestConfig.postOrPutExecu("put",
-				"/course/quiz/" + quizId + "?loginUserId=" + userId + "&tenantId=1", jsonObject);
+		String paramUrl = path + basePath + "/course/quiz/" + quizId + "?loginUserId=" + userId + "&tenantId=1";
+		String strMsg = httpRequest.sendHttpPut(paramUrl, jsonObject);
+		String[] data = strMsg.split("&");
+		JSONObject jsonobject = JSONObject.fromObject(data[1]);
 
-		if (response.getStatusCode() == 500) {
-			logger.info("修改测验接口##verifyNotExistQuestionId##" + response.prettyPrint());
+		if (Integer.parseInt(data[0]) == 500) {
+			logger.info("新建测验接口##" + strMsg);
 		}
 
-		response.then().assertThat().statusCode(400).body("type", equalTo("")).body("message", equalTo("questionid不存在"));
+		Assert.assertEquals(jsonobject.get("code").toString(), "1000", "状态码不正确");
+		Assert.assertEquals(jsonobject.get("message").toString(), "question不存在", "message提示信息不正确");
+		Assert.assertEquals(jsonobject.get("type").toString(), "ServiceException", "type提示信息不正确");
 	}
 	
-	//failed
+	//pass
 	@Test(priority = 11, description = "title为32位")
 	public void verifyTitleLength() {
 		String title = "te1111111111111111111111111111112";
@@ -331,6 +335,6 @@ public class UpdateQuiz {
 			logger.info("修改测验接口##verifyCorrectParams##" + response.prettyPrint());
 		}
 
-		response.then().assertThat().statusCode(400).body("message", equalTo("title长度不能超出32位"));
+		response.then().assertThat().statusCode(400).body("message", equalTo("title长度需要在0和32之间,"));
 	}
 }

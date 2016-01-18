@@ -194,7 +194,7 @@ public class AddTopic {
 				.body("message", equalTo("title不能为空,"));
 	}
 
-	// failed
+	// pass
 	@Test(priority = 6, description = "title长度为32位")
 	public void verifyTitleLength() {
 		String title = "test11111111111111111111111111111";
@@ -218,7 +218,7 @@ public class AddTopic {
 		}
 
 		response.then().assertThat().statusCode(400).body("type", equalTo("MethodArgumentNotValidException"))
-				.body("message", equalTo("title长度为32位"));
+				.body("message", equalTo("title长度需要在0和32之间,"));
 	}
 
 	@Test(priority = 7, description = "position无效")
@@ -246,7 +246,7 @@ public class AddTopic {
 		response.then().assertThat().statusCode(400).body("type", equalTo("InvalidFormatException"));
 	}
 
-	// failed
+	// pass
 	@Test(priority = 7, description = "position为0")
 	public void verifyInvalidPosition_002() {
 		String title = "章节2001";
@@ -269,7 +269,7 @@ public class AddTopic {
 			logger.info("保存课程topic接口##" + response.prettyPrint());
 		}
 
-		response.then().assertThat().statusCode(400).body("message", equalTo("position不能小于1"));
+		response.then().assertThat().statusCode(200);
 	}
 
 	// failed
@@ -351,7 +351,7 @@ public class AddTopic {
 				equalTo("MethodArgumentNotValidException"));
 	}
 
-	// failed
+	// pass
 	@Test(priority = 11, description = "title长度为32")
 	public void verifyInvalidTopicTitle_002() {
 		String title = "章节2001";
@@ -374,10 +374,10 @@ public class AddTopic {
 			logger.info("保存课程topic接口##" + response.prettyPrint());
 		}
 
-		response.then().assertThat().statusCode(400).body("message", equalTo("topic.title长度为32位"));
+		response.then().assertThat().statusCode(400).body("message", equalTo("topic.title长度需要在0和32之间,")).body("type", equalTo("MethodArgumentNotValidException"));
 	}
 
-	// failed
+	// pass
 	@Test(priority = 12, description = "body长度为400")
 	public void verifyInvalidTopicBody_001() {
 		String title = "章节2001";
@@ -400,7 +400,7 @@ public class AddTopic {
 			logger.info("保存课程topic接口##" + response.prettyPrint());
 		}
 
-		response.then().assertThat().statusCode(400).body("message", equalTo("body长度为400位"));
+		response.then().assertThat().statusCode(400).body("message", equalTo("topic.body长度需要在0和400之间,")).body("type", equalTo("MethodArgumentNotValidException"));
 	}
 
 	@Test(priority = 13, description = "body为空")

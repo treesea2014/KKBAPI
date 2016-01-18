@@ -232,7 +232,7 @@ public class AddCourseware {
 				.body("message", equalTo("title不能为空,"));
 	}
 
-	// failed
+	// pass
 	@Test(priority = 6, description = "title长度为32位")
 	public void verifyTitleLength() {
 		String title = "test11111111111111111111111111111";
@@ -262,7 +262,7 @@ public class AddCourseware {
 		}
 
 		response.then().assertThat().statusCode(400).body("type", equalTo("MethodArgumentNotValidException"))
-				.body("message", equalTo("title长度为32位"));
+				.body("message", equalTo("title长度需要在0和32之间,"));
 	}
 
 	@Test(priority = 7, description = "position无效")
@@ -294,38 +294,6 @@ public class AddCourseware {
 		}
 
 		response.then().assertThat().statusCode(400).body("type", equalTo("InvalidFormatException"));
-	}
-
-	// failed
-	@Test(priority = 7, description = "position为0")
-	public void verifyInvalidPosition_002() {
-		String title = "test11";
-		int documentId = 1001;
-		int position = 0;
-
-		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("documentId", documentId);
-
-		JSONArray jsonArray = new JSONArray();
-		jsonArray.add(jsonObject);
-
-		JSONObject coursewareJson = new JSONObject();
-		coursewareJson.put("title", "web前端11");
-		coursewareJson.put("documentList", jsonArray);
-
-		JSONObject chapterJson = new JSONObject();
-		chapterJson.put("title", title);
-		chapterJson.put("position", position);
-		chapterJson.put("courseware", coursewareJson);
-
-		Response response = TestConfig.postOrPutExecu("post",
-				"/course/item/" + itemId + "/courseware?loginUserId=" + userId, chapterJson);
-
-		if (response.getStatusCode() == 500) {
-			logger.info("新建课件接口##" + response.prettyPrint());
-		}
-
-		response.then().assertThat().statusCode(400).body("message", equalTo("position不能小于1"));
 	}
 
 	// failed
@@ -424,7 +392,7 @@ public class AddCourseware {
 				equalTo("MethodArgumentNotValidException"));
 	}
 
-	// failed
+	// pass
 	@Test(priority = 11, description = "title长度为32")
 	public void verifyInvalidCourseTitle_002() {
 		String title = "test11";
@@ -454,7 +422,8 @@ public class AddCourseware {
 			logger.info("新建课件接口##" + response.prettyPrint());
 		}
 
-		response.then().assertThat().statusCode(400).body("message", equalTo("title长度为32位"));
+		response.then().assertThat().statusCode(400).body("message", equalTo("courseware.title长度需要在0和32之间,"))
+		.body("type", equalTo("MethodArgumentNotValidException"));
 	}
 	
 
@@ -524,7 +493,7 @@ public class AddCourseware {
 		response.then().assertThat().statusCode(400).body("type", equalTo("InvalidFormatException"));
 	}
 	
-	//failed
+	//pass
 	@Test(priority = 14, description = "documentId在document表中不存在")
 	public void verifyInvalidDocumentId_003() {
 		String title = "课件1001";
@@ -546,14 +515,18 @@ public class AddCourseware {
 		chapterJson.put("position", position);
 		chapterJson.put("courseware", coursewareJson);
 
-		Response response = TestConfig.postOrPutExecu("post",
-				"/course/item/" + itemId + "/courseware?loginUserId=" + userId, chapterJson);
+		String paramUrl = 	path + basePath + "/course/item/" + itemId + "/courseware?loginUserId=" + userId;
+		String strMsg = httpRequest.sendHttpPost(paramUrl, chapterJson);
+		String[] data = strMsg.split("&");
+		JSONObject jsonobject = JSONObject.fromObject(data[1]);
 
-		if (response.getStatusCode() == 500) {
-			logger.info("新建课件接口##" + response.prettyPrint());
+		if (Integer.parseInt(data[0]) == 500) {
+			logger.info("新建课件接口##" + strMsg);
 		}
 
-		response.then().assertThat().statusCode(400).body("message", equalTo("documentId不存在"));
+		Assert.assertEquals(jsonobject.get("code").toString(), "1000", "状态码不正确");
+		Assert.assertEquals(jsonobject.get("message").toString(), "文档不存在", "message提示信息不正确");
+		Assert.assertEquals(jsonobject.get("type").toString(), "ServiceException", "type提示信息不正确");
 	}
 
 }

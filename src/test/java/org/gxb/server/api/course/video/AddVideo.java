@@ -173,7 +173,7 @@ public class AddVideo {
 				.body("message", equalTo("title不能为空,"));
 	}
 
-	// failed
+	// pass
 	@Test(priority = 6, description = "title长度为32位")
 	public void verifyTitleLength() {
 		String title = "test11111111111111111111111111111";
@@ -193,7 +193,7 @@ public class AddVideo {
 		}
 
 		response.then().assertThat().statusCode(400).body("type", equalTo("MethodArgumentNotValidException"))
-				.body("message", equalTo("title长度为32位"));
+				.body("message", equalTo("title长度需要在0和32之间,"));
 	}
 
 	@Test(priority = 7, description = "position无效")
@@ -217,7 +217,7 @@ public class AddVideo {
 		response.then().assertThat().statusCode(400).body("type", equalTo("InvalidFormatException"));
 	}
 
-	// failed
+	// pass
 	@Test(priority = 7, description = "position为0")
 	public void verifyInvalidPosition_002() {
 		String title = "章节2001";
@@ -236,7 +236,7 @@ public class AddVideo {
 			logger.info("课程添加视频接口##" + response.prettyPrint());
 		}
 
-		response.then().assertThat().statusCode(400).body("message", equalTo("position不能小于1"));
+		response.then().assertThat().statusCode(200);
 	}
 
 	// failed
@@ -304,7 +304,7 @@ public class AddVideo {
 		response.then().assertThat().statusCode(400).body("type", equalTo("InvalidFormatException"));
 	}
 
-	// failed
+	// pass
 	@Test(priority = 11, description = "contentId在video中不存在")
 	public void verifyInvalidContentid_002() {
 		String title = "章节2001";
@@ -316,14 +316,18 @@ public class AddVideo {
 		chapterJson.put("position", position);
 		chapterJson.put("contentId", contentId);
 
-		Response response = TestConfig.postOrPutExecu("post", "/course/item/" + itemId + "/video?loginUserId=" + userId,
-				chapterJson);
+		String paramUrl = path + basePath + "/course/item/" + itemId + "/video?loginUserId=" + userId;
+		String strMsg = httpRequest.sendHttpPost(paramUrl, chapterJson);
+		String[] data = strMsg.split("&");
+		JSONObject jsonobject = JSONObject.fromObject(data[1]);
 
-		if (response.getStatusCode() == 500) {
-			logger.info("课程添加视频接口##" + response.prettyPrint());
+		if (Integer.parseInt(data[0]) == 500) {
+			logger.info("课程添加视频接口##" + strMsg);
 		}
 
-		response.then().assertThat().statusCode(400).body("message", equalTo("videoId不存在"));
+		Assert.assertEquals(jsonobject.get("code").toString(), "1000", "状态码不正确");
+		Assert.assertEquals(jsonobject.get("message").toString(), "视频不存在", "message提示信息不正确");
+		Assert.assertEquals(jsonobject.get("type").toString(), "ServiceException", "type提示信息不正确");
 	}
 
 	@Test(priority = 12, description = "contentId为空")

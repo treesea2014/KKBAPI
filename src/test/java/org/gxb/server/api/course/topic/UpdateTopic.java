@@ -151,7 +151,7 @@ public class UpdateTopic {
 		response.then().assertThat().statusCode(400).body("type", equalTo("MethodArgumentNotValidException")).body("message", equalTo("title不能为空,"));
 	}
 	
-	//failed
+	//pass
 	@Test(priority = 7, description = "title长度为32")
 	public void verifyInvalidTitle_002() {
 		String title = "test11111111111111111111111111111";
@@ -169,7 +169,7 @@ public class UpdateTopic {
 		}
 
 		response.then().assertThat().statusCode(400).body("type", equalTo("MethodArgumentNotValidException"))
-		.body("message", equalTo("title长度为32位"));
+		.body("message", equalTo("title长度需要在0和32之间,"));
 	}
 	
 	@Test(priority = 8, description = "body为空")
@@ -192,7 +192,7 @@ public class UpdateTopic {
 		.body("message", equalTo("body不能为空,"));
 	}
 	
-	//failed
+	//pass
 	@Test(priority = 9, description = "body长度为400")
 	public void verifyInvalidBody_002() {
 		String title = "test11";
@@ -210,6 +210,6 @@ public class UpdateTopic {
 		}
 
 		response.then().assertThat().statusCode(400).body("type", equalTo("MethodArgumentNotValidException"))
-		.body("message", equalTo("title长度为32位"));
+		.body("message", equalTo("body长度需要在0和400之间,"));
 	}
 }

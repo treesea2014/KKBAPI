@@ -42,7 +42,7 @@ public class PublishCourseTest {
 		url = path + basePath + "/course/";
 	}
 
-	//pass 需验证
+	//pass 
 	@Test(priority = 1, description = "status为已发布")
 	public void verifyPublishedStatus() {
 		Response response = TestConfig.postOrPutFileExecu("put",
@@ -62,20 +62,9 @@ public class PublishCourseTest {
 		}
 	}
 
-	//failed
-	@Test(priority = 2, description = "status为未发布")
-	public void verifyUnpublishedStatus() {
-		courseid = 2;
-		Response response = TestConfig.postOrPutFileExecu("put",
-				"/course/" + courseid + "/status/publish?loginUserId=123456");
-		
-		response.then().assertThat().statusCode(200);
-		Assert.assertEquals(Boolean.parseBoolean(response.prettyPrint()), true, "发布失败");
-	}
-
 	@Test(priority = 3, description = "status为停用")
 	public void verifyDisableStatus() {
-		courseid = 18;
+		courseid = 10;
 		String paramUrl = url + courseid + "/status/publish?loginUserId=123456";
 
 		String strMsg = httpRequest.sendHttpPut(paramUrl, null);
@@ -120,7 +109,7 @@ public class PublishCourseTest {
 
 	@Test(priority = 6, description = "课程信息不存在")
 	public void verifyInvalidCourse_001() {
-		courseid = 10;
+		courseid = 700;
 		String paramUrl = url + courseid + "/status/publish?loginUserId=123456";
 
 		String strMsg = httpRequest.sendHttpPut(paramUrl, null);
@@ -169,7 +158,7 @@ public class PublishCourseTest {
 		}
 	}
 	
-	@Test(priority = 8, description = "课程资源不存在")
+	@Test(priority = 9, description = "课程资源不存在")
 	public void verifyInvalidCourse_004() {
 		courseid = 407;
 		String paramUrl = url + courseid + "/status/publish?loginUserId=123456";

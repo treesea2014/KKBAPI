@@ -93,14 +93,17 @@ public class OperationTable {
 		return map;
 	}
 
-	public int selectCourseChapter(int courseid, String contentType) throws Exception {
-		String sql = "select count(*) as totalcount from course_chapter where course_id = " + courseid
-				+ " and content_type = '" + contentType + "'";
+	public Map<String,Integer> selectCourseChapter(int courseid, int flag) throws Exception {
+		String sql = "select chapter.content_type as contenttype,count(1) as totalcount from  course_chapter chapter join course_item item on chapter.item_id =item.item_id"
+				+ " and item.delete_flag= " + flag + " join course_unit unit on unit.unit_id = item.item_id"
+				+ " and unit.delete_flag= " + flag + " where chapter.course_id= " + courseid
+				+ "  and chapter.delete_flag =" + flag + " group by chapter.content_type";
+
 		DBConnection dbc = null;
 		Connection conn = null;
 		Statement st = null;
 		ResultSet res = null;
-		int count = 0;
+		Map<String,Integer> hashMap = new HashMap<String,Integer>();
 
 		try {
 			dbc = new DBConnection(dbUrl);
@@ -108,15 +111,15 @@ public class OperationTable {
 			st = conn.createStatement();
 			res = st.executeQuery(sql);
 			while (res.next()) {
-				count = res.getInt("totalcount");
+				hashMap.put(res.getString("contenttype"), res.getInt("totalcount"));
 			}
-			System.out.println("select course_chapter success!");
+
 			conn.close();
 			st.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return count;
+		return hashMap;
 	}
 
 	public void updateCourseStatus(int courseid, int status, String flag) throws Exception {
