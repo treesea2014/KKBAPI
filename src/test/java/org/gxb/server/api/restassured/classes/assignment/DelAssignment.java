@@ -1,4 +1,4 @@
-package org.gxb.server.api.restassured.classes.page;
+package org.gxb.server.api.restassured.classes.assignment;
 
 import com.jayway.restassured.response.Response;
 import net.sf.json.JSONArray;
@@ -20,7 +20,7 @@ import java.util.ResourceBundle;
  * Created by treesea on 16/1/5.
  * 查询课程信息接口
  */
-public class DelPage {
+public class DelAssignment {
     private Logger logger = LoggerFactory.getLogger(CreateItem.class);
     public static ResourceBundle bundle = ResourceBundle.getBundle("api");
     // 请求地址
@@ -29,7 +29,7 @@ public class DelPage {
     String Url = path + basePath;
     Integer unitId;
     Integer itemId;
-    Integer pageId;
+    Integer assignmentId;
     @BeforeClass(description = "获取itemid")
     public void init() {
         JSONObject jo = new JSONObject();
@@ -46,46 +46,60 @@ public class DelPage {
         // jo.put("unlockAt", 1450947971236);
         response = TestConfig.postOrPutExecu("post",
                 "classes/1/unit/"+unitId+"/item?loginUserId=123&tenantId=1", jo1);
-        //创建item后 itemId
+
         itemId = response.jsonPath().get("itemId");
 
-        HashMap<String, String> classPage = new HashMap<String, String>();
-        classPage.put("title", "我是classPage");
-        classPage.put("body", "测试内容");
-        classPage.put("link", "www.test.ss");
-        classPage.put("type", "Link");
+
+        JSONArray classAssetList = new JSONArray();
+        JSONObject classAssignment = new JSONObject();
+
+        HashMap<String, String> asset1 = new HashMap<String, String>();
+        asset1.put("title", "测试作业附件1");
+        asset1.put("link", "http://www.baidu.com/123");
+
+        HashMap<String, String> asset2 = new HashMap<String, String>();
+        asset2.put("title", "测试作业附件1");
+        asset2.put("link", "http://www.baidu.com/123");
+
+        classAssetList.add(asset1);
+        classAssetList.add(asset2);
+
+        classAssignment.put("title","测试作业修改");
+        classAssignment.put("body","测试内容修改");
+        classAssignment.put("gradingStandard","测试得分点修改");
+        classAssignment.put("classAssetList",classAssetList);
 
         JSONObject jo2 = new JSONObject();
-        jo2.put("title", "我是page标题");
+        jo2.put("title", "测试作业");
         jo2.put("position", 888);
-        jo2.put("classPage",JSONObject.fromObject(classPage));
+        jo2.put("classAssignment",classAssignment);
+
         logger.info("jo:{}",jo2);
         response = TestConfig.postOrPutExecu("post",
-                "/classes/1/unit/"+unitId+"/item/"+itemId+"/chapter/page?loginUserId=123&tenantId=1", jo2);
-        logger.info("jo:{}",response.toString());
+                "/classes/1/unit/"+unitId+"/item/"+itemId+"/chapter/assignment?loginUserId=123&tenantId=1", jo2);
 
-        pageId = response.jsonPath().get("classPage.pageId");
+        assignmentId = response.jsonPath().get("classAssignment.assignmentId");
+
     }
 
     @Test(description = "正常删除",priority = 1)
     public void test(){
 
-        Response response =  TestConfig.getOrDeleteExecu("del","/class_page/"+pageId+"?loginUserId=123");
+        Response response =  TestConfig.getOrDeleteExecu("del","/class_assignment/"+assignmentId+"?loginUserId=123");
         response.then().log().all()
                 .assertThat().statusCode(200)
                 .body(Matchers.equalTo("true"));
-
     }
 
-    @Test(description = "页面不存在",priority = 2)
+    @Test(description = "作业不存在",priority = 2)
     public void testWithItemIdNotExist(){
 
-        String response = HttpRequest.sendHttpDelete(Url+"/class_page/-1?loginUserId=123");
+        String response = HttpRequest.sendHttpDelete(Url+"/class_assignment/-1?loginUserId=123");
         response =  response.substring(response.indexOf("&")+1,response.length());
         JSONObject result = JSONObject.fromObject(response);
 
         Assert.assertEquals(result.get("code"),1000);
-        Assert.assertEquals(result.get("message"),"页面不存在");
+        Assert.assertEquals(result.get("message"),"作业不存在");
         Assert.assertEquals(result.get("type"),"ServiceException");
     }
 

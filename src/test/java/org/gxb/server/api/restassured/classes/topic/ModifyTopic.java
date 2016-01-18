@@ -26,7 +26,7 @@ public class ModifyTopic {
     Integer unitId;
     Integer topicId;
     Integer itemId;
-    @BeforeClass(description = "获取itemid")
+    @BeforeClass(description = "获取topicId")
     public void init() {
         JSONObject jo = new JSONObject();
         jo.put("title", "测试单元xxsea");

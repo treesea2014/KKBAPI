@@ -1,7 +1,6 @@
-package org.gxb.server.api.restassured.classes.page;
+package org.gxb.server.api.restassured.classes.topic;
 
 import com.jayway.restassured.response.Response;
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.gxb.server.api.HttpRequest;
 import org.gxb.server.api.TestConfig;
@@ -16,11 +15,13 @@ import org.testng.annotations.Test;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
+import static org.hamcrest.Matchers.equalTo;
+
 /**
  * Created by treesea on 16/1/5.
  * 查询课程信息接口
  */
-public class DelPage {
+public class GetTopicById {
     private Logger logger = LoggerFactory.getLogger(CreateItem.class);
     public static ResourceBundle bundle = ResourceBundle.getBundle("api");
     // 请求地址
@@ -28,9 +29,9 @@ public class DelPage {
     public static final String basePath = bundle.getString("apiBasePath");
     String Url = path + basePath;
     Integer unitId;
+    Integer topicId;
     Integer itemId;
-    Integer pageId;
-    @BeforeClass(description = "获取itemid")
+    @BeforeClass(description = "获取topicId")
     public void init() {
         JSONObject jo = new JSONObject();
         jo.put("title", "测试单元xxsea");
@@ -46,48 +47,42 @@ public class DelPage {
         // jo.put("unlockAt", 1450947971236);
         response = TestConfig.postOrPutExecu("post",
                 "classes/1/unit/"+unitId+"/item?loginUserId=123&tenantId=1", jo1);
-        //创建item后 itemId
+
         itemId = response.jsonPath().get("itemId");
 
-        HashMap<String, String> classPage = new HashMap<String, String>();
-        classPage.put("title", "我是classPage");
-        classPage.put("body", "测试内容");
-        classPage.put("link", "www.test.ss");
-        classPage.put("type", "Link");
+        HashMap<String, String> classTopic = new HashMap<String, String>();
+        classTopic.put("title", "测试讨论标题");
+        classTopic.put("body", "测试讨论内容");
 
         JSONObject jo2 = new JSONObject();
-        jo2.put("title", "我是page标题");
+        jo2.put("title", "测试讨论");
         jo2.put("position", 888);
-        jo2.put("classPage",JSONObject.fromObject(classPage));
-        logger.info("jo:{}",jo2);
+        jo2.put("classTopic",JSONObject.fromObject(classTopic));
+        logger.info("jo:{}",jo);
         response = TestConfig.postOrPutExecu("post",
-                "/classes/1/unit/"+unitId+"/item/"+itemId+"/chapter/page?loginUserId=123&tenantId=1", jo2);
-        logger.info("jo:{}",response.toString());
+                "/classes/1/unit/"+unitId+"/item/"+itemId+"/chapter/topic?loginUserId=123&tenantId=1", jo2);
 
-        pageId = response.jsonPath().get("classPage.pageId");
+        topicId =  response.jsonPath().get("classTopic.topicId");
+
     }
 
-    @Test(description = "正常删除",priority = 1)
+    @Test(description = "正常",priority = 1)
     public void test(){
 
-        Response response =  TestConfig.getOrDeleteExecu("del","/class_page/"+pageId+"?loginUserId=123");
+        Response response =  TestConfig.getOrDeleteExecu("get","/class_topic/"+topicId+"?loginUserId=123");
         response.then().log().all()
                 .assertThat().statusCode(200)
-                .body(Matchers.equalTo("true"));
-
+                .body("topicId",equalTo(topicId));
     }
 
-    @Test(description = "页面不存在",priority = 2)
+    @Test(description = "测验不存在",priority = 2)
     public void testWithItemIdNotExist(){
-
-        String response = HttpRequest.sendHttpDelete(Url+"/class_page/-1?loginUserId=123");
-        response =  response.substring(response.indexOf("&")+1,response.length());
-        JSONObject result = JSONObject.fromObject(response);
-
-        Assert.assertEquals(result.get("code"),1000);
-        Assert.assertEquals(result.get("message"),"页面不存在");
-        Assert.assertEquals(result.get("type"),"ServiceException");
+        Response response =  TestConfig.getOrDeleteExecu("get","/class_topic/-1?loginUserId=123");
+        response.then().log().all()
+                .assertThat().statusCode(200)
+                .body(equalTo(""));
     }
+
 
 
 }

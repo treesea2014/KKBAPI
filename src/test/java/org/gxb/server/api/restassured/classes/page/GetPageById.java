@@ -1,7 +1,6 @@
 package org.gxb.server.api.restassured.classes.page;
 
 import com.jayway.restassured.response.Response;
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.gxb.server.api.HttpRequest;
 import org.gxb.server.api.TestConfig;
@@ -20,7 +19,7 @@ import java.util.ResourceBundle;
  * Created by treesea on 16/1/5.
  * 查询课程信息接口
  */
-public class DelPage {
+public class GetPageById {
     private Logger logger = LoggerFactory.getLogger(CreateItem.class);
     public static ResourceBundle bundle = ResourceBundle.getBundle("api");
     // 请求地址
@@ -67,26 +66,21 @@ public class DelPage {
         pageId = response.jsonPath().get("classPage.pageId");
     }
 
-    @Test(description = "正常删除",priority = 1)
+    @Test(description = "正常",priority = 1)
     public void test(){
-
-        Response response =  TestConfig.getOrDeleteExecu("del","/class_page/"+pageId+"?loginUserId=123");
+        Response response =  TestConfig.getOrDeleteExecu("get","/class_page/"+pageId+"?loginUserId=123");
         response.then().log().all()
                 .assertThat().statusCode(200)
-                .body(Matchers.equalTo("true"));
+                .body("pageId",Matchers.equalTo(pageId));
 
     }
 
     @Test(description = "页面不存在",priority = 2)
     public void testWithItemIdNotExist(){
-
-        String response = HttpRequest.sendHttpDelete(Url+"/class_page/-1?loginUserId=123");
-        response =  response.substring(response.indexOf("&")+1,response.length());
-        JSONObject result = JSONObject.fromObject(response);
-
-        Assert.assertEquals(result.get("code"),1000);
-        Assert.assertEquals(result.get("message"),"页面不存在");
-        Assert.assertEquals(result.get("type"),"ServiceException");
+        Response response =  TestConfig.getOrDeleteExecu("get","/class_page/-1?loginUserId=123");
+        response.then().log().all()
+                .assertThat().statusCode(200)
+                .body(Matchers.equalTo(""));
     }
 
 
