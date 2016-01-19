@@ -72,8 +72,10 @@ public class DeleteCourseware {
 
 		response.then().assertThat().statusCode(200);
 		Assert.assertEquals(Boolean.parseBoolean(response.prettyPrint()), true, "修改courseware失败");
-		
-		//再次删除
+	}
+	
+	@Test(priority = 2, description = "coursewareId已删除,deleteflag=0")
+	public void verifyCourseware_001() {
 		String paramUrl = path + basePath  + "/class_courseware/" + coursewareId + "?loginUserId=" + loginUserId;
 		String strMsg = httpRequest.sendHttpDelete(paramUrl);
 		String[] data = strMsg.split("&");
@@ -88,8 +90,8 @@ public class DeleteCourseware {
 		Assert.assertEquals(jsonobject.get("type").toString(), "ServiceException", "type提示信息不正确");
 	}
 	
-	@Test(priority = 2, description = "status=30")
-	public void verifyCourseware_001() {
+	@Test(priority = 3, description = "status=30")
+	public void verifyCourseware_002() {
 		coursewareId = 1;
 		
 		//再次删除
@@ -107,8 +109,8 @@ public class DeleteCourseware {
 		Assert.assertEquals(jsonobject.get("type").toString(), "ServiceException", "type提示信息不正确");
 	}
 	
-	@Test(priority = 3, description = "coursewareId无效")
-	public void verifyCourseware_002() {	
+	@Test(priority = 4, description = "coursewareId无效")
+	public void verifyCourseware_003() {	
 		Response response = TestConfig.getOrDeleteExecu("delete","/class_courseware/" + "q1" + "?loginUserId=" + loginUserId);
 		if (response.getStatusCode() == 500) {
 			logger.info("删除courseware接口##" + response.prettyPrint());
@@ -117,7 +119,7 @@ public class DeleteCourseware {
 		response.then().assertThat().statusCode(400).body("type", equalTo("NumberFormatException"));
 	}
 	
-	@Test(priority = 4, description = "loginUserId为空")
+	@Test(priority = 5, description = "loginUserId为空")
 	public void verifyEmptyLoginUserId() {	
 		Response response = TestConfig.getOrDeleteExecu("delete","/class_courseware/" + coursewareId + "?loginUserId=");
 		

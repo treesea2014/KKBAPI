@@ -15,7 +15,7 @@ import net.sf.json.JSONObject;
  * 192.168.30.33:8080/gxb-api/classes/1/video/2/video_time_node?loginUserId=123&tenantId=1
  */
 public class AddVideoTimeNode {
-	private static Logger logger = LoggerFactory.getLogger(AddVideo.class);
+	private static Logger logger = LoggerFactory.getLogger(AddVideoTimeNode.class);
 	public ResourceBundle bundle = ResourceBundle.getBundle("api");
 	private static HttpRequest httpRequest = new HttpRequest();
 	public String path = bundle.getString("env");
@@ -129,7 +129,7 @@ public class AddVideoTimeNode {
 	}
 
 	@Test(priority = 6, description = "timeNode为空")
-	public void verifyNullTimeNode() {
+	public void verifyTimeNode_001() {
 		int timeNode = 10;
 
 		JSONObject jsonObject = new JSONObject();
@@ -147,7 +147,7 @@ public class AddVideoTimeNode {
 	}
 
 	@Test(priority = 7, description = "timeNode无效")
-	public void verifyInvalidTimeNode() {
+	public void verifyTimeNode_002() {
 		int timeNode = 10;
 
 		JSONObject jsonObject = new JSONObject();
@@ -161,5 +161,41 @@ public class AddVideoTimeNode {
 		}
 
 		response.then().assertThat().statusCode(400).body("type", equalTo("InvalidFormatException"));
+	}
+	
+	@Test(priority = 8, description = "timeNode为0")
+	public void verifyTimeNode_003() {
+		int timeNode = 0;
+
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("timeNode", timeNode);
+
+		Response response = TestConfig.postOrPutExecu("post", "/classes/" + classId + "/video/" + videoId
+				+ "/video_time_node?loginUserId=" + loginUserId + "&tenantId=" + tenantId, jsonObject);
+
+		if (response.getStatusCode() == 500) {
+			logger.info("新增视频中测验接口##" + response.prettyPrint());
+		}
+
+		response.then().assertThat().statusCode(400).body("type", equalTo("MethodArgumentNotValidException"))
+		.body("message", equalTo("timeNode最小不能小于1,"));
+	}
+	
+	@Test(priority = 9, description = "timeNode为负数")
+	public void verifyTimeNode_004() {
+		int timeNode = -1;
+
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("timeNode", timeNode);
+
+		Response response = TestConfig.postOrPutExecu("post", "/classes/" + classId + "/video/" + videoId
+				+ "/video_time_node?loginUserId=" + loginUserId + "&tenantId=" + tenantId, jsonObject);
+
+		if (response.getStatusCode() == 500) {
+			logger.info("新增视频中测验接口##" + response.prettyPrint());
+		}
+
+		response.then().assertThat().statusCode(400).body("type", equalTo("MethodArgumentNotValidException"))
+		.body("message", equalTo("timeNode最小不能小于1,"));
 	}
 }
