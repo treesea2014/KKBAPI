@@ -79,7 +79,7 @@ public class ModifyUnit {
 
         response.then().log().all().assertThat()
                 .statusCode(400)
-                .body("message", equalTo("title长度,"))
+                .body("message", equalTo("title长度需要在0和32之间,"))
                 .body("potypesition", equalTo("MethodArgumentNotValidException"));
     }
 

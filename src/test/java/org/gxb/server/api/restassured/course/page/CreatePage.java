@@ -51,7 +51,7 @@ public class CreatePage {
         jo.put("instructorList", instructorListArray);
 
         Response response = TestConfig.postOrPutExecu("post",
-                "course?loginUserId=123456&tenantId=1", jo);
+                "course?loginUserId=123456&tenantId=111", jo);
 
         courseId = response.jsonPath().get("courseId");
 

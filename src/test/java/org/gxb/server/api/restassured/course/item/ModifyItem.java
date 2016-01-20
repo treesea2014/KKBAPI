@@ -51,7 +51,7 @@ public class ModifyItem {
         jo.put("instructorList", instructorListArray);
 
         Response response = TestConfig.postOrPutExecu("post",
-                "course?loginUserId=123456&tenantId=1", jo);
+                "course?loginUserId=123456&tenantId=111", jo);
         //获取课程Id
         Integer courseId = response.jsonPath().get("courseId");
 
@@ -121,7 +121,7 @@ public class ModifyItem {
 
         response.then().log().all().assertThat()
                 .statusCode(400)
-                .body("message", equalTo("title不能超长,"))
+                .body("message", equalTo("title长度需要在0和32之间,"))
                 .body("type", equalTo("MethodArgumentNotValidException"));
     }
 

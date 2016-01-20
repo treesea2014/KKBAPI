@@ -1,29 +1,42 @@
-/*  1:   */package org.gxb.server.api.utils;
+//=============================================================================
+// Copyright 2006-2013 Daniel W. Dyer
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//=============================================================================
+package org.gxb.server.api.utils;
 
-/*  2:   */
-/*  3:   */import java.util.Comparator;
+import java.util.Comparator;
 
-/*  4:   */
 import org.testng.ITestNGMethod;
 
-/*  5:   */
-/*  6:   */class TestMethodComparator/* 7: */implements Comparator<ITestNGMethod>
-/* 8: */ {
-	/* 9: */public int compare(ITestNGMethod method1, ITestNGMethod method2)
-	/* 10: */ {
-		/* 11:31 */int compare = method1.getRealClass().getName().compareTo(method2.getRealClass().getName());
-		/* 12:32 */if (compare == 0) {
-			/* 13:34 */compare = method1.getMethodName().compareTo(method2.getMethodName());
-			/* 14: */}
-		/* 15:36 */return compare;
-		/* 16: */}
-	/* 17: */
-}
-
-/*
- * Location: C:\Users\dell\Desktop\reportng-1.1.4.jar
- * 
- * Qualified Name: org.uncommons.reportng.TestMethodComparator
- * 
- * JD-Core Version: 0.7.0.1
+/**
+ * Comparator for sorting TestNG test methods.  Sorts method alphabeticaly
+ * (first by fully-qualified class name, then by method name).
+ * @author treesea
  */
+class TestMethodComparator implements Comparator<ITestNGMethod>
+{
+    @Override
+	public int compare(ITestNGMethod method1,
+                       ITestNGMethod method2)
+    {
+        int compare = method1.getRealClass().getName().compareTo(method2.getRealClass().getName());
+        if (compare == 0)
+        {
+            compare = method1.getMethodName().compareTo(method2.getMethodName());
+        }
+        return compare;
+    }
+    
+
+}

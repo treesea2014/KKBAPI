@@ -1,49 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-
-<suite name="API测试报告" parallel="tests">
+<suite name="新API测试" parallel="tests">
     <listeners>
         <listener class-name="org.gxb.server.api.utils.ReporterListener" />
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
     </listeners>
 
-    <test name="类别接口">
+    <test name="建课-类别接口">
         <packages>
             <package name="org.gxb.server.api.restassured.course.category"/>
         </packages>
     </test>
-    <test name="课程封面接口">
+    <test name="建课-课程封面接口">
         <packages>
             <package name="org.gxb.server.api.restassured.course.cover"/>
         </packages>
     </test>
-    <test name="课程基本信息接口">
+    <test name="建课-课程基本信息接口">
         <packages>
             <package name="org.gxb.server.api.restassured.course.course"/>
         </packages>
     </test>
 
-    <test name="讲师接口">
+    <test name="建课-讲师接口">
         <packages>
             <package name="org.gxb.server.api.restassured.course.instructor"/>
         </packages>
     </test>
 
-    <test name="item接口">
+    <test name="建课-item接口">
         <packages>
             <package name="org.gxb.server.api.restassured.course.item"/>
         </packages>
     </test>
-    <test name="page接口">
+    <test name="建课-page接口">
         <packages>
             <package name="org.gxb.server.api.restassured.course.page"/>
         </packages>
     </test>
-    <test name="unit接口">
+    <test name="建课-unit接口">
         <packages>
             <package name="org.gxb.server.api.restassured.course.unit"/>
         </packages>
     </test>
 
-</suite> <!-- Suite -->
+
+    <test name="建班-作业assignment接口">
+        <packages>
+            <package name="org.gxb.server.api.restassured.classes.assignment"/>
+        </packages>
+    </test>
+    <test name="建班-班组group接口">
+        <packages>
+            <package name="org.gxb.server.api.restassured.classes.group"/>
+        </packages>
+    </test>
+    <test name="建班-item接口">
+        <packages>
+            <package name="org.gxb.server.api.restassured.classes.item"/>
+        </packages>
+    </test>
+
+    <test name="建班-page接口">
+        <packages>
+            <package name="org.gxb.server.api.restassured.classes.page"/>
+        </packages>
+    </test>
+
+    <test name="建班-quiz接口">
+        <packages>
+            <package name="org.gxb.server.api.restassured.classes.quiz"/>
+        </packages>
+    </test>
+    <test name="建班-topic接口">
+        <packages>
+            <package name="org.gxb.server.api.restassured.classes.topic"/>
+        </packages>
+    </test>
+    <test name="建班-unit接口">
+        <packages>
+            <package name="org.gxb.server.api.restassured.classes.unit"/>
+        </packages>
+    </test>
+
+</suite><!-- Suite -->
  

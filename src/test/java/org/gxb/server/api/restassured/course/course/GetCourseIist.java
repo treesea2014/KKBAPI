@@ -69,7 +69,7 @@ public class GetCourseIist {
         response.then().log().all().assertThat()
                 .statusCode(200)
                 .body("paging.curPage", equalTo(1))
-                .body("sortList.sort", hasItem("userId"))
+                .body("sortList.sort", hasItem("courseId"))
                 .body("sortList.order", hasItem("DESC"))
                 .body("filter.tenantId", equalTo(111))
                 .body("filter.query", equalTo("treesea查询课程名称1"))

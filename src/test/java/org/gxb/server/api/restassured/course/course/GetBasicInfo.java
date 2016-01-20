@@ -54,7 +54,7 @@ public class GetBasicInfo {
         jo.put("instructorList", instructorListArray);
 
         Response response = TestConfig.postOrPutExecu("post",
-                "course?loginUserId=654321&tenantId=1", jo);
+                "course?loginUserId=654321&tenantId=111", jo);
         response.then().log().all();
         courseId = response.getBody().jsonPath().get("courseId");
         logger.info("courseId:{}",courseId);
@@ -66,13 +66,13 @@ public class GetBasicInfo {
        HashMap<String, Object> categoryList = new HashMap<String, Object>();
         categoryList.put("categoryId", 1);
         categoryList.put("categoryName", "java相关");
-        Response response = TestConfig.getOrDeleteExecu("get", "course/"+courseId+"?loginUserId=654321&tenantId=2");
+        Response response = TestConfig.getOrDeleteExecu("get", "course/"+courseId+"?loginUserId=654321&tenantId=111");
 
         response.then().log().all().assertThat()
                 .statusCode(200)
                 .body("name", equalTo("查询课程名称"))
                 .body("intro", equalTo("查询课程简介"))
-                .body("tenantId", equalTo(1))
+                .body("tenantId", equalTo(111))
                 .body("categoryList", Matchers.hasItem(categoryList))
                 .body("editorId", equalTo(654321)) ;
     }
@@ -82,7 +82,7 @@ public class GetBasicInfo {
         HashMap<String, Object> categoryList = new HashMap<String, Object>();
         categoryList.put("categoryId", 1);
         categoryList.put("categoryName", "java相关");
-        Response response = TestConfig.getOrDeleteExecu("get", "course/-1?loginUserId=654321&tenantId=2");
+        Response response = TestConfig.getOrDeleteExecu("get", "course/-1?loginUserId=654321&tenantId=111");
 
         response.then().log().all().assertThat()
                 .statusCode(200);
@@ -90,7 +90,7 @@ public class GetBasicInfo {
 
     @Test(description = "正常",priority = 3)
     public void testWithInvalidCourseId(){
-        Response response = TestConfig.getOrDeleteExecu("get", "course/"+2+"?loginUserId=654321&tenantId=2");
+        Response response = TestConfig.getOrDeleteExecu("get", "course/"+2+"?loginUserId=541513&tenantId=111");
 
         response.then().log().all().assertThat()
                 .statusCode(200)

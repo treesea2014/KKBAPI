@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="新API测试" parallel="tests">
+<suite name="新API测试" parallel="tests" verbose="10" preserve-order="true">
     <listeners>
         <listener class-name="org.gxb.server.api.utils.ReporterListener" />
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
     </listeners>
 
-    <test name="建课-类别接口">
+    <test name="建课-类别接口" >
         <packages>
             <package name="org.gxb.server.api.restassured.course.category"/>
         </packages>
@@ -84,4 +84,3 @@
     </test>
 
 </suite><!-- Suite -->
- 

@@ -72,7 +72,7 @@ public class CreateUnit {
 
         response.then().log().all().assertThat()
                 .statusCode(400)
-                .body("message", equalTo("title不能超长,"))
+                .body("message", equalTo("title长度需要在0和32之间,"))
                 .body("type", equalTo("MethodArgumentNotValidException"));
     }
 
