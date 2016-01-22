@@ -1,4 +1,4 @@
-package org.gxb.server.api.restassured.user;
+package org.gxb.server.api.restassured.user.register;
 
 import com.jayway.restassured.response.Response;
 import net.sf.json.JSONObject;
@@ -14,8 +14,8 @@ import java.util.HashMap;
 /**
  * Created by treesea on 16/1/21.
  */
-public class ChangeMobile {
-    Logger logger = LoggerFactory.getLogger(ChangeMobile.class);
+public class ChangePassword {
+    Logger logger = LoggerFactory.getLogger(ChangePassword.class);
 
     @Test(description = "正常" , priority = 1)
     public void test(){

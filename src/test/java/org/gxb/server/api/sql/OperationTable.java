@@ -459,4 +459,22 @@ public class OperationTable {
 			e.printStackTrace();
 		}
 	}
+
+	public void delRegisteredMobile(String mobile) {
+		String sql = "delete from `course`.`user` where `mobile`= "+mobile;
+		DBConnection dbc = null;
+		Connection conn = null;
+		Statement st = null;
+
+		try {
+			dbc = new DBConnection(dbUrl);
+			conn = dbc.GetConnection();
+			st = conn.createStatement();
+			st.executeUpdate(sql);
+			conn.close();
+			st.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

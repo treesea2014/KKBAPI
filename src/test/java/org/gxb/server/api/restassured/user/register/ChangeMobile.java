@@ -5,6 +5,9 @@ import net.sf.json.JSONObject;
 import org.gxb.server.api.TestConfig;
 import org.gxb.server.api.sql.OperationTable;
 import org.hamcrest.Matchers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -12,10 +15,9 @@ import java.util.HashMap;
 
 /**
  * Created by treesea on 16/1/21.
- * 获取手机注册验证码
- * http://192.168.30.33:8080/gxb-api/validate_code/mobile_register?mobile=18638097289
  */
-public class RegisterMobile {
+public class ChangeMobile {
+    Logger logger = LoggerFactory.getLogger(ChangeMobile.class);
     String mobile;
     OperationTable op;
 
@@ -24,20 +26,20 @@ public class RegisterMobile {
         op = new OperationTable();
 
     }
-/*
-    正常无法拿到手机验证码 无法完成正常流程
-        JSONObject jo  = new JSONObject();
-        jo.put("mobile","1850081802x");
-        jo.put("encrypted_password","123456");
-        jo.put("validateCode","123456");
+    /*
+        正常无法拿到手机验证码 无法完成正常流程
+            JSONObject jo  = new JSONObject();
+            jo.put("mobile","1850081802x");
+            jo.put("encrypted_password","123456");
+            jo.put("validateCode","123456");
 
-        Response response = TestConfig.postOrPutExecu("post","/user/register" ,jo);
-        response.then().log().all().assertThat()
-                .statusCode(200)
-                .body("status" , Matchers.equalTo(false))
-                .body("errorInfo.mobile" , Matchers.equalTo("手机号码不合法"));
-                }
-        */
+            Response response = TestConfig.postOrPutExecu("post","/user/1272520/change_mobile" ,jo);
+            response.then().log().all().assertThat()
+                    .statusCode(200)
+                    .body("status" , Matchers.equalTo(false))
+                    .body("errorInfo.mobile" , Matchers.equalTo("手机号码不合法"));
+                    }
+            */
     @Test(description = "手机号码不合法",priority = 1)
     public void testWithInvalidMobile(){
         JSONObject jo  = new JSONObject();
@@ -45,7 +47,7 @@ public class RegisterMobile {
         jo.put("encrypted_password","123456");
         jo.put("validateCode","123456");
 
-        Response response = TestConfig.postOrPutExecu("post","/user/register" ,jo);
+        Response response = TestConfig.postOrPutExecu("post","/user/1272520/change_mobile" ,jo);
         response.then().log().all().assertThat()
                 .statusCode(200)
                 .body("status" , Matchers.equalTo(false))
@@ -60,7 +62,7 @@ public class RegisterMobile {
         jo.put("encrypted_password","123456");
         jo.put("validateCode","123456");
 
-        Response response = TestConfig.postOrPutExecu("post","/user/register" ,jo);
+        Response response = TestConfig.postOrPutExecu("post","/user/1272520/change_mobile" ,jo);
         response.then().log().all().assertThat()
                 .statusCode(200)
                 .body("status" , Matchers.equalTo(false))
@@ -75,7 +77,7 @@ public class RegisterMobile {
         jo.put("encrypted_password","123456");
         jo.put("validateCode","123456");
 
-        Response response = TestConfig.postOrPutExecu("post","/user/register" ,jo);
+        Response response = TestConfig.postOrPutExecu("post","/user/1272520/change_mobile" ,jo);
         response.then().log().all().assertThat()
                 .statusCode(200)
                 .body("status" , Matchers.equalTo(false))
@@ -83,6 +85,4 @@ public class RegisterMobile {
         ;
 
     }
-
-
 }

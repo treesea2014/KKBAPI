@@ -28,7 +28,7 @@ public class CheckMobile {
     public void test(){
         op.delRegisteredMobile("18500818020");
         mobile = "18500818020";
-        Response response = TestConfig.getOrDeleteExecu("get","validate_code/mobile_register?mobile=" + mobile);
+        Response response = TestConfig.getOrDeleteExecu("get","/user/check_mobile_unique?mobile=" + mobile);
         response.then().log().all().assertThat()
                 .statusCode(200)
                 .body("status" , Matchers.equalTo(true))
@@ -39,7 +39,7 @@ public class CheckMobile {
     @Test(description = "手机号码不合法",priority = 2)
     public void testWithInvalidMobile(){
         mobile = "1850081802x";
-        Response response = TestConfig.getOrDeleteExecu("get","validate_code/mobile_register?mobile=" + mobile);
+        Response response = TestConfig.getOrDeleteExecu("get","/user/check_mobile_unique?mobile=" + mobile);
         response.then().log().all().assertThat()
                 .statusCode(200)
                 .body("status" , Matchers.equalTo(false))
@@ -50,11 +50,11 @@ public class CheckMobile {
     @Test(description = "手机已被注册",priority = 3)
     public void testAlreadyExist(){
         mobile = "18500818023";
-        Response response = TestConfig.getOrDeleteExecu("get","validate_code/mobile_register?mobile=" + mobile);
+        Response response = TestConfig.getOrDeleteExecu("get","/user/check_mobile_unique?mobile=" + mobile);
         response.then().log().all().assertThat()
                 .statusCode(200)
                 .body("status" , Matchers.equalTo(false))
-                .body("errorInfo.mobile" , Matchers.equalTo("手机已被注册"))
+                .body("errorInfo.mobile" , Matchers.equalTo("手机号已注册"))
         ;
 
     }
