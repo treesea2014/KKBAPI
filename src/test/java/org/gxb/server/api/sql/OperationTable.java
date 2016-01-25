@@ -93,7 +93,7 @@ public class OperationTable {
 		return map;
 	}
 
-	public Map<String,Integer> selectCourseChapter(int courseid, int flag) throws Exception {
+	public Map<String, Integer> selectCourseChapter(int courseid, int flag) throws Exception {
 		String sql = "select chapter.content_type as contenttype,count(1) as totalcount from  course_chapter chapter join course_item item on chapter.item_id =item.item_id"
 				+ " and item.delete_flag= " + flag + " join course_unit unit on unit.unit_id = item.item_id"
 				+ " and unit.delete_flag= " + flag + " where chapter.course_id= " + courseid
@@ -103,7 +103,7 @@ public class OperationTable {
 		Connection conn = null;
 		Statement st = null;
 		ResultSet res = null;
-		Map<String,Integer> hashMap = new HashMap<String,Integer>();
+		Map<String, Integer> hashMap = new HashMap<String, Integer>();
 
 		try {
 			dbc = new DBConnection(dbUrl);
@@ -461,7 +461,7 @@ public class OperationTable {
 	}
 
 	public void delRegisteredMobile(String mobile) {
-		String sql = "delete from `course`.`user` where `mobile`= "+mobile;
+		String sql = "delete from `course`.`user` where `mobile`= " + mobile;
 		DBConnection dbc = null;
 		Connection conn = null;
 		Statement st = null;
@@ -476,5 +476,31 @@ public class OperationTable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public int selectUserInfor(int tenantid) throws Exception {
+		String sql = "select count(1) as totalcount from class_group_user cgu left join student s on cgu.student_user_id = s.user_id"
+				+ " left join class c on cgu.class_id = c.class_id left join user u on u.user_id = cgu.student_user_id"
+				+ " where cgu.delete_flag = 1 and cgu.tenant_id=" + tenantid + " order by s.no asc;";
+		DBConnection dbc = null;
+		Connection conn = null;
+		Statement st = null;
+		ResultSet res = null;
+		int count = 0;
+
+		try {
+			dbc = new DBConnection(dbUrl);
+			conn = dbc.GetConnection();
+			st = conn.createStatement();
+			res = st.executeQuery(sql);
+			while (res.next()) {
+				count = res.getInt("totalcount");
+			}
+			conn.close();
+			st.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count;
 	}
 }
