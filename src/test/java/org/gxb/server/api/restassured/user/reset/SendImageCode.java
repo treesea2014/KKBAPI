@@ -54,5 +54,46 @@ public class SendImageCode {
         ;
     }
 
+    @Test(description = "token不能为空 & 手机号码不合法",priority = 2)
+    public void test02(){
+        String code;
+        String token;
+        mobile = "18500818020";
+        //发送图形验证码
+        Response response = TestConfig.getOrDeleteExecu("get","validate_code/reset_pwd_imageCode?key="+mobile+"&token");
+        response.then().log().all().assertThat()
+                .statusCode(200)
+                .body("code" , Matchers.notNullValue())
+                .body("token" , Matchers.notNullValue())
+        ;
+        code = response.jsonPath().get("code");
+        token = response.jsonPath().get("token");
 
+        //检查图形验证码参数
+        JSONObject jo  = new JSONObject();
+        jo.put("key",mobile);
+        jo.put("code",code);
+        jo.put("token",token);
+        //检查图形验证码
+        response = TestConfig.postOrPutExecu("post","/user/check_reset_pwd_imageCode" ,jo);
+        response.then().log().all().assertThat()
+                .statusCode(200)
+                .body("status" , Matchers.equalTo(true))
+                .body("data.mobile" , Matchers.equalTo(mobile))
+        ;
+
+
+        //检查图形验证码参数
+        JSONObject jo1  = new JSONObject();
+        jo1.put("mobile",mobile);
+        //jo1.put("token",token);
+        //检查图形验证码
+        response = TestConfig.postOrPutExecu("post","validate_code/reset_pwd_mobileCode" ,jo1);
+        response.then().log().all().assertThat()
+              .statusCode(400)
+                //.body("status" , Matchers.equalTo(false))
+               // .body("errorInfo.token" , Matchers.equalTo("token不能为空"))
+                //.body("errorInfo.mobile" , Matchers.equalTo("手机号码不合法"))
+        ;
+    }
 }

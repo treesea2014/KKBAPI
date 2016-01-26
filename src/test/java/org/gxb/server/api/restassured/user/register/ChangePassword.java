@@ -121,7 +121,7 @@ public class ChangePassword {
         JSONObject jo  = new JSONObject();
         jo.put("oldPassword","123456");
         jo.put("newPassword","111111");
-        jo.put("confirmPassword","123456");
+        jo.put("confirmPassword","111111");
 
         Response response = TestConfig.postOrPutExecu("post","/user/1272515/password" ,jo);
         response.then().log().all().assertThat()
