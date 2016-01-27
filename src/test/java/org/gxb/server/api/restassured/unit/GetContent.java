@@ -71,7 +71,6 @@ public class GetContent {
 		String topicId = "999999999999999999999999999";
 		Response response = TestConfig.getOrDeleteExecu("get", "/class/" + classId + "/Topic/" + topicId);
 		response.then().log().all().assertThat().statusCode(400)
-
 		;
 	}
 
