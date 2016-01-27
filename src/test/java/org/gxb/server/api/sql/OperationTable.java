@@ -503,4 +503,57 @@ public class OperationTable {
 		}
 		return count;
 	}
+
+	public int selectPost(int topicid, int userid) throws Exception {
+		String sql = " select count(1) as totalcount from (select * from post where parent_id is null and delete_flag=1 and topic_id="
+				+ topicid + ") pst left join post children on pst.post_id=children.parent_id"
+				+ " left join vote_log voteLog on pst.post_id=voteLog.context_id and voteLog.context_type='Post' and voteLog.user_id = "
+				+ userid + " order by pst.created_at,pst.post_id";
+		DBConnection dbc = null;
+		Connection conn = null;
+		Statement st = null;
+		ResultSet res = null;
+		int count = 0;
+
+		try {
+			dbc = new DBConnection(dbUrl);
+			conn = dbc.GetConnection();
+			st = conn.createStatement();
+			res = st.executeQuery(sql);
+			while (res.next()) {
+				count = res.getInt("totalcount");
+			}
+			conn.close();
+			st.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
+	public int selectClassTopic(int userid) throws Exception {
+		String sql = "select count(1) as totalcount from class_topic tpc"
+        + " inner join post pst on tpc.topic_id = pst.topic_id and pst.parent_id is null and pst.root_parent_id is null and pst.user_id = "+userid+""
+        + " and tpc.delete_flag=1";
+		DBConnection dbc = null;
+		Connection conn = null;
+		Statement st = null;
+		ResultSet res = null;
+		int count = 0;
+
+		try {
+			dbc = new DBConnection(dbUrl);
+			conn = dbc.GetConnection();
+			st = conn.createStatement();
+			res = st.executeQuery(sql);
+			while (res.next()) {
+				count = res.getInt("totalcount");
+			}
+			conn.close();
+			st.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
 }
