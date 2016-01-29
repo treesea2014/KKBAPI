@@ -1,15 +1,10 @@
 package org.gxb.server.api.restassured.lms;
 
 import com.jayway.restassured.response.Response;
-import com.sun.tools.javac.code.Attribute;
 import net.sf.json.JSONObject;
 import org.gxb.server.api.TestConfig;
-import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
-
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**

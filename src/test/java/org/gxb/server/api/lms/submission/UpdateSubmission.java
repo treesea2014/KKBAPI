@@ -63,7 +63,7 @@ public class UpdateSubmission {
 		jsonObject.put("userId", 123456);
 		jsonObject.put("assetList", assetListArray);
 
-		Response response = TestConfig.postOrPutExecu("post", "/submission/" + submissionId + "?tenantId=" + tenantId,
+		Response response = TestConfig.postOrPutExecu("put", "/submission/" + submissionId + "?tenantId=" + tenantId,
 				jsonObject);
 
 		if (response.getStatusCode() == 500) {
@@ -91,7 +91,7 @@ public class UpdateSubmission {
 		jsonObject.put("userId", 123456);
 		jsonObject.put("assetList", assetListArray);
 
-		Response response = TestConfig.postOrPutExecu("post", "/submission/" + submissionId + "?tenantId=" + tenantId,
+		Response response = TestConfig.postOrPutExecu("put", "/submission/" + submissionId + "?tenantId=" + tenantId,
 				jsonObject);
 
 		if (response.getStatusCode() == 500) {
@@ -120,7 +120,7 @@ public class UpdateSubmission {
 		jsonObject.put("userId", 123456);
 		jsonObject.put("assetList", assetListArray);
 
-		Response response = TestConfig.postOrPutExecu("post", "/submission/" + submissionId + "?tenantId=" + tenantId,
+		Response response = TestConfig.postOrPutExecu("put", "/submission/" + submissionId + "?tenantId=" + tenantId,
 				jsonObject);
 
 		if (response.getStatusCode() == 500) {
@@ -148,7 +148,7 @@ public class UpdateSubmission {
 		jsonObject.put("userId", 123456);
 		jsonObject.put("assetList", assetListArray);
 
-		Response response = TestConfig.postOrPutExecu("post", "/submission/" + submissionId + "?tenantId=" + tenantId,
+		Response response = TestConfig.postOrPutExecu("put", "/submission/" + submissionId + "?tenantId=" + tenantId,
 				jsonObject);
 
 		if (response.getStatusCode() == 500) {
@@ -177,7 +177,7 @@ public class UpdateSubmission {
 		jsonObject.put("userId", 123456);
 		jsonObject.put("assetList", assetListArray);
 
-		Response response = TestConfig.postOrPutExecu("post", "/submission/" + submissionId + "?tenantId=" + tenantId,
+		Response response = TestConfig.postOrPutExecu("put", "/submission/" + submissionId + "?tenantId=" + tenantId,
 				jsonObject);
 
 		if (response.getStatusCode() == 500) {
@@ -206,7 +206,7 @@ public class UpdateSubmission {
 		jsonObject.put("userId", 123456);
 		jsonObject.put("assetList", assetListArray);
 
-		Response response = TestConfig.postOrPutExecu("post", "/submission/" + submissionId + "?tenantId=" + tenantId,
+		Response response = TestConfig.postOrPutExecu("put", "/submission/" + submissionId + "?tenantId=" + tenantId,
 				jsonObject);
 
 		if (response.getStatusCode() == 500) {
@@ -234,7 +234,7 @@ public class UpdateSubmission {
 		jsonObject.put("userId", 123456);
 		jsonObject.put("assetList", assetListArray);
 
-		Response response = TestConfig.postOrPutExecu("post", "/submission/" + submissionId + "?tenantId=" + tenantId,
+		Response response = TestConfig.postOrPutExecu("put", "/submission/" + submissionId + "?tenantId=" + tenantId,
 				jsonObject);
 
 		if (response.getStatusCode() == 500) {
@@ -263,7 +263,7 @@ public class UpdateSubmission {
 		jsonObject.put("userId", 123456);
 		jsonObject.put("assetList", assetListArray);
 
-		Response response = TestConfig.postOrPutExecu("post", "/submission/" + submissionId + "?tenantId=" + tenantId,
+		Response response = TestConfig.postOrPutExecu("put", "/submission/" + submissionId + "?tenantId=" + tenantId,
 				jsonObject);
 
 		if (response.getStatusCode() == 500) {
@@ -291,7 +291,7 @@ public class UpdateSubmission {
 		jsonObject.put("userId", 123456);
 		jsonObject.put("assetList", assetListArray);
 
-		Response response = TestConfig.postOrPutExecu("post", "/submission/" + submissionId + "?tenantId=" + tenantId,
+		Response response = TestConfig.postOrPutExecu("put", "/submission/" + submissionId + "?tenantId=" + tenantId,
 				jsonObject);
 
 		if (response.getStatusCode() == 500) {
@@ -320,7 +320,7 @@ public class UpdateSubmission {
 		jsonObject.put("userId", 123456);
 		jsonObject.put("assetList", assetListArray);
 
-		Response response = TestConfig.postOrPutExecu("post", "/submission/" + submissionId + "?tenantId=" + tenantId,
+		Response response = TestConfig.postOrPutExecu("put", "/submission/" + submissionId + "?tenantId=" + tenantId,
 				jsonObject);
 
 		if (response.getStatusCode() == 500) {
@@ -348,7 +348,7 @@ public class UpdateSubmission {
 		jsonObject.put("userId", null);
 		jsonObject.put("assetList", assetListArray);
 
-		Response response = TestConfig.postOrPutExecu("post", "/submission/" + submissionId + "?tenantId=" + tenantId,
+		Response response = TestConfig.postOrPutExecu("put", "/submission/" + submissionId + "?tenantId=" + tenantId,
 				jsonObject);
 
 		if (response.getStatusCode() == 500) {
@@ -377,7 +377,7 @@ public class UpdateSubmission {
 		jsonObject.put("userId", 1);
 		jsonObject.put("assetList", assetListArray);
 
-		Response response = TestConfig.postOrPutExecu("post", "/submission/" + submissionId + "?tenantId=" + tenantId,
+		Response response = TestConfig.postOrPutExecu("put", "/submission/" + submissionId + "?tenantId=" + tenantId,
 				jsonObject);
 
 		if (response.getStatusCode() == 500) {
@@ -406,7 +406,7 @@ public class UpdateSubmission {
 		jsonObject.put("userId", 123456);
 		jsonObject.put("assetList", null);
 
-		Response response = TestConfig.postOrPutExecu("post", "/submission/" + submissionId + "?tenantId=" + tenantId,
+		Response response = TestConfig.postOrPutExecu("put", "/submission/" + submissionId + "?tenantId=" + tenantId,
 				jsonObject);
 
 		if (response.getStatusCode() == 500) {
@@ -435,7 +435,7 @@ public class UpdateSubmission {
 		jsonObject.put("userId", 123456);
 		jsonObject.put("assetList", assetListArray);
 
-		Response response = TestConfig.postOrPutExecu("post", "/submission/" + submissionId + "?tenantId=" + tenantId,
+		Response response = TestConfig.postOrPutExecu("put", "/submission/" + submissionId + "?tenantId=" + tenantId,
 				jsonObject);
 
 		if (response.getStatusCode() == 500) {
@@ -464,7 +464,7 @@ public class UpdateSubmission {
 		jsonObject.put("userId", 123456);
 		jsonObject.put("assetList", assetListArray);
 
-		Response response = TestConfig.postOrPutExecu("post", "/submission/" + submissionId + "?tenantId=" + tenantId,
+		Response response = TestConfig.postOrPutExecu("put", "/submission/" + submissionId + "?tenantId=" + tenantId,
 				jsonObject);
 
 		if (response.getStatusCode() == 500) {
@@ -493,7 +493,7 @@ public class UpdateSubmission {
 		jsonObject.put("userId", 123456);
 		jsonObject.put("assetList", assetListArray);
 
-		Response response = TestConfig.postOrPutExecu("post", "/submission/" + submissionId + "?tenantId=" + tenantId,
+		Response response = TestConfig.postOrPutExecu("put", "/submission/" + submissionId + "?tenantId=" + tenantId,
 				jsonObject);
 
 		if (response.getStatusCode() == 500) {
