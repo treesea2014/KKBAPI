@@ -6,32 +6,31 @@ import org.hamcrest.Matchers;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-
 /**
  * Created by treesea on 16/1/28.
- * http://192.168.30.33:8080/gxb-api/classes/2/quiz
- * chapterid userid 获取submission test
+ * http://localhost:8080/gxb-api/class_assignment/11
+ * assignmentId获取chapter
  */
-public class GetClassQuiz {
-    Integer classId;
+public class GetClassAssignmentById {
+    Integer assignmentId;
 
 
     @Test(description = "正常" , priority = 1)
     public void test01(){
-        classId  = 2;
-        Response response = TestConfig.getOrDeleteExecu("get","classes/"+classId+"/quiz");
+        assignmentId  = 11;
+        Response response = TestConfig.getOrDeleteExecu("get","class_assignment/"+assignmentId);
         Object o = response.jsonPath().get();
         response.then().log().all()
                 .statusCode(200)
-                .body("classId", Matchers.hasItem(classId))
-                .body("title", Matchers.hasItem(Matchers.containsString("测验")))
+                .body("assignmentId", Matchers.equalTo(assignmentId))
+                .body("deleteFlag", Matchers.equalTo(1))
+                .body("title", Matchers.containsString("作业"))
         ;
     }
 
-    @Test(description = "classId为X" , priority = 2)
+    @Test(description = "assignmentId为X" , priority = 2)
     public void test02(){
-        Response response = TestConfig.getOrDeleteExecu("get","classes/x/quiz");
+        Response response = TestConfig.getOrDeleteExecu("get","class_assignment/x");
         Object o = response.jsonPath().get();
         response.then().log().all()
                 .statusCode(400)
@@ -42,13 +41,13 @@ public class GetClassQuiz {
 
     @Test(description = "chapter为-1,返回为空" , priority = 3)
     public void test03(){
-        classId  = -1;
-        Response response = TestConfig.getOrDeleteExecu("get","classes/"+classId+"/quiz");
-        ArrayList o = response.jsonPath().get();
+        assignmentId  = -1;
+        Response response = TestConfig.getOrDeleteExecu("get","class_assignment/"+assignmentId);
+        //Object o = response.jsonPath().get();
         response.then().log().all()
                 .statusCode(200)
         ;
-        Assert.assertTrue(o.size()==0);
+       Assert.assertTrue(response.asString().length()==0);
     }
 
 }

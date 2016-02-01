@@ -10,28 +10,28 @@ import java.util.ArrayList;
 
 /**
  * Created by treesea on 16/1/28.
- * http://192.168.30.33:8080/gxb-api/classes/2/quiz
- * chapterid userid 获取submission test
+ * http://192.168.30.33:8080/gxb-api/class_chapter/42
+ * chapterid获取chapter
  */
-public class GetClassQuiz {
-    Integer classId;
+public class GetClassChapterById {
+    Integer chapterId;
 
 
     @Test(description = "正常" , priority = 1)
     public void test01(){
-        classId  = 2;
-        Response response = TestConfig.getOrDeleteExecu("get","classes/"+classId+"/quiz");
+        chapterId  = 42;
+        Response response = TestConfig.getOrDeleteExecu("get","class_chapter/"+chapterId);
         Object o = response.jsonPath().get();
         response.then().log().all()
                 .statusCode(200)
-                .body("classId", Matchers.hasItem(classId))
-                .body("title", Matchers.hasItem(Matchers.containsString("测验")))
+                .body("chapterId", Matchers.equalTo(chapterId))
+                .body("title", Matchers.containsString("知识"))
         ;
     }
 
-    @Test(description = "classId为X" , priority = 2)
+    @Test(description = "chapterId为X" , priority = 2)
     public void test02(){
-        Response response = TestConfig.getOrDeleteExecu("get","classes/x/quiz");
+        Response response = TestConfig.getOrDeleteExecu("get","class_chapter/x");
         Object o = response.jsonPath().get();
         response.then().log().all()
                 .statusCode(400)
@@ -42,13 +42,13 @@ public class GetClassQuiz {
 
     @Test(description = "chapter为-1,返回为空" , priority = 3)
     public void test03(){
-        classId  = -1;
-        Response response = TestConfig.getOrDeleteExecu("get","classes/"+classId+"/quiz");
-        ArrayList o = response.jsonPath().get();
+        chapterId  = -1;
+        Response response = TestConfig.getOrDeleteExecu("get","class_chapter/"+chapterId);
+        //Object o = response.jsonPath().get();
         response.then().log().all()
                 .statusCode(200)
         ;
-        Assert.assertTrue(o.size()==0);
+       Assert.assertTrue(response.asString().length()==0);
     }
 
 }

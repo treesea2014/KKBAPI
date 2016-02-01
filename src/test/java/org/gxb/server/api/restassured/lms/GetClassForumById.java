@@ -10,28 +10,28 @@ import java.util.ArrayList;
 
 /**
  * Created by treesea on 16/1/28.
- * http://192.168.30.33:8080/gxb-api/classes/2/quiz
- * chapterid userid 获取submission test
+ *http://localhost:8080/gxb-api/forum/4
+ * ID获取板块信息
  */
-public class GetClassQuiz {
-    Integer classId;
+public class GetClassForumById {
+    Integer forumId;
 
 
     @Test(description = "正常" , priority = 1)
     public void test01(){
-        classId  = 2;
-        Response response = TestConfig.getOrDeleteExecu("get","classes/"+classId+"/quiz");
+        forumId  = 2;
+        Response response = TestConfig.getOrDeleteExecu("get","/forum/"+forumId);
         Object o = response.jsonPath().get();
         response.then().log().all()
                 .statusCode(200)
-                .body("classId", Matchers.hasItem(classId))
-                .body("title", Matchers.hasItem(Matchers.containsString("测验")))
+                .body("deleteFlag", Matchers.equalTo(1))
+                .body("forumId", Matchers.equalTo(forumId))
         ;
     }
 
-    @Test(description = "classId为X" , priority = 2)
+    @Test(description = "forumId为X" , priority = 2)
     public void test02(){
-        Response response = TestConfig.getOrDeleteExecu("get","classes/x/quiz");
+        Response response = TestConfig.getOrDeleteExecu("get","/forum/x");
         Object o = response.jsonPath().get();
         response.then().log().all()
                 .statusCode(400)
@@ -40,15 +40,15 @@ public class GetClassQuiz {
         ;
     }
 
-    @Test(description = "chapter为-1,返回为空" , priority = 3)
+    @Test(description = "forumId -1,返回为空" , priority = 3)
     public void test03(){
-        classId  = -1;
-        Response response = TestConfig.getOrDeleteExecu("get","classes/"+classId+"/quiz");
-        ArrayList o = response.jsonPath().get();
+        forumId  = -1;
+        Response response = TestConfig.getOrDeleteExecu("get","/forum/"+forumId);
+       // Object o = response.jsonPath().get();
         response.then().log().all()
                 .statusCode(200)
         ;
-        Assert.assertTrue(o.size()==0);
+       Assert.assertTrue(response.asString().length()==0);
     }
 
 }
